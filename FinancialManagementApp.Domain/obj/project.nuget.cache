@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "5ltothhcjaw+00SwSf17QSJm4OsHt+guDOaE6Ze6V1J2bZOjkkySj9+QRzsQ1si7FeLPN3ucfTP/erRiy10AXQ==",
+  "success": true,
+  "projectFilePath": "C:\\MyWorkSpace\\C#\\FinancialManagementApp\\FinancialManagementApp.Domain\\FinancialManagementApp.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Николай\\.nuget\\packages\\microsoft.csharp\\4.6.0\\microsoft.csharp.4.6.0.nupkg.sha512",
+    "C:\\Users\\Николай\\.nuget\\packages\\system.data.datasetextensions\\4.5.0\\system.data.datasetextensions.4.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
