@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinancialManagementApp.Domain
+namespace FinancialManagementApp.Infrastructure
 {
     public class Class1
     {

@@ -1,11 +1,12 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinancialManagementApp", "FinancialManagementApp\FinancialManagementApp.csproj", "{9CE83091-10AF-44EE-BFFE-78DA1B7DF4AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinancialManagementApp.Domain", "FinancialManagementApp.Domain\FinancialManagementApp.Domain.csproj", "{8832BE22-0CAF-41DB-9BFE-9D85AEC9CAA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinancialManagementApp.Domain", "FinancialManagementApp.Domain\FinancialManagementApp.Domain.csproj", "{8832BE22-0CAF-41DB-9BFE-9D85AEC9CAA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinancialManagementApp.Infrastructure", "FinancialManagementApp.Infrastructure\FinancialManagementApp.Infrastructure.csproj", "{96338C9C-946B-4C1B-B87F-9D0E0035E2C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +22,10 @@ Global
 		{8832BE22-0CAF-41DB-9BFE-9D85AEC9CAA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8832BE22-0CAF-41DB-9BFE-9D85AEC9CAA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8832BE22-0CAF-41DB-9BFE-9D85AEC9CAA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96338C9C-946B-4C1B-B87F-9D0E0035E2C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96338C9C-946B-4C1B-B87F-9D0E0035E2C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96338C9C-946B-4C1B-B87F-9D0E0035E2C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96338C9C-946B-4C1B-B87F-9D0E0035E2C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
