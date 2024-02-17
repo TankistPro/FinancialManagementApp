@@ -13,6 +13,7 @@
             <ColumnDefinition Width="479*" />
             <ColumnDefinition Width="162*" />
         </Grid.ColumnDefinitions>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="55*" />
             <RowDefinition Height="142*" />
@@ -30,8 +31,8 @@
             <TextBox TextWrapping="Wrap" Padding="5" Margin="0, 5, 0, 5"/>
             <TextBox TextWrapping="Wrap" Padding="5" Margin="0, 5, 0, 10"/>
 
-            <Button Margin="0,0,0,0" Padding="5">Войти</Button>
-            <Button Padding="5" Margin="0, 5, 0, 0">Зарегистрироваться</Button>
+            <Button Margin="0,0,0,0" Padding="5" Click="AuthUser">Войти</Button>
+            <Button Padding="5" Margin="0, 5, 0, 0" Click="GoToRegistration">Зарегистрироваться</Button>
         </StackPanel>
     </Grid>
 </Page>

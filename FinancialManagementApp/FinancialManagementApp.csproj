@@ -11,7 +11,6 @@
   <ItemGroup>
     <None Remove="Images\logo.png" />
     <None Remove="Images\logo.svg" />
-    <None Remove="Pages\logo.svg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,10 +20,6 @@
     <Content Include="Images\logo.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Pages\logo.svg" />
   </ItemGroup>
 
 </Project>
