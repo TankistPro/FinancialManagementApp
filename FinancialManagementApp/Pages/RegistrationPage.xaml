@@ -35,7 +35,7 @@
             <StackPanel Margin="0,15,0,0" Grid.ColumnSpan="1" Grid.Column="1" Grid.Row="2">
 
                 <TextBox TextWrapping="Wrap" Padding="5" Margin="0, 5, 0, 5"/>
-                <TextBox TextWrapping="Wrap" Padding="5" Margin="0, 5, 0, 10"/>
+                <PasswordBox Padding="5" Margin="0, 5, 0, 10" PasswordChar="$" MaxLength="25" />
 
                 <Button Margin="0,0,0,0" Padding="5">Зарегистрироваться</Button>
                 <Button Padding="5" Margin="0, 5, 0, 0" Click="GoToAuthPage">Назад</Button>
