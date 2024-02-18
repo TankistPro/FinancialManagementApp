@@ -40,6 +40,11 @@ namespace FinancialManagementApp.Pages
 
         async private void CreateUser(object sender, RoutedEventArgs e)
         {
+            RegForm.Visibility = Visibility.Collapsed;
+            Loader.Visibility = Visibility.Visible;
+
+            await Task.Delay(1000); //искуствееная задержка для просмотра лоадера
+
             var newUser = new RegistrationUserDto()
             {
                 FirstName = FirstName.Text,
@@ -68,6 +73,8 @@ namespace FinancialManagementApp.Pages
                     Application.Current.MainWindow.Content = new HomePage();
                 }
             }
+            RegForm.Visibility = Visibility.Visible;
+            Loader.Visibility = Visibility.Collapsed;
         }
     }
 }
