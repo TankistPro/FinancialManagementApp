@@ -40,29 +40,30 @@ namespace FinancialManagementApp.Pages
 
         async private void CreateUser(object sender, RoutedEventArgs e)
         {
-            var userWallet = new WalletDto()
+            var newUser = new RegistrationUserDto()
             {
-                Name = "Test",
-                WalletNumber = 123456789,
-                Balance = 50
+                FirstName = FirstName.Text,
+                LastName = LastName.Text,
+                Email = Email.Text,
+                EmailConfirmed = 0,
+                Password = Password.Password,
             };
 
-            int walletId = await _walletRepository.CreateWallet(userWallet);
+            int userId = await _userRepository.RegistartionUser(newUser);
 
-            if (walletId > 0)
+            if (userId > -1)
             {
-                var newUser = new RegistrationUserDto()
+                var userWallet = new WalletDto()
                 {
-                    FirstName = "Иван",
-                    LastName = "Мельников",
-                    Email = "ivan@mail.ru",
-                    Password = "admin",
-                    WalletId = walletId
+                    Name = "Test",
+                    WalletNumber = Convert.ToInt64(WalletNumber.Text),
+                    Balance = Convert.ToInt32(Balance.Text),
+                    UserId = userId,
                 };
 
-                bool status = await _userRepository.RegistartionUser(newUser);
+                int walletId = await _walletRepository.CreateWallet(userWallet);
 
-                if (status)
+                if (walletId > -1)
                 {
                     Application.Current.MainWindow.Content = new HomePage();
                 }

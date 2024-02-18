@@ -19,6 +19,7 @@ namespace FinancialManagementApp.Infrastructure.Repositories
                 WalletNumber = wallet.WalletNumber,
                 Balance = wallet.Balance,
                 Image = wallet.Image ?? String.Empty,
+                UserId = wallet.UserId,
             };
 
             bool status = await this.AddAsync(newWallet);

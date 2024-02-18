@@ -14,13 +14,13 @@ namespace FinancialManagementApp.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        async public Task<bool> RegistartionUser(RegistrationUserDto user)
+        async public Task<int> RegistartionUser(RegistrationUserDto user)
         {
             bool exsistUser = _context.Users.Any(x => x.Email == user.Email);
 
             if (exsistUser)
             {
-                return false;
+                return -1;
             }
 
             var newUser = new User()
@@ -29,14 +29,20 @@ namespace FinancialManagementApp.Infrastructure.Repositories
                 LastName = user.LastName,
                 MiddleName = user.MiddleName ?? String.Empty,
                 Email = user.Email,
+                EmailConfirmed = user.EmailConfirmed,
                 Password = user.Password,
                 AvatarHash = user.AvatarHash ?? String.Empty,
-                WalletId = user.WalletId
+                RegistrationDate = DateTime.Now
             };
 
             bool status = await this.AddAsync(newUser);
 
-            return status;
+            if (status)
+            {
+                return newUser.Id;
+            }
+
+            return -1;
         }
     }
 }

@@ -12,6 +12,7 @@ namespace FinancialManagementApp.Infrastructure.ModelDto
         public string LastName { get; set; }
         public string? MiddleName { get; set; }
         public string Email { get; set; }
+        public int EmailConfirmed { get; set; }
         public string Password { get; set; }
         public string? AvatarHash { get; set; }
         public int WalletId { get; set; }

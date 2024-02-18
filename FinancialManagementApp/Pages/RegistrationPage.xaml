@@ -3,42 +3,91 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:FinancialManagementApp.Pages"
+      xmlns:local="clr-namespace:FinancialManagementApp.Pages" xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Регистрация">
     <Grid  Background="White">
         <Grid Background="White">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="159*" />
-                <ColumnDefinition Width="479*" />
-                <ColumnDefinition Width="162*" />
+                <ColumnDefinition Width="82*" />
+                <ColumnDefinition Width="635*" />
+                <ColumnDefinition Width="83*" />
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="55*" />
-                <RowDefinition Height="142*" />
-                <RowDefinition Height="176*" />
-                <RowDefinition Height="77*" />
+                <RowDefinition Height="127*" />
+                <RowDefinition Height="312*" />
+                <RowDefinition Height="11*" />
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Height="120" Width="472">
-                <Image Height="120" Source="/Images/logo.png" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Height="120" Width="472">
+                <svgc:SvgViewbox Source="/Images/logo.svg" />
 
                 <StackPanel VerticalAlignment="Center">
                     <TextBlock Text="Управление финансами"  HorizontalAlignment="Center" FontSize="30" FontWeight="Bold" />
                     <TextBlock Text="Регистарция"  HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" FontStyle="Italic" TextDecorations="Underline" />
                 </StackPanel>
-                
+
             </StackPanel>
 
-            <StackPanel Margin="0,15,0,0" Grid.ColumnSpan="1" Grid.Column="1" Grid.Row="2">
+            <StackPanel Margin="0,15,0,0" Grid.ColumnSpan="1" Grid.Column="1" Grid.Row="1">
 
-                <TextBox TextWrapping="Wrap" Padding="5" Margin="0, 5, 0, 5"/>
-                <PasswordBox Padding="5" Margin="0, 5, 0, 10" PasswordChar="$" MaxLength="25" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="5" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Vertical" Grid.Column="2">
+                        <StackPanel>
+                            <TextBlock Text="Имя*" />
+                            <TextBox x:Name="FirstName" TextWrapping="Wrap" Padding="5" Margin="0, 5, 0, 5"/>
+                        </StackPanel>
+
+                        <StackPanel>
+                            <TextBlock Text="Фамилия*" />
+                            <TextBox x:Name="LastName" TextWrapping="Wrap" Padding="5" Margin="0, 5, 0, 5"/>
+                        </StackPanel>
+
+                        <StackPanel>
+                            <TextBlock Text="Отчество" />
+                            <TextBox x:Name="MiddleName" TextWrapping="Wrap" Padding="5" Margin="0, 5, 0, 5"/>
+                        </StackPanel>
+                        
+                        <StackPanel>
+                            <TextBlock Text="Баланс в рублях*" />
+                            <TextBox x:Name="Balance" TextWrapping="Wrap" Padding="5" Text="0" Margin="0, 5, 0, 5"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical"  Grid.Column="0">
+                        <StackPanel >
+                            <TextBlock Text="Введите Email*" />
+                            <TextBox x:Name="Email" TextWrapping="Wrap" Padding="5" Margin="0, 5, 0, 5"/>
+                        </StackPanel>
+
+                        <StackPanel>
+                            <TextBlock Text="Номер карты (счёта)*" />
+                            <TextBox x:Name="WalletNumber" TextWrapping="Wrap" Padding="5" Margin="0, 5, 0, 5"/>
+                        </StackPanel>
+
+                        <StackPanel>
+                            <TextBlock Text="Пароль*" />
+                            <PasswordBox x:Name="Password" Padding="5" Margin="0, 5, 0, 5" PasswordChar="$" MaxLength="25" />
+                        </StackPanel>
+
+                        <StackPanel>
+                            <TextBlock Text="Повторите пароль*" />
+                            <PasswordBox  x:Name="RepeatPassword" Padding="5" Margin="0, 5, 0, 5" PasswordChar="$" MaxLength="25" />
+                        </StackPanel>
+
+                    </StackPanel>
+                </Grid>
 
                 <Button Margin="0,0,0,0" Padding="5" Click="CreateUser" >Зарегистрироваться</Button>
-                <Button Padding="5" Margin="0, 5, 0, 0" Click="GoToAuthPage">Назад</Button>
+                <Button Padding="5" Margin="0, 5, 0, 0" Click="GoToAuthPage">Войти</Button>
             </StackPanel>
         </Grid>
     </Grid>

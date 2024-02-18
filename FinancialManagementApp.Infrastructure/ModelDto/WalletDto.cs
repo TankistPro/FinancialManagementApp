@@ -9,8 +9,10 @@ namespace FinancialManagementApp.Infrastructure.ModelDto
     public class WalletDto
     {
         public string Name { get; set; }
-        public int WalletNumber { get; set; }
+        public long WalletNumber { get; set; }
         public decimal Balance { get; set; }
         public string? Image { get; set; }
+
+        public int UserId { get; set; }
     }
 }
