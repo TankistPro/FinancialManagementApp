@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace FinancialManagementApp.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для HomePage.xaml
+    /// Логика взаимодействия для MainPage.xaml
     /// </summary>
-    public partial class HomePage : Page
+    public partial class MainPage : Page
     {
-        public HomePage()
+        public MainPage()
         {
             InitializeComponent();
         }

@@ -10,7 +10,13 @@
     <Compile Update="Pages\AuthPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\HomePage.xaml.cs">
+    <Compile Update="Layouts\HomeLayout.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\Home\HistoryPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\Home\MainPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\RegistrationPage.xaml.cs">
@@ -24,10 +30,19 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\HomePage.xaml">
+    <Page Update="Layouts\HomeLayout.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\Home\HistoryPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\Home\MainPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\RegistrationPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Themes\Generic.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

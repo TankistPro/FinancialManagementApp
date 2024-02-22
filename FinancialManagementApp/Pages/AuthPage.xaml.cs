@@ -1,4 +1,5 @@
-﻿using FinancialManagementApp.Pages;
+﻿using FinancialManagementApp.Layouts;
+using FinancialManagementApp.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace FinancialManagementApp
 
         private void AuthUser(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.Content = new HomePage();
+            Application.Current.MainWindow.Content = new HomeLayout();
         }
     }
 }
