@@ -23,7 +23,7 @@
             </Grid.RowDefinitions>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Height="120" Width="472">
-                <svgc:SvgViewbox Source="/Images/logo.svg" />
+                <svgc:SvgViewbox Source="/Images/logo.svg" Height="110" />
 
                 <StackPanel VerticalAlignment="Center">
                     <TextBlock Text="Управление финансами"  HorizontalAlignment="Center" FontSize="30" FontWeight="Bold" />
