@@ -3,6 +3,7 @@ using FinancialManagementApp.Infrastructure.Repositories;
 using System.Windows;
 using System.Windows.Controls;
 using FinancialManagementApp.Layouts;
+using FinancialManagementApp.Services;
 
 namespace FinancialManagementApp.Pages
 {
@@ -11,14 +12,14 @@ namespace FinancialManagementApp.Pages
     /// </summary>
     public partial class RegistrationPage : Page
     {
-        private readonly WalletRepository _walletRepository;
-        private readonly UserRepository _userRepository;
+        private readonly AuthService _authService;
+        private readonly WalletService _walletService;
         public RegistrationPage()
         {
             InitializeComponent();
 
-            _walletRepository = new WalletRepository();
-            _userRepository = new UserRepository();
+            _authService = new AuthService();
+            _walletService = new WalletService();
         }
 
         private void GoToAuthPage(object sender, RoutedEventArgs e)
@@ -42,11 +43,11 @@ namespace FinancialManagementApp.Pages
                 Password = Password.Password,
             };
 
-            int userId = await _userRepository.RegistartionUser(newUser);
+            int userId = await _authService.RegistartionUser(newUser);
 
             if (userId > -1)
             {
-                var userWallet = new WalletDto()
+                var newWallet = new WalletDto()
                 {
                     Name = "Test",
                     WalletNumber = Convert.ToInt64(WalletNumber.Text),
@@ -54,13 +55,14 @@ namespace FinancialManagementApp.Pages
                     UserId = userId,
                 };
 
-                int walletId = await _walletRepository.CreateWallet(userWallet);
+                int walletId = await _walletService.CreateWallet(newWallet);
 
-                if (walletId > -1)
+                if (walletId > -1) 
                 {
                     Application.Current.MainWindow.Content = new HomeLayout();
-                }
+                } 
             }
+
             RegForm.Visibility = Visibility.Visible;
             Loader.Visibility = Visibility.Collapsed;
         }
