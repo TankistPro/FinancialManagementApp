@@ -33,17 +33,17 @@
 
             <StackPanel>
                 <TextBlock Text="Email" />
-                <TextBox TextWrapping="Wrap" Padding="5" Margin="0, 5, 0, 5"/>
+                <TextBox TextWrapping="Wrap" Margin="0, 5, 0, 5"/>
             </StackPanel>
 
             <StackPanel>
                 <TextBlock Text="Пароль" />
-                <PasswordBox Padding="5" Margin="0, 5, 0, 10" PasswordChar="$" MaxLength="25" />
+                <PasswordBox Margin="0, 5, 0, 10" PasswordChar="$" MaxLength="25" />
             </StackPanel>
 
 
-            <Button Margin="0,0,0,0" Padding="5" Click="AuthUser">Войти</Button>
-            <Button Padding="5" Margin="0, 5, 0, 0" Click="GoToRegistration">Зарегистрироваться</Button>
+            <Button Style="{StaticResource AcceptCustomButtom}" Margin="0,0,0,0" Click="AuthUser">Войти</Button>
+            <Button Style="{StaticResource CancelCustomButtom}" Margin="0, 5, 0, 0" Click="GoToRegistration">Зарегистрироваться</Button>
         </StackPanel>
     </Grid>
 </Page>

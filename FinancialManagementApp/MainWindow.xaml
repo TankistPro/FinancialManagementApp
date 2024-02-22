@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinancialManagementApp"
         mc:Ignorable="d"
-        Title="Управление финансами" Height="500" Width="800" ResizeMode="NoResize">
+        Title="Управление финансами" Height="500" Width="800" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
     <Grid></Grid>
 </Window>

@@ -7,7 +7,7 @@
     <Style TargetType="{x:Type local:NavButtonControl}">
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="Cursor" Value="Hand" />
-        
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:NavButtonControl}">
@@ -19,7 +19,7 @@
                             x:Name="back">
                         <Path x:Name="icon" Data="{ TemplateBinding Icon }" Stretch="Uniform" Fill="#7b8792" Height="18" Width="18" />
                     </Border>
-                    
+
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" TargetName="back" Value="#d0edff"></Setter>
@@ -36,4 +36,84 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!--Buttons-->
+    
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="Control.Cursor" Value="Hand" />
+        <Setter Property="Control.BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="0, 10, 0, 10" />
+        <Setter Property="FontSize" Value="14" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" Padding="{ TemplateBinding Padding }">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Resources>
+            <Style TargetType="{ x:Type Border }">
+                <Setter Property="CornerRadius" Value="5"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+
+    <Style x:Key="AcceptCustomButtom" TargetType="{x:Type Button}" BasedOn="{ StaticResource { x:Type Button } }">
+
+        <Style.Setters>
+            <Setter Property="Control.Background" Value="#FF3489F1" />
+            <Setter Property="Control.Foreground" Value="White" />
+        </Style.Setters>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Control.Background" Value="#FF2B7DDF" />
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+
+    <Style x:Key="CancelCustomButtom" TargetType="Button" BasedOn="{ StaticResource { x:Type Button } }">
+        <Style.Setters>
+            <Setter Property="Control.Background" Value="#FFAAAAAA" />
+            <Setter Property="Control.Foreground" Value="#ffff" />
+        </Style.Setters>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Control.Background" Value="#FF959595" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--TextBox-->
+    <Style TargetType="TextBox">
+        <Setter Property="Padding" Value="10, 7, 10, 7" />
+        
+        <Style.Resources>
+            <Style TargetType="{ x:Type Border }">
+                <Setter Property="CornerRadius" Value="5"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+
+    <Style TargetType="PasswordBox">
+        <Setter Property="Padding" Value="10, 7, 10, 7" />
+        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="PasswordBox">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
+                        <ScrollViewer Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        
+    </Style>
+
 </ResourceDictionary>
