@@ -56,30 +56,13 @@ namespace FinancialManagementApp
 
                 UserDto user = await _authService.LoginUser(email.Text, password.Password);
                 
-
                 if (user != null)
                 {
                     WalletDto wallet = await _walletService.GetUserWallet(user.Id);
 
-                    var userVM = new UserVM()
-                    {
-                        FirstName = user.FirstName,
-                        LastName = user.LastName,
-                        MiddleName = user.MiddleName,
-                    };
+                    var homeLayouVM = new HomeLayoutVM() ;
 
-                    var walletVm = new WalletVM()
-                    {
-                        Name = wallet.Name,
-                        Balance = wallet.Balance,
-                        WalletNumber = wallet.WalletNumber,
-                    };
-
-                    var homeLayouVM = new HomeLayoutVM()
-                    {
-                        UserVM = userVM,
-                        WalletVM = walletVm
-                    };
+                    homeLayouVM.InitVM(user, wallet);
 
                     Application.Current.MainWindow.Content = new HomeLayout(homeLayouVM);
                 }

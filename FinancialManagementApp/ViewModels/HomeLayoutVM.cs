@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using FinancialManagementApp.Domain.Entities;
+using FinancialManagementApp.Infrastructure.ModelDto;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FinancialManagementApp.ViewModels
 {
@@ -32,6 +29,28 @@ namespace FinancialManagementApp.ViewModels
                 OnPropertyChanged("WalletVM");
             }
         }
+
+
+        public void InitVM(UserDto userDto, WalletDto walletDto)
+        {
+            var userVM = new UserVM()
+            {
+                FirstName = userDto.FirstName,
+                LastName = userDto.LastName,
+                MiddleName = userDto.MiddleName,
+            };
+
+            var walletVm = new WalletVM()
+            {
+                Name = walletDto.Name,
+                Balance = walletDto.Balance,
+                WalletNumber = walletDto.WalletNumber,
+            };
+
+            this.UserVM = userVM;
+            this.WalletVM = walletVm;
+        }
+        
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

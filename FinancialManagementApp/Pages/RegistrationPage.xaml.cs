@@ -5,6 +5,9 @@ using FinancialManagementApp.Layouts;
 using FinancialManagementApp.Services;
 using FinancialManagementApp.ViewModels;
 using FinancialManagementApp.Domain.Entities;
+using Microsoft.VisualBasic.ApplicationServices;
+using System.Windows.Input;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace FinancialManagementApp.Pages
 {
@@ -60,24 +63,11 @@ namespace FinancialManagementApp.Pages
 
                 if (walletId > -1)
                 {
-                    var userVM = new UserVM()
-                    {
-                        FirstName = newUser.FirstName,
-                        LastName = newUser.LastName,
-                    };
+                    UserDto user = await _authService.LoginUser(Email.Text, Password.Password);
 
-                    var walletVm = new WalletVM()
-                    {
-                        Name = newWallet.Name,
-                        Balance = newWallet.Balance,
-                        WalletNumber = newWallet.WalletNumber,
-                    };
-
-                    var homeLayouVM = new HomeLayoutVM()
-                    {
-                        UserVM = userVM,
-                        WalletVM = walletVm
-                    };
+                    var homeLayouVM = new HomeLayoutVM();
+                    
+                    homeLayouVM.InitVM(user, newWallet);
 
                     Application.Current.MainWindow.Content = new HomeLayout(homeLayouVM);
                 }
