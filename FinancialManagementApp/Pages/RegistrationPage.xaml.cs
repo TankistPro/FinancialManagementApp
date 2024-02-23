@@ -1,9 +1,10 @@
 ﻿using FinancialManagementApp.Infrastructure.ModelDto;
-using FinancialManagementApp.Infrastructure.Repositories;
 using System.Windows;
 using System.Windows.Controls;
 using FinancialManagementApp.Layouts;
 using FinancialManagementApp.Services;
+using FinancialManagementApp.ViewModels;
+using FinancialManagementApp.Domain.Entities;
 
 namespace FinancialManagementApp.Pages
 {
@@ -32,7 +33,7 @@ namespace FinancialManagementApp.Pages
             RegForm.Visibility = Visibility.Collapsed;
             Loader.Visibility = Visibility.Visible;
 
-            await Task.Delay(1000); //искуствееная задержка для просмотра лоадера
+            await Task.Delay(1000); //искусственная задержка для просмотра лоадера
 
             var newUser = new RegistrationUserDto()
             {
@@ -57,10 +58,29 @@ namespace FinancialManagementApp.Pages
 
                 int walletId = await _walletService.CreateWallet(newWallet);
 
-                if (walletId > -1) 
+                if (walletId > -1)
                 {
-                    Application.Current.MainWindow.Content = new HomeLayout();
-                } 
+                    var userVM = new UserVM()
+                    {
+                        FirstName = newUser.FirstName,
+                        LastName = newUser.LastName,
+                    };
+
+                    var walletVm = new WalletVM()
+                    {
+                        Name = newWallet.Name,
+                        Balance = newWallet.Balance,
+                        WalletNumber = newWallet.WalletNumber,
+                    };
+
+                    var homeLayouVM = new HomeLayoutVM()
+                    {
+                        UserVM = userVM,
+                        WalletVM = walletVm
+                    };
+
+                    Application.Current.MainWindow.Content = new HomeLayout(homeLayouVM);
+                }
             }
 
             RegForm.Visibility = Visibility.Visible;

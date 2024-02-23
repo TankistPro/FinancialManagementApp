@@ -1,6 +1,7 @@
 ﻿using FinancialManagementApp.Domain.Entities;
 using FinancialManagementApp.Infrastructure.Interfaces;
 using FinancialManagementApp.Infrastructure.ModelDto;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,13 @@ namespace FinancialManagementApp.Infrastructure.Repositories
             }
 
             return -1;
+        }
+
+        async public Task<Wallet> GetUserWallet(int userId)
+        {
+            var wallet= await _context.Wallets.Where(x => x.UserId == userId).FirstOrDefaultAsync();
+
+            return wallet;
         }
     }
 }

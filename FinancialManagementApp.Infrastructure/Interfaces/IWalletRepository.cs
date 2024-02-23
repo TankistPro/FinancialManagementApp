@@ -8,5 +8,6 @@ namespace FinancialManagementApp.Infrastructure.Interfaces
     public interface IWalletRepository : IBaseRepository<Wallet>
     {
         Task<int> CreateWallet(WalletDto wallet);
+        Task<Wallet> GetUserWallet(int userId);
     }
 }

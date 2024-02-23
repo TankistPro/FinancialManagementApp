@@ -1,6 +1,7 @@
 ﻿using FinancialManagementApp.Domain.Entities;
 using FinancialManagementApp.Infrastructure.Interfaces;
 using FinancialManagementApp.Infrastructure.ModelDto;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,9 +10,36 @@ namespace FinancialManagementApp.Infrastructure.Repositories
 {
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
-        public Task<bool> LoginUser(string login, string password)
+        async public Task<UserDto> LoginUser(string email, string password)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)) 
+            {
+                return null;
+            }
+
+            var candidate = await _context.Users.Where(x => x.Email == email).FirstOrDefaultAsync();
+
+            if (candidate != null) 
+            {
+                var candidatePassword = candidate.Password;
+
+                if (candidatePassword == password) 
+                {
+                    return new UserDto()
+                    {
+                        Id = candidate.Id,
+                        FirstName = candidate.FirstName,
+                        LastName = candidate.LastName,
+                        MiddleName = candidate.MiddleName,
+                        Email = candidate.Email,
+                        AvatarHash = candidate.AvatarHash,
+                        EmailConfirmed = candidate.EmailConfirmed.ToString(),
+                        RegistrationDate = candidate.RegistrationDate,
+                    };
+                }
+            }
+
+            return null;
         }
 
         async public Task<int> RegistartionUser(RegistrationUserDto user)

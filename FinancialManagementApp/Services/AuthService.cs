@@ -39,5 +39,12 @@ namespace FinancialManagementApp.Services
 
             return -1;
         }
+
+        async public Task<UserDto> LoginUser(string email, string password)
+        {
+            UserDto user = await _userRepository.LoginUser(email, password);
+
+            return user;
+        }
     }
 }

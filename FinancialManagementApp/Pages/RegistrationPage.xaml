@@ -44,7 +44,7 @@
                     <StackPanel Orientation="Vertical" Grid.Column="2">
                         <StackPanel>
                             <TextBlock Text="Имя*" />
-                            <TextBox x:Name="FirstName" TextWrapping="Wrap" Margin="0, 5, 0, 5"/>
+                            <TextBox x:Name="FirstName" TextWrapping="Wrap" Margin="0, 5, 0, 5" />
                         </StackPanel>
 
                         <StackPanel>

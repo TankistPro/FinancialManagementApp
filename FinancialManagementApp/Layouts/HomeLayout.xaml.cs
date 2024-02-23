@@ -1,4 +1,5 @@
 ﻿using FinancialManagementApp.Controls;
+using FinancialManagementApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,12 +23,14 @@ namespace FinancialManagementApp.Layouts
     /// </summary>
     public partial class HomeLayout : Page
     {
-        public HomeLayout()
+        public HomeLayout(HomeLayoutVM homeLayoutVM)
         {
 
             InitializeComponent();
 
-            if(this.sideBar.Items.Count > 0)
+            DataContext = homeLayoutVM;
+
+            if (this.sideBar.Items.Count > 0)
             {
                 this.sideBar.SelectedIndex = 0;
             }
@@ -36,7 +39,6 @@ namespace FinancialManagementApp.Layouts
             WindowHeight = 700;
 
             this.Loaded += (s, e) => MainWindow.PostitionWindowOnScreen(0, 0);
-
         }
 
         private void sideBar_SelectionChanged(object sender, SelectionChangedEventArgs e)

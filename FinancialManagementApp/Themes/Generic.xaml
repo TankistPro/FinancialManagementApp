@@ -93,7 +93,7 @@
     <!--TextBox-->
     <Style TargetType="TextBox">
         <Setter Property="Padding" Value="10, 7, 10, 7" />
-        
+
         <Style.Resources>
             <Style TargetType="{ x:Type Border }">
                 <Setter Property="CornerRadius" Value="5"/>

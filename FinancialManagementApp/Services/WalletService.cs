@@ -1,4 +1,5 @@
-﻿using FinancialManagementApp.Infrastructure.ModelDto;
+﻿using FinancialManagementApp.Domain.Entities;
+using FinancialManagementApp.Infrastructure.ModelDto;
 using FinancialManagementApp.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,19 @@ namespace FinancialManagementApp.Services
             catch (Exception) {}
             
             return -1;
+        }
+
+        async public Task<WalletDto> GetUserWallet(int userId)
+        {
+            Wallet walletEntity = await _walletRepository.GetUserWallet(userId);
+
+            return new WalletDto()
+            {
+                Name = walletEntity.Name,
+                WalletNumber = walletEntity.WalletNumber,
+                Balance = walletEntity.Balance,
+                UserId = userId
+            };
         }
     }
 }

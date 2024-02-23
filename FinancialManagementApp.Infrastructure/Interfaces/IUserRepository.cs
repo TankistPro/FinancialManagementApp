@@ -7,6 +7,6 @@ namespace FinancialManagementApp.Infrastructure.Interfaces
     public interface IUserRepository : IBaseRepository<User>
     {
         Task<int> RegistartionUser(RegistrationUserDto user);
-        Task<bool> LoginUser(string login, string password);
+        Task<UserDto> LoginUser(string email, string password);
     }
 }
