@@ -7,7 +7,7 @@ namespace FinancialManagementApp.Domain.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public long WalletNumber { get; set; }
-        [Column(TypeName = "decimal(18,4)")]
+        [Column(TypeName = "money")]
         public decimal Balance { get; set; }
         public string? Image { get; set; }
 

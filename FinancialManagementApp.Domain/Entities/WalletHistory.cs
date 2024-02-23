@@ -11,11 +11,11 @@ namespace FinancialManagementApp.Domain.Entities
     {
         public int Id { get; set; }
         public string OperationType { get; set;}
-        [Column(TypeName = "decimal(18,4)")]
+        [Column(TypeName = "money")]
         public decimal Value { get; set; }
-        [Column(TypeName = "decimal(18,4)")]
+        [Column(TypeName = "money")]
         public decimal NewBalance { get; set; }
-        [Column(TypeName = "decimal(18,4)")]
+        [Column(TypeName = "money")]
         public decimal OldBalance { get; set; }
         public string? Comment { get; set; }
         public int Status { get; set; }
