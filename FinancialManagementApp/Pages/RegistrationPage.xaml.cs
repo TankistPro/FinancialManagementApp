@@ -42,6 +42,7 @@ namespace FinancialManagementApp.Pages
             {
                 FirstName = FirstName.Text,
                 LastName = LastName.Text,
+                MiddleName = MiddleName.Text,
                 Email = Email.Text,
                 EmailConfirmed = 0,
                 Password = Password.Password,
@@ -63,13 +64,7 @@ namespace FinancialManagementApp.Pages
 
                 if (walletId > -1)
                 {
-                    UserDto user = await _authService.LoginUser(Email.Text, Password.Password);
-
-                    var homeLayouVM = new HomeLayoutVM();
-                    
-                    homeLayouVM.InitVM(user, newWallet);
-
-                    Application.Current.MainWindow.Content = new HomeLayout(homeLayouVM);
+                    Application.Current.MainWindow.Content = new AuthPage();
                 }
             }
 

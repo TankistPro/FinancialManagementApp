@@ -42,6 +42,7 @@ namespace FinancialManagementApp.ViewModels
 
             var walletVm = new WalletVM()
             {
+                Id = walletDto.Id,
                 Name = walletDto.Name,
                 Balance = walletDto.Balance,
                 WalletNumber = walletDto.WalletNumber,

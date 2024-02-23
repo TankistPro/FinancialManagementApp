@@ -23,12 +23,14 @@ namespace FinancialManagementApp.Layouts
     /// </summary>
     public partial class HomeLayout : Page
     {
+        private HomeLayoutVM _homeLayoutVM;
         public HomeLayout(HomeLayoutVM homeLayoutVM)
         {
 
             InitializeComponent();
 
-            DataContext = homeLayoutVM;
+            _homeLayoutVM = homeLayoutVM;
+            DataContext = _homeLayoutVM;
 
             if (this.sideBar.Items.Count > 0)
             {
@@ -46,6 +48,18 @@ namespace FinancialManagementApp.Layouts
             var selected = sideBar.SelectedItem as NavButtonControl;
 
             mainFraim.Navigate(selected.NavLink);
+        }
+
+        private void OpenAddHistoryModal(object sender, RoutedEventArgs e)
+        {
+
+            AddWalletHistoryWindow modal = new AddWalletHistoryWindow(
+                new WalletHistoryVM()
+                {
+                    WalletId=_homeLayoutVM.WalletVM.Id
+                }, _homeLayoutVM);
+
+            modal.ShowDialog();
         }
     }
 }

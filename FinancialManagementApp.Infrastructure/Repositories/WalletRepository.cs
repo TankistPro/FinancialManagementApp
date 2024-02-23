@@ -39,5 +39,62 @@ namespace FinancialManagementApp.Infrastructure.Repositories
 
             return wallet;
         }
+
+        /// <summary>
+        /// Создание операции по кошельку
+        /// </summary>
+        /// <param name="walletHistoryDto"></param>
+        /// <returns>Возвращается новый баланс пользователя</returns>
+        async public Task<decimal?> CreateWalletOperation(WalletHistoryDto walletHistoryDto)
+        {
+            var userWallet = await _context.Wallets.Where(x => x.Id == walletHistoryDto.WalletId).FirstOrDefaultAsync();
+
+            if (userWallet != null) 
+            {
+                try
+                {
+                    walletHistoryDto.OldBalance = userWallet.Balance;
+                    userWallet.Balance += walletHistoryDto.Value;
+                    walletHistoryDto.NewBalance = userWallet.Balance;
+
+                    await _context.SaveChangesAsync();
+
+                    bool status = await this.AddWalletHistory(walletHistoryDto);
+
+                    if (status)
+                    {
+                        return userWallet.Balance;
+                    }
+                } catch (Exception ex) { }
+            }
+            
+            return null;
+        }
+
+
+        async public Task<bool> AddWalletHistory(WalletHistoryDto walletHistoryDto)
+        {
+            var newHistory = new WalletHistory()
+            {
+                OperationType = "Доход",
+                Value = walletHistoryDto.Value,
+                NewBalance = walletHistoryDto.NewBalance,
+                OldBalance = walletHistoryDto.OldBalance,
+                Comment = walletHistoryDto.Comment,
+                Status = walletHistoryDto.Status,
+                CreatedDate = DateTime.Now,
+                WalletId = walletHistoryDto.WalletId,
+            };
+
+            try
+            {
+                await _context.WalletHistories.AddAsync(newHistory);
+                await _context.SaveChangesAsync();
+
+                return true;
+            } catch (Exception ex) { }
+
+            return false;
+        }
     }
 }

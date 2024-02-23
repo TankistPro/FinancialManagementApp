@@ -58,7 +58,7 @@
                         </StackPanel>
 
                         <StackPanel>
-                            <TextBlock Text="Баланс в рублях*" />
+                            <TextBlock Text="Текущий баланс в рублях*" />
                             <TextBox x:Name="Balance" TextWrapping="Wrap" Text="0" Margin="0, 5, 0, 5"/>
                         </StackPanel>
                     </StackPanel>

@@ -9,5 +9,7 @@ namespace FinancialManagementApp.Infrastructure.Interfaces
     {
         Task<int> CreateWallet(WalletDto wallet);
         Task<Wallet> GetUserWallet(int userId);
+        Task<decimal?> CreateWalletOperation(WalletHistoryDto walletHistoryDto);
+        Task<bool> AddWalletHistory(WalletHistoryDto walletHistoryDto);
     }
 }

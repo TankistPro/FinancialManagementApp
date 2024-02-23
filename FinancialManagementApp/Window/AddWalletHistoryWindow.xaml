@@ -1,0 +1,82 @@
+﻿<Window x:Class="FinancialManagementApp.AddWalletHistoryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FinancialManagementApp" 
+        xmlns:svgc="http://sharpvectors.codeplex.com/svgc/" 
+        xmlns:viewmodels="clr-namespace:FinancialManagementApp.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:WalletHistoryVM}"
+        mc:Ignorable="d"
+        Title="AddWalletHistoryWindow" Height="370" Width="550" ResizeMode="NoResize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48*" />
+            <RowDefinition Height="317*" />
+            <RowDefinition Height="44" />
+            <RowDefinition Height="25*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" Width="336">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="5*" />
+            </Grid.ColumnDefinitions>
+
+            <svgc:SvgViewbox Grid.Column="0"  Height="30" Width="30" Source="/Images/add.svg" />
+            <TextBlock Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"  Text="Добаление операции" />
+        </Grid>
+
+        <StackPanel Grid.Column="1"  Grid.Row="1" Margin="0,20,0,0">
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Margin="0, 0, 0, 5" Text="Значение:*" />
+                <TextBox >
+                    <TextBox.Text>
+                        <Binding Path="WalletValue">
+                            <Binding.ValidationRules>
+                                <ExceptionValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </StackPanel>
+
+            <StackPanel Margin="0,0,0,10">
+                <TextBlock Margin="0, 0, 0, 5" Text="Тип операции:" />
+                <ComboBox>
+                    <ComboBoxItem IsSelected="True">
+                        <TextBlock Text="Доход" />
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="Расход" />
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="Возврат денежных средств" />
+                    </ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Margin="0, 0, 0, 5" Text="Комментарий к операции:" />
+                <TextBox Text="{Binding Path=Comment}" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" TextWrapping="Wrap" Height="70" />
+            </StackPanel>
+
+        </StackPanel>
+
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Button Style="{ StaticResource SuccessCustomButtom }" Grid.Column="0" Click="AddWalletOperation_Click" >Добавить</Button>
+            <Button Style="{ StaticResource CancelCustomButtom }" Grid.Column="2" Click="CancelAdd_Click">Отмена</Button>
+        </Grid>
+
+    </Grid>
+</Window>

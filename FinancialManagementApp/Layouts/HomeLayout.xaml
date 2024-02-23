@@ -27,7 +27,7 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <Button HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Style="{ StaticResource AcceptCustomButtom }" FontSize="12" Padding="0,0,0,0" Height="35" Margin="10,0,0,0" Width="100">Добавить</Button>
+                <Button Click="OpenAddHistoryModal" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" Style="{ StaticResource AcceptCustomButtom }" FontSize="12" Padding="0,0,0,0" Height="35" Margin="10,0,0,0" Width="100">Добавить</Button>
 
                 <StackPanel Grid.Column="2" HorizontalAlignment="Right" Margin="0, 0, 10, 0">
                     <DockPanel Margin="0, 0, 0, 3">

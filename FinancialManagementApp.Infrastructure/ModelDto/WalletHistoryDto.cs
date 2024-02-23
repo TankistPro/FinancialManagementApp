@@ -5,24 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FinancialManagementApp.Domain.Entities
+namespace FinancialManagementApp.Infrastructure.ModelDto
 {
-    public class WalletHistory
+    public class WalletHistoryDto
     {
         public int Id { get; set; }
-        public string OperationType { get; set;}
-        [Column(TypeName = "money")]
+        public int WalletId { get; set; }
+        public string OperationType { get; set; }
         public decimal Value { get; set; }
-        [Column(TypeName = "money")]
         public decimal NewBalance { get; set; }
-        [Column(TypeName = "money")]
         public decimal OldBalance { get; set; }
         public string? Comment { get; set; }
         public int Status { get; set; }
         public DateTime CreatedDate { get; set; }
-
-        [ForeignKey("Wallet")]
-        public int? WalletId { get; set; }
-        public Wallet? Wallet { get; set; }
     }
 }

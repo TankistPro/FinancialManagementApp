@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Window\AddWalletHistoryWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\AuthPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -24,6 +27,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Window\AddWalletHistoryWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Pages\AuthPage.xaml">
       <SubType>Designer</SubType>
     </Page>

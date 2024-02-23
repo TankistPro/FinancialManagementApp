@@ -77,6 +77,21 @@
 
     </Style>
 
+    <Style x:Key="SuccessCustomButtom" TargetType="{x:Type Button}" BasedOn="{ StaticResource { x:Type Button } }">
+
+        <Style.Setters>
+            <Setter Property="Control.Background" Value="#FF12B42C" />
+            <Setter Property="Control.Foreground" Value="White" />
+        </Style.Setters>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Control.Background" Value="#FF14D010" />
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+
     <Style x:Key="CancelCustomButtom" TargetType="Button" BasedOn="{ StaticResource { x:Type Button } }">
         <Style.Setters>
             <Setter Property="Control.Background" Value="#FFAAAAAA" />

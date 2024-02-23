@@ -10,10 +10,21 @@ namespace FinancialManagementApp.ViewModels
 {
     public class WalletVM : INotifyPropertyChanged
     {
+        private int id;
         private string name;
         private long walletNumber;
         private decimal balance;
         private string? image;
+
+        public int Id
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+                OnPropertyChanged("iId");
+            }
+        }
 
         public string Name
         {

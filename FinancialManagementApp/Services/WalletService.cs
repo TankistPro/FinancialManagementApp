@@ -49,11 +49,24 @@ namespace FinancialManagementApp.Services
 
             return new WalletDto()
             {
+                Id = walletEntity.Id,
                 Name = walletEntity.Name,
                 WalletNumber = walletEntity.WalletNumber,
                 Balance = walletEntity.Balance,
                 UserId = userId
             };
+        }
+
+        async public Task<decimal?> CreateWalletOperation(WalletHistoryDto walletHistoryDto)
+        {
+            decimal? newBalance = await _walletRepository.CreateWalletOperation(walletHistoryDto);
+
+            if (newBalance != null) 
+            {
+                return (decimal)newBalance;
+            }
+
+            return null;
         }
     }
 }
