@@ -1,11 +1,12 @@
 ﻿using FinancialManagementApp.Domain.Entities;
 using FinancialManagementApp.Infrastructure.ModelDto;
+using FinancialManagementApp.Interfaces;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace FinancialManagementApp.ViewModels
 {
-    public class HomeLayoutVM : INotifyPropertyChanged
+    public class HomeLayoutVM : IHomeLayoutVM, INotifyPropertyChanged
     {
         private UserVM _userVM;
         private WalletVM _walletVM;
@@ -31,25 +32,10 @@ namespace FinancialManagementApp.ViewModels
         }
 
 
-        public void InitVM(UserDto userDto, WalletDto walletDto)
+        public void InitVM(UserVM userVM, WalletVM walletVM)
         {
-            var userVM = new UserVM()
-            {
-                FirstName = userDto.FirstName,
-                LastName = userDto.LastName,
-                MiddleName = userDto.MiddleName,
-            };
-
-            var walletVm = new WalletVM()
-            {
-                Id = walletDto.Id,
-                Name = walletDto.Name,
-                Balance = walletDto.Balance,
-                WalletNumber = walletDto.WalletNumber,
-            };
-
             this.UserVM = userVM;
-            this.WalletVM = walletVm;
+            this.WalletVM = walletVM;
         }
         
 

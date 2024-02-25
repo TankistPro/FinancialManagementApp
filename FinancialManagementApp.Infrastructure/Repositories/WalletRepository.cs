@@ -45,21 +45,21 @@ namespace FinancialManagementApp.Infrastructure.Repositories
         /// </summary>
         /// <param name="walletHistoryDto"></param>
         /// <returns>Возвращается новый баланс пользователя</returns>
-        async public Task<decimal?> CreateWalletOperation(WalletHistoryDto walletHistoryDto)
+        async public Task<decimal?> CreateWalletOperation(WalletHistory walletHistory)
         {
-            var userWallet = await _context.Wallets.Where(x => x.Id == walletHistoryDto.WalletId).FirstOrDefaultAsync();
+            var userWallet = await _context.Wallets.Where(x => x.Id == walletHistory.WalletId).FirstOrDefaultAsync();
 
             if (userWallet != null) 
             {
                 try
                 {
-                    walletHistoryDto.OldBalance = userWallet.Balance;
-                    userWallet.Balance += walletHistoryDto.Value;
-                    walletHistoryDto.NewBalance = userWallet.Balance;
+                    walletHistory.OldBalance = userWallet.Balance;
+                    userWallet.Balance += walletHistory.Value;
+                    walletHistory.NewBalance = userWallet.Balance;
 
                     await _context.SaveChangesAsync();
 
-                    bool status = await this.AddWalletHistory(walletHistoryDto);
+                    bool status = await this.AddWalletHistory(walletHistory);
 
                     if (status)
                     {
@@ -72,23 +72,11 @@ namespace FinancialManagementApp.Infrastructure.Repositories
         }
 
 
-        async public Task<bool> AddWalletHistory(WalletHistoryDto walletHistoryDto)
+        async public Task<bool> AddWalletHistory(WalletHistory walletHistory)
         {
-            var newHistory = new WalletHistory()
-            {
-                OperationType = "Доход",
-                Value = walletHistoryDto.Value,
-                NewBalance = walletHistoryDto.NewBalance,
-                OldBalance = walletHistoryDto.OldBalance,
-                Comment = walletHistoryDto.Comment,
-                Status = walletHistoryDto.Status,
-                CreatedDate = DateTime.Now,
-                WalletId = walletHistoryDto.WalletId,
-            };
-
             try
             {
-                await _context.WalletHistories.AddAsync(newHistory);
+                await _context.WalletHistories.AddAsync(walletHistory);
                 await _context.SaveChangesAsync();
 
                 return true;

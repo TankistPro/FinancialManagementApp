@@ -9,7 +9,7 @@
       Title="AuthPage">
     <Grid Background="White">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="159*" />
+            <ColumnDefinition Width="162*" />
             <ColumnDefinition Width="479*" />
             <ColumnDefinition Width="162*" />
         </Grid.ColumnDefinitions>

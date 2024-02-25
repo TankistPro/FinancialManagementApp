@@ -1,6 +1,9 @@
-﻿using FinancialManagementApp.Domain.Entities;
+﻿using AutoMapper;
+using FinancialManagementApp.Domain.Entities;
 using FinancialManagementApp.Infrastructure.ModelDto;
 using FinancialManagementApp.Infrastructure.Repositories;
+using FinancialManagementApp.Interfaces;
+using FinancialManagementApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +12,13 @@ using System.Threading.Tasks;
 
 namespace FinancialManagementApp.Services
 {
-    public class WalletService
+    public class WalletService : IWalletService
     {
         private readonly WalletRepository _walletRepository;
-        public WalletService() 
+        private readonly IMapper _mapper;
+        public WalletService(IMapper mapper) 
         {
+            _mapper = mapper;
             _walletRepository = new WalletRepository();
         }
 
@@ -43,23 +48,20 @@ namespace FinancialManagementApp.Services
             return -1;
         }
 
-        async public Task<WalletDto> GetUserWallet(int userId)
+        async public Task<WalletVM> GetUserWallet(int userId)
         {
             Wallet walletEntity = await _walletRepository.GetUserWallet(userId);
 
-            return new WalletDto()
-            {
-                Id = walletEntity.Id,
-                Name = walletEntity.Name,
-                WalletNumber = walletEntity.WalletNumber,
-                Balance = walletEntity.Balance,
-                UserId = userId
-            };
+            return _mapper.Map<WalletVM>(walletEntity);
         }
 
-        async public Task<decimal?> CreateWalletOperation(WalletHistoryDto walletHistoryDto)
+        async public Task<decimal?> CreateWalletOperation(WalletHistoryVM walletHistory)
         {
-            decimal? newBalance = await _walletRepository.CreateWalletOperation(walletHistoryDto);
+            WalletHistory walletEntity = _mapper.Map<WalletHistory>(walletHistory);
+            // TODO: FIX Mapper ?????
+            walletEntity.Value = walletHistory.WalletValue;
+
+            decimal? newBalance = await _walletRepository.CreateWalletOperation(walletEntity);
 
             if (newBalance != null) 
             {

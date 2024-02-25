@@ -59,6 +59,16 @@ namespace FinancialManagementApp.ViewModels
             }
         }
 
+        public DateTime CreatedDate
+        {
+            get { return createdDate; }
+            set
+            {
+                createdDate = value;
+                OnPropertyChanged("CreatedDate");
+            }
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {

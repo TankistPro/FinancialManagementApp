@@ -1,7 +1,10 @@
-﻿using FinancialManagementApp.Domain.Entities;
+﻿using AutoMapper;
+using FinancialManagementApp.Domain.Entities;
 using FinancialManagementApp.Infrastructure.ModelDto;
 using FinancialManagementApp.Infrastructure.Repositories;
+using FinancialManagementApp.Interfaces;
 using FinancialManagementApp.Layouts;
+using FinancialManagementApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +13,17 @@ using System.Threading.Tasks;
 
 namespace FinancialManagementApp.Services
 {
-    public class AuthService
+    public class AuthService : IAuthService
     {
         private readonly WalletRepository _walletRepository;
         private readonly UserRepository _userRepository;
 
-        public AuthService() 
+        private readonly IMapper _mapper;
+
+        public AuthService(IMapper mapper) 
         {
+            _mapper = mapper;
+
             _walletRepository = new WalletRepository();
             _userRepository = new UserRepository();
         }
@@ -40,11 +47,11 @@ namespace FinancialManagementApp.Services
             return -1;
         }
 
-        async public Task<UserDto> LoginUser(string email, string password)
+        async public Task<UserVM> LoginUser(string email, string password)
         {
-            UserDto user = await _userRepository.LoginUser(email, password);
+            User user = await _userRepository.LoginUser(email, password);
 
-            return user;
+            return _mapper.Map<UserVM>(user);
         }
     }
 }

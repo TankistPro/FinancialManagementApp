@@ -10,7 +10,7 @@ namespace FinancialManagementApp.Infrastructure.Repositories
 {
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
-        async public Task<UserDto> LoginUser(string email, string password)
+        async public Task<User> LoginUser(string email, string password)
         {
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)) 
             {
@@ -25,17 +25,7 @@ namespace FinancialManagementApp.Infrastructure.Repositories
 
                 if (candidatePassword == password) 
                 {
-                    return new UserDto()
-                    {
-                        Id = candidate.Id,
-                        FirstName = candidate.FirstName,
-                        LastName = candidate.LastName,
-                        MiddleName = candidate.MiddleName,
-                        Email = candidate.Email,
-                        AvatarHash = candidate.AvatarHash,
-                        EmailConfirmed = candidate.EmailConfirmed.ToString(),
-                        RegistrationDate = candidate.RegistrationDate,
-                    };
+                    return candidate;
                 }
             }
 

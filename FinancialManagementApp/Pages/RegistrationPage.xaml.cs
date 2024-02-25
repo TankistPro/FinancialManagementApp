@@ -1,13 +1,7 @@
 ﻿using FinancialManagementApp.Infrastructure.ModelDto;
 using System.Windows;
 using System.Windows.Controls;
-using FinancialManagementApp.Layouts;
-using FinancialManagementApp.Services;
-using FinancialManagementApp.ViewModels;
-using FinancialManagementApp.Domain.Entities;
-using Microsoft.VisualBasic.ApplicationServices;
-using System.Windows.Input;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using FinancialManagementApp.Interfaces;
 
 namespace FinancialManagementApp.Pages
 {
@@ -16,19 +10,20 @@ namespace FinancialManagementApp.Pages
     /// </summary>
     public partial class RegistrationPage : Page
     {
-        private readonly AuthService _authService;
-        private readonly WalletService _walletService;
-        public RegistrationPage()
+        private readonly IAuthService _authService;
+        private readonly IWalletService _walletService;
+
+        public RegistrationPage(IAuthService authService, IWalletService walletService)
         {
             InitializeComponent();
 
-            _authService = new AuthService();
-            _walletService = new WalletService();
+            _authService = authService;
+            _walletService = walletService;
         }
 
         private void GoToAuthPage(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.Content = new AuthPage();
+            this.NavigationService.GoBack();
         }
 
         async private void CreateUser(object sender, RoutedEventArgs e)
@@ -64,7 +59,7 @@ namespace FinancialManagementApp.Pages
 
                 if (walletId > -1)
                 {
-                    Application.Current.MainWindow.Content = new AuthPage();
+                    this.NavigationService.GoBack();
                 }
             }
 

@@ -6,9 +6,20 @@ namespace FinancialManagementApp.ViewModels
 {
     public class UserVM : INotifyPropertyChanged
     {
+        private int id;
         private string firstName;
         private string lastName;
         private string? middleName;
+
+        public int Id
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+                OnPropertyChanged("Id");
+            }
+        }
 
         public string FirstName 
         {
