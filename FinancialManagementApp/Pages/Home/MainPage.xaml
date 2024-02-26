@@ -3,12 +3,34 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:FinancialManagementApp.Pages"
+      xmlns:local="clr-namespace:FinancialManagementApp.Pages" xmlns:ScottPlot="clr-namespace:ScottPlot.WPF;assembly=ScottPlot.WPF"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainPage">
 
-    <Grid>
-        <TextBlock Text="Главная страница" />
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="19*"/>
+            <RowDefinition Height="24*" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Column="0" Grid.Row="0" Background="White" BorderBrush="#FF000000" BorderThickness="1" CornerRadius="8" Padding="5">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+
+
+                <TextBlock Text="Статистика за текущий месяц" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" TextDecorations="Underline" Padding="0, 5, 0, 0" />
+                <ScottPlot:WpfPlot Grid.Row="1" x:Name="StatisticChart"  />
+            </Grid>
+        </Border>
+
+
     </Grid>
 </Page>
