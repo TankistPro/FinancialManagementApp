@@ -8,7 +8,8 @@
         Title="Управление финансами"
         ResizeMode="CanResize"
         MinHeight="500" MinWidth="800"
-        Width="800" Height="500"
+        WindowStyle="SingleBorderWindow"
+        WindowState="Maximized"
         WindowStartupLocation="CenterScreen"
         >
     <Frame x:Name="mainWindowFraim" NavigationUIVisibility="Hidden" />
