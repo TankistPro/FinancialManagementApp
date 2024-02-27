@@ -8,7 +8,27 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="HistoryPage">
 
-    <Grid Background="Transparent">
-        <TextBlock Text="Старница истории" />
+    <Grid Background="Transparent" >
+        <DataGrid x:Name="WalletHistoryTable" AutoGenerateColumns="False" TextBlock.TextAlignment="Center" FontSize="13">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn CanUserResize="False">
+                    <DataGridCheckBoxColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <CheckBox />
+                        </DataTemplate>
+                    </DataGridCheckBoxColumn.HeaderTemplate>
+                </DataGridCheckBoxColumn>
+
+                <DataGridTextColumn  Header="ID" IsReadOnly="True" CanUserResize="False" Binding="{ Binding WalletId }" />
+
+                <DataGridTextColumn  Header="Тип операции" IsReadOnly="True" CanUserResize="False" Binding="{ Binding OperationType }" />
+
+                <DataGridTextColumn Header="Сумма" Width="2*" IsReadOnly="True" Binding="{ Binding WalletValue }" />
+                <DataGridTextColumn Header="Новый баланс" Width="2*" IsReadOnly="True" Binding="{ Binding NewBalance }" />
+                <DataGridTextColumn Header="Старый баланс" Width="2*" IsReadOnly="True" Binding="{ Binding OldBalance }" />
+                <DataGridTextColumn Header="Комментарий" Width="5*" IsReadOnly="True" Binding="{ Binding Comment }" />
+                <DataGridTextColumn Header="Дата создания" Width="1.5*" IsReadOnly="True" Binding="{ Binding CreatedDate, StringFormat='dd.MM.yy, HH:mm:ss'}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

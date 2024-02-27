@@ -15,11 +15,13 @@ namespace FinancialManagementApp.Services
     public class WalletService : IWalletService
     {
         private readonly WalletRepository _walletRepository;
+        private readonly WalletHistoryRepository _walletHistoryRepository;
         private readonly IMapper _mapper;
         public WalletService(IMapper mapper) 
         {
             _mapper = mapper;
             _walletRepository = new WalletRepository();
+            _walletHistoryRepository = new WalletHistoryRepository();
         }
 
         /// <summary>
@@ -69,6 +71,13 @@ namespace FinancialManagementApp.Services
             }
 
             return null;
+        }
+
+        async public Task<List<WalletHistoryVM>> GetWalletHistory(int walletId)
+        {
+            List<WalletHistory> history = await _walletHistoryRepository.GetWalletHistory(walletId);
+
+            return _mapper.Map<List<WalletHistoryVM>>(history);
         }
     }
 }

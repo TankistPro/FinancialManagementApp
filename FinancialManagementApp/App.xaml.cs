@@ -2,6 +2,7 @@
 using FinancialManagementApp.Interfaces;
 using FinancialManagementApp.Layouts;
 using FinancialManagementApp.Pages;
+using FinancialManagementApp.Pages.Home;
 using FinancialManagementApp.Services;
 using FinancialManagementApp.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,11 +30,13 @@ namespace FinancialManagementApp
         private void ConfigureServices(ServiceCollection services)
         {
             services.AddAutoMapper(typeof(AppMapper));
-            services.AddScoped<MainWindow>();
+            services.AddSingleton<MainWindow>();
             services.AddScoped<AddWalletHistoryWindow>();
 
             services.AddScoped<AuthPage>();
             services.AddScoped<RegistrationPage>();
+            services.AddTransient<HistoryPage>();
+            services.AddTransient<MainPage>();
             services.AddScoped<HomeLayout>();
 
             services.AddSingleton<HomeLayoutVM>();

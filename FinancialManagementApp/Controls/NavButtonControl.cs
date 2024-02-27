@@ -11,13 +11,13 @@ namespace FinancialManagementApp.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(NavButtonControl), new FrameworkPropertyMetadata(typeof(NavButtonControl)));
         }
 
-        public Uri NavLink
+        public string ComponentName
         {
-            get { return (Uri)GetValue(NavLinkProperty); }
-            set { SetValue(NavLinkProperty, value); }
+            get { return (string)GetValue(ComponentNameProperty); }
+            set { SetValue(ComponentNameProperty, value); }
         }
-        public static readonly DependencyProperty NavLinkProperty =
-            DependencyProperty.Register("NavLink", typeof(Uri), typeof(NavButtonControl), new PropertyMetadata(null));
+        public static readonly DependencyProperty ComponentNameProperty =
+            DependencyProperty.Register("ComponentName", typeof(string), typeof(NavButtonControl), new PropertyMetadata(null));
 
 
 

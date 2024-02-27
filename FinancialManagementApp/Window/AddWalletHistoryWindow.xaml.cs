@@ -45,6 +45,7 @@ namespace FinancialManagementApp
             if (newBalance != null)
             {
                 _homeLayoutVM.WalletVM.Balance = (decimal)newBalance;
+                _homeLayoutVM.InsertWalletHistoryRecord(_walletHistoryVM);
                 this.Hide();
             }
         }

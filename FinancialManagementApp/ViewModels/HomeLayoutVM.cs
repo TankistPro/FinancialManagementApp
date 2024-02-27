@@ -1,6 +1,7 @@
 ﻿using FinancialManagementApp.Domain.Entities;
 using FinancialManagementApp.Infrastructure.ModelDto;
 using FinancialManagementApp.Interfaces;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -10,6 +11,7 @@ namespace FinancialManagementApp.ViewModels
     {
         private UserVM _userVM;
         private WalletVM _walletVM;
+        private ObservableCollection<WalletHistoryVM> _listWalletHistoryVM;
 
         public UserVM UserVM
         {
@@ -31,11 +33,31 @@ namespace FinancialManagementApp.ViewModels
             }
         }
 
+        public ObservableCollection<WalletHistoryVM> ListWalletHistoryVM
+        {
+            get { return _listWalletHistoryVM; }
+            set
+            {
+                _listWalletHistoryVM = value;
+                OnPropertyChanged("ListWalletHistoryVM");
+            }
+        }
 
-        public void InitVM(UserVM userVM, WalletVM walletVM)
+
+        public void InitVM(UserVM userVM, WalletVM walletVM, ObservableCollection<WalletHistoryVM>? listWalletHistoryVM)
         {
             this.UserVM = userVM;
             this.WalletVM = walletVM;
+
+            if(listWalletHistoryVM != null)
+            {
+                this._listWalletHistoryVM = listWalletHistoryVM;
+            }
+        }
+
+        public void InsertWalletHistoryRecord(WalletHistoryVM walletHistoryVM)
+        {
+            this.ListWalletHistoryVM.Insert(0, walletHistoryVM);
         }
         
 

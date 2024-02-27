@@ -39,6 +39,26 @@ namespace FinancialManagementApp.ViewModels
             }
         }
 
+        public decimal NewBalance
+        {
+            get { return newBalance; }
+            set
+            {
+                newBalance = value;
+                OnPropertyChanged("NewBalance");
+            }
+        }
+
+        public decimal OldBalance
+        {
+            get { return oldBalance; }
+            set
+            {
+                oldBalance = value;
+                OnPropertyChanged("OldBalance");
+            }
+        }
+
         public string OperationType
         {
             get { return operationType; }

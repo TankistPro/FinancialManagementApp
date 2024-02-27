@@ -12,6 +12,11 @@ namespace FinancialManagementApp.Infrastructure.Repositories
 {
     public class WalletRepository : BaseRepository<Wallet>, IWalletRepository
     {
+        private readonly IWalletHistoryRepository _walletHistoryRepository;
+        public WalletRepository() 
+        {
+            _walletHistoryRepository = new WalletHistoryRepository();
+        }
         async public Task<int> CreateWallet(WalletDto wallet)
         {
             var newWallet = new Wallet()
@@ -59,7 +64,7 @@ namespace FinancialManagementApp.Infrastructure.Repositories
 
                     await _context.SaveChangesAsync();
 
-                    bool status = await this.AddWalletHistory(walletHistory);
+                    bool status = await _walletHistoryRepository.AddWalletHistory(walletHistory);
 
                     if (status)
                     {
@@ -69,20 +74,6 @@ namespace FinancialManagementApp.Infrastructure.Repositories
             }
             
             return null;
-        }
-
-
-        async public Task<bool> AddWalletHistory(WalletHistory walletHistory)
-        {
-            try
-            {
-                await _context.WalletHistories.AddAsync(walletHistory);
-                await _context.SaveChangesAsync();
-
-                return true;
-            } catch (Exception ex) { }
-
-            return false;
         }
     }
 }

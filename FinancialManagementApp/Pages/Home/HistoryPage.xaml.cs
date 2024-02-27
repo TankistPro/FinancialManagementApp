@@ -1,5 +1,9 @@
-﻿using System;
+﻿using FinancialManagementApp.Infrastructure.Interfaces;
+using FinancialManagementApp.Interfaces;
+using FinancialManagementApp.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +24,25 @@ namespace FinancialManagementApp.Pages.Home
     /// </summary>
     public partial class HistoryPage : Page
     {
-        public HistoryPage()
+        private readonly IWalletService _walletService;
+        private HomeLayoutVM _homeLayoutVM;
+        public HistoryPage(HomeLayoutVM homeLayoutVM, IWalletService walletService)
         {
             InitializeComponent();
+
+            _walletService = walletService;
+            _homeLayoutVM = homeLayoutVM;
+
+            this.Loaded += (e, s) => InitHistory();
+        }
+
+        async private void InitHistory()
+        {
+            var history = await _walletService.GetWalletHistory(_homeLayoutVM.WalletVM.Id);
+
+            _homeLayoutVM.ListWalletHistoryVM = new ObservableCollection<WalletHistoryVM>(history.AsEnumerable());
+
+            WalletHistoryTable.ItemsSource = _homeLayoutVM.ListWalletHistoryVM;
         }
     }
 }

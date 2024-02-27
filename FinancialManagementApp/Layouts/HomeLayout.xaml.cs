@@ -1,5 +1,7 @@
 ﻿using FinancialManagementApp.Controls;
 using FinancialManagementApp.Interfaces;
+using FinancialManagementApp.Pages;
+using FinancialManagementApp.Pages.Home;
 using FinancialManagementApp.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -20,12 +22,22 @@ namespace FinancialManagementApp.Layouts
         private IWalletService _walletService;
         private HomeLayoutVM _homeLayoutVM;
 
-        public HomeLayout(HomeLayoutVM homeLayoutVM, IWalletService walletService)
+        private readonly MainPage _mainPage;
+        private readonly HistoryPage _historyPage;
+
+        public HomeLayout(
+            HomeLayoutVM homeLayoutVM, 
+            IWalletService walletService,
+            MainPage mainPage,
+            HistoryPage historyPage
+            )
         {
 
             InitializeComponent();
 
             _homeLayoutVM = homeLayoutVM;
+            _mainPage = mainPage;
+            _historyPage = historyPage;
 
             DataContext = _homeLayoutVM;
 
@@ -39,9 +51,20 @@ namespace FinancialManagementApp.Layouts
 
         private void sideBar_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selected = sideBar.SelectedItem as NavButtonControl;
+            var item = sideBar.SelectedItem as NavButtonControl;
 
-            mainFraim.Navigate(selected.NavLink);
+            switch (item?.ComponentName)
+            {
+                case "MainPage": 
+                    mainFraim.Navigate(_mainPage);
+                    break;
+                case "HistoryPage":
+                    mainFraim.Navigate(_historyPage);
+                    break;
+                default:
+                    mainFraim.Navigate(_mainPage);
+                    break;
+            }
         }
 
         private void OpenAddHistoryModal(object sender, RoutedEventArgs e)

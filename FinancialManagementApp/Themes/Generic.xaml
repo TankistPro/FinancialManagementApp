@@ -118,7 +118,7 @@
 
     <Style TargetType="PasswordBox">
         <Setter Property="Padding" Value="10, 7, 10, 7" />
-        
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="PasswordBox">
@@ -128,7 +128,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        
+
     </Style>
 
 </ResourceDictionary>
