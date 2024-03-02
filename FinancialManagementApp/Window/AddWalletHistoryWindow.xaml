@@ -33,7 +33,7 @@
 
         <StackPanel Grid.Column="1"  Grid.Row="1" Margin="0,20,0,0">
             <StackPanel Margin="0,0,0,10">
-                <TextBlock Margin="0, 0, 0, 5" Text="Значение:*" />
+                <TextBlock Margin="0, 0, 0, 5" Text="Сумма:*" />
                 <TextBox >
                     <TextBox.Text>
                         <Binding Path="WalletValue">

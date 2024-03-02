@@ -9,7 +9,13 @@
       Title="HistoryPage">
 
     <Grid Margin="10">
-        <DataGrid x:Name="WalletHistoryTable" AutoGenerateColumns="False" TextBlock.TextAlignment="Center" FontSize="13">
+        <DataGrid 
+            x:Name="WalletHistoryTable" 
+            AutoGenerateColumns="False" 
+            TextBlock.TextAlignment="Center"
+            CanUserAddRows="False"
+            MouseDoubleClick="EditRecord_MouseDoubleClick"
+            FontSize="13">
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn CanUserResize="False">
                     <DataGridCheckBoxColumn.HeaderTemplate>

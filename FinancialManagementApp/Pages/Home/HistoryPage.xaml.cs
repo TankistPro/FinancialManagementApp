@@ -26,7 +26,9 @@ namespace FinancialManagementApp.Pages.Home
     {
         private readonly IWalletService _walletService;
         private HomeLayoutVM _homeLayoutVM;
-        public HistoryPage(HomeLayoutVM homeLayoutVM, IWalletService walletService)
+        public HistoryPage(
+            HomeLayoutVM homeLayoutVM, 
+            IWalletService walletService)
         {
             InitializeComponent();
 
@@ -43,6 +45,18 @@ namespace FinancialManagementApp.Pages.Home
             _homeLayoutVM.ListWalletHistoryVM = new ObservableCollection<WalletHistoryVM>(history.AsEnumerable());
 
             WalletHistoryTable.ItemsSource = _homeLayoutVM.ListWalletHistoryVM;
+        }
+
+        private void EditRecord_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            WalletHistoryVM currentRecord = WalletHistoryTable.SelectedItem as WalletHistoryVM;
+
+            if (currentRecord != null)
+            {
+                var modal = new AddWalletHistoryWindow(_walletService, _homeLayoutVM, currentRecord);
+                modal.ShowDialog();
+            }
+            
         }
     }
 }

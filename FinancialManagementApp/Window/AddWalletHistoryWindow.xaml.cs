@@ -17,15 +17,32 @@ namespace FinancialManagementApp
         private WalletHistoryVM _walletHistoryVM;
         private HomeLayoutVM _homeLayoutVM;
 
-        public AddWalletHistoryWindow(IWalletService walletService, HomeLayoutVM homeLayoutVM)
+        private bool isEditRecord = false;
+
+        public AddWalletHistoryWindow(IWalletService walletService, HomeLayoutVM homeLayoutVM, WalletHistoryVM editRecordVM = null)
         {
             InitializeComponent();
 
             _walletService = walletService;
-            _walletHistoryVM = new WalletHistoryVM();
+            
+            
             _homeLayoutVM = homeLayoutVM;
 
-            _walletHistoryVM.WalletId = _homeLayoutVM.WalletVM.Id;
+            if (editRecordVM != null)
+            {
+                isEditRecord = true;
+                _walletHistoryVM = editRecordVM;
+
+                this.Title = "Редактирование записи";
+            } 
+            else
+            {
+                isEditRecord = false;
+                _walletHistoryVM = new WalletHistoryVM();
+                _walletHistoryVM.WalletId = _homeLayoutVM.WalletVM.Id;
+
+                this.Title = "Создание записи";
+            }
 
             this.DataContext = _walletHistoryVM;
         }
@@ -39,15 +56,28 @@ namespace FinancialManagementApp
         {
             _walletHistoryVM.OperationType = "Доход";
             _walletHistoryVM.CreatedDate = DateTime.Now;
+            
 
-            decimal? newBalance = await _walletService.CreateWalletOperation(_walletHistoryVM);
-
-            if (newBalance != null)
+            if(!isEditRecord)
             {
-                _homeLayoutVM.WalletVM.Balance = (decimal)newBalance;
-                _homeLayoutVM.InsertWalletHistoryRecord(_walletHistoryVM);
-                this.Hide();
+                decimal? newBalance = await _walletService.CreateWalletOperation(_walletHistoryVM);
+
+                if (newBalance != null)
+                {
+                    _walletHistoryVM.OldBalance = _homeLayoutVM.WalletVM.Balance;
+
+                    _walletHistoryVM.NewBalance = (decimal)newBalance;
+                    _homeLayoutVM.WalletVM.Balance = (decimal)newBalance;
+
+                    _homeLayoutVM.InsertWalletHistoryRecord(_walletHistoryVM);
+
+                    this.Hide();
+                }
             }
+            else
+            {
+                // Логика для редактирования уже созданной записи
+            }  
         }
     }
 }

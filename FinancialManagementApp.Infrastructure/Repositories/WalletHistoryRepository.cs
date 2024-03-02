@@ -29,7 +29,7 @@ namespace FinancialManagementApp.Infrastructure.Repositories
 
         public async Task<List<WalletHistory>> GetWalletHistory(int walletId)
         {
-            return await _context.WalletHistories.Where(x => x.WalletId == walletId).ToListAsync();
+            return await _context.WalletHistories.Where(x => x.WalletId == walletId).OrderByDescending(x => x.CreatedDate).ToListAsync();
         }
     }
 }
