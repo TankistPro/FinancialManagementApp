@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="HistoryPage">
 
-    <Grid Background="Transparent" >
+    <Grid Margin="10">
         <DataGrid x:Name="WalletHistoryTable" AutoGenerateColumns="False" TextBlock.TextAlignment="Center" FontSize="13">
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn CanUserResize="False">
@@ -23,10 +23,16 @@
 
                 <DataGridTextColumn  Header="Тип операции" IsReadOnly="True" CanUserResize="False" Binding="{ Binding OperationType }" />
 
-                <DataGridTextColumn Header="Сумма" Width="2*" IsReadOnly="True" Binding="{ Binding WalletValue }" />
-                <DataGridTextColumn Header="Новый баланс" Width="2*" IsReadOnly="True" Binding="{ Binding NewBalance }" />
-                <DataGridTextColumn Header="Старый баланс" Width="2*" IsReadOnly="True" Binding="{ Binding OldBalance }" />
-                <DataGridTextColumn Header="Комментарий" Width="5*" IsReadOnly="True" Binding="{ Binding Comment }" />
+                <DataGridTextColumn Header="Сумма" Width="2*" IsReadOnly="True" Binding="{ Binding WalletValue, StringFormat='{}{0:N2} руб.' }" />
+                <DataGridTextColumn Header="Новый баланс" Width="2*" IsReadOnly="True" Binding="{ Binding NewBalance, StringFormat='{}{0:N2} руб.' }" />
+                <DataGridTextColumn Header="Старый баланс" Width="2*" IsReadOnly="True" Binding="{ Binding OldBalance, StringFormat='{}{0:N2} руб.' }" />
+                <DataGridTextColumn Header="Комментарий" x:Name="Comment" Width="5*" IsReadOnly="True" Binding="{ Binding Comment }">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextWrapping" Value="Wrap" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
                 <DataGridTextColumn Header="Дата создания" Width="1.5*" IsReadOnly="True" Binding="{ Binding CreatedDate, StringFormat='dd.MM.yy, HH:mm:ss'}" />
             </DataGrid.Columns>
         </DataGrid>
