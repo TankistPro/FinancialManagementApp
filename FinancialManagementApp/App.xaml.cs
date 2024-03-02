@@ -6,7 +6,7 @@ using FinancialManagementApp.Pages.Home;
 using FinancialManagementApp.Services;
 using FinancialManagementApp.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
-
+using System.Globalization;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;

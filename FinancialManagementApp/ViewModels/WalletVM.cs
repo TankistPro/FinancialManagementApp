@@ -16,6 +16,17 @@ namespace FinancialManagementApp.ViewModels
         private decimal balance;
         private string? image;
 
+        public string BalanceView
+        {
+            get
+            {
+                return this.balance.ToString("N2") + " руб.";
+            }
+            set {
+                OnPropertyChanged("BalanceView");
+            }
+        }
+
         public int Id
         {
             get { return id; }
@@ -52,6 +63,7 @@ namespace FinancialManagementApp.ViewModels
             set
             {
                 balance = value;
+                BalanceView = balance.ToString();
                 OnPropertyChanged("Balance");
             }
         }

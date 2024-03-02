@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinancialManagementApp.Infrastructure.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -11,13 +12,21 @@ namespace FinancialManagementApp.ViewModels
     public class WalletHistoryVM
     {
         private int walletId;
-        private string operationType;
+        private int operationType;
         private decimal walletValue;
         private decimal newBalance;
         private decimal oldBalance;
         private string? comment;
         private int status;
         private DateTime createdDate;
+
+        public string OperationTypeView
+        {
+            get
+            {
+                return WalletOperations.walletOperationsDict[this.OperationType];
+            }
+        }
 
         public int WalletId
         {
@@ -59,7 +68,7 @@ namespace FinancialManagementApp.ViewModels
             }
         }
 
-        public string OperationType
+        public int OperationType
         {
             get { return operationType; }
             set

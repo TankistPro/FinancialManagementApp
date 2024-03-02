@@ -38,7 +38,7 @@
                     </DockPanel>
                     <DockPanel>
                         <TextBlock Text="Баланс:" FontSize="14" Margin="0,0,5,0" />
-                        <TextBlock Text="{ Binding Path=WalletVM.Balance, StringFormat='{}{0:F2} руб.'}" FontSize="14" FontWeight="Bold" />
+                        <TextBlock Text="{ Binding Path=WalletVM.BalanceView}" FontSize="14" FontWeight="Bold" />
                     </DockPanel>
                 </StackPanel>
             </Grid>

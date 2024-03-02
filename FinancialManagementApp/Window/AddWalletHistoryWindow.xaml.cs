@@ -1,4 +1,5 @@
 ﻿using FinancialManagementApp.Domain.Entities;
+using FinancialManagementApp.Infrastructure.Enums;
 using FinancialManagementApp.Infrastructure.ModelDto;
 using FinancialManagementApp.Interfaces;
 using FinancialManagementApp.Services;
@@ -19,32 +20,40 @@ namespace FinancialManagementApp
 
         private bool isEditRecord = false;
 
-        public AddWalletHistoryWindow(IWalletService walletService, HomeLayoutVM homeLayoutVM, WalletHistoryVM editRecordVM = null)
+        public AddWalletHistoryWindow(IWalletService walletService, HomeLayoutVM homeLayoutVM, WalletHistoryVM? editRecordVM = null)
         {
             InitializeComponent();
 
             _walletService = walletService;
-            
-            
             _homeLayoutVM = homeLayoutVM;
+
+            this.InitWalletHistoryWindow(editRecordVM);
+
+            this.DataContext = _walletHistoryVM;
+        }
+
+        private void InitWalletHistoryWindow(WalletHistoryVM? editRecordVM)
+        {
+            this.OperationTypeBox.ItemsSource = WalletOperations.walletOperationsDict.Select(x => x.Value);
+
 
             if (editRecordVM != null)
             {
                 isEditRecord = true;
                 _walletHistoryVM = editRecordVM;
+                this.OperationTypeBox.SelectedIndex = editRecordVM.OperationType;
 
                 this.Title = "Редактирование записи";
-            } 
+            }
             else
             {
                 isEditRecord = false;
                 _walletHistoryVM = new WalletHistoryVM();
                 _walletHistoryVM.WalletId = _homeLayoutVM.WalletVM.Id;
+                this.OperationTypeBox.SelectedIndex = 0;
 
                 this.Title = "Создание записи";
             }
-
-            this.DataContext = _walletHistoryVM;
         }
 
         private void CancelAdd_Click(object sender, RoutedEventArgs e)
@@ -54,9 +63,8 @@ namespace FinancialManagementApp
 
         async private void AddWalletOperation_Click(object sender, RoutedEventArgs e)
         {
-            _walletHistoryVM.OperationType = "Доход";
+            _walletHistoryVM.OperationType = Convert.ToInt32(OperationTypeBox.SelectedIndex);
             _walletHistoryVM.CreatedDate = DateTime.Now;
-            
 
             if(!isEditRecord)
             {

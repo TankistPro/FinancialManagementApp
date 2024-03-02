@@ -3,12 +3,16 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:FinancialManagementApp.Pages.Home"
+      xmlns:local="clr-namespace:FinancialManagementApp.Pages.Home" 
+      xmlns:local1="clr-namespace:FinancialManagementApp.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="HistoryPage">
-
+    <Page.Resources>
+        <local1:OperationTypeColorConvertor x:Key="OperationTypeColorConvertor" />
+    </Page.Resources>
     <Grid Margin="10">
+
         <DataGrid 
             x:Name="WalletHistoryTable" 
             AutoGenerateColumns="False" 
@@ -16,6 +20,12 @@
             CanUserAddRows="False"
             MouseDoubleClick="EditRecord_MouseDoubleClick"
             FontSize="13">
+            <DataGrid.RowStyle>
+                <Style TargetType="{x:Type DataGridRow}">
+                    <Setter Property="Background" Value="{Binding OperationType, Converter={StaticResource OperationTypeColorConvertor}}" />
+                </Style>
+            </DataGrid.RowStyle>
+            
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn CanUserResize="False">
                     <DataGridCheckBoxColumn.HeaderTemplate>
@@ -25,9 +35,11 @@
                     </DataGridCheckBoxColumn.HeaderTemplate>
                 </DataGridCheckBoxColumn>
 
+                
+
                 <DataGridTextColumn  Header="ID" IsReadOnly="True" CanUserResize="False" Binding="{ Binding WalletId }" />
 
-                <DataGridTextColumn  Header="Тип операции" IsReadOnly="True" CanUserResize="False" Binding="{ Binding OperationType }" />
+                <DataGridTextColumn  Header="Тип операции" IsReadOnly="True" CanUserResize="False" Binding="{ Binding OperationTypeView }" />
 
                 <DataGridTextColumn Header="Сумма" Width="2*" IsReadOnly="True" Binding="{ Binding WalletValue, StringFormat='{}{0:N2} руб.' }" />
                 <DataGridTextColumn Header="Новый баланс" Width="2*" IsReadOnly="True" Binding="{ Binding NewBalance, StringFormat='{}{0:N2} руб.' }" />

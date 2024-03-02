@@ -10,7 +10,7 @@ namespace FinancialManagementApp.Domain.Entities
     public class WalletHistory
     {
         public int Id { get; set; }
-        public string OperationType { get; set;}
+        public int OperationType { get; set;}
         [Column(TypeName = "money")]
         public decimal Value { get; set; }
         [Column(TypeName = "money")]

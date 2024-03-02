@@ -36,7 +36,7 @@
                 <TextBlock Margin="0, 0, 0, 5" Text="Сумма:*" />
                 <TextBox >
                     <TextBox.Text>
-                        <Binding Path="WalletValue">
+                        <Binding Path="WalletValue" StringFormat="{}{0:N2}" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <ExceptionValidationRule />
                             </Binding.ValidationRules>
@@ -47,17 +47,7 @@
 
             <StackPanel Margin="0,0,0,10">
                 <TextBlock Margin="0, 0, 0, 5" Text="Тип операции:" />
-                <ComboBox>
-                    <ComboBoxItem IsSelected="True">
-                        <TextBlock Text="Доход" />
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock Text="Расход" />
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock Text="Возврат денежных средств" />
-                    </ComboBoxItem>
-                </ComboBox>
+                <ComboBox x:Name="OperationTypeBox"></ComboBox>
             </StackPanel>
 
             <StackPanel>

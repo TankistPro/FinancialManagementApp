@@ -13,7 +13,7 @@ namespace FinancialManagementApp.Pages
         public MainPage()
         {
             InitializeComponent();
-            this.Loaded += (s, e) => InitStatisticPlot();
+            InitStatisticPlot();
         }
 
         private void InitStatisticPlot()
