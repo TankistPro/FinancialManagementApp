@@ -11,6 +11,7 @@
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="10" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -31,6 +32,84 @@
             </Grid>
         </Border>
 
+        <Border  Grid.Column="2" Grid.Row="0" Background="White" BorderBrush="#FF000000" BorderThickness="1" CornerRadius="8" Padding="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                
+                <StackPanel>
+                    <TextBlock Text="Статистика за 02.02.2024" TextAlignment="Center" FontSize="18" FontWeight="Bold" TextDecorations="Underline" />
+                    <StackPanel VerticalAlignment="Center">
+                        <Grid HorizontalAlignment="Center" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
 
+                            <TextBlock Grid.Column="0"  Text="Доходы: " FontSize="14" />
+                            <TextBlock Grid.Column="2" Text="1000руб." FontSize="14" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Center" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0"  Text="Расходы: " FontSize="14" />
+                            <TextBlock Grid.Column="2" Text="-1000руб." FontSize="14" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Center" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0"  Text="Другое: " FontSize="14" />
+                            <TextBlock Grid.Column="2" Text="-1000руб." FontSize="14" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Center" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0"  Text="Баланс на начало периода: " FontSize="14" />
+                            <TextBlock Grid.Column="2" Text="1000руб." FontSize="14" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Center" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0"  Text="Баланс на конец периода: " FontSize="14" />
+                            <TextBlock Grid.Column="2" Text="1000руб." FontSize="14" />
+                        </Grid>
+                        <Grid HorizontalAlignment="Center" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0"  Text="Самый большой доход: " FontSize="14" />
+                            <TextBlock Grid.Column="2" Text="1000руб." FontSize="14" />
+                        </Grid>
+                    </StackPanel>
+                    
+                </StackPanel>
+
+                <Viewbox  Grid.Row="1">
+                    <Calendar HorizontalAlignment="Center" SelectionMode="SingleRange"></Calendar>
+                </Viewbox>
+            </Grid>
+        </Border>
     </Grid>
 </Page>

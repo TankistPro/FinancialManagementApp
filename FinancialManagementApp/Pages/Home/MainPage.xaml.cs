@@ -31,6 +31,7 @@ namespace FinancialManagementApp.Pages
             
             StatisticService statisticService = new StatisticService();
             StatisticMonthDto statisticMonthDto = await statisticService.InitStatiscticByMonth(DateTime.Now.Month, DateTime.Now.Year, _homeLayoutVM.WalletVM.Id);
+            
             _statisticMonthVM.InitStatistic(statisticMonthDto);
 
             StatisticChart.Reset();
