@@ -37,7 +37,7 @@
 
                 
 
-                <DataGridTextColumn  Header="ID" IsReadOnly="True" CanUserResize="False" Binding="{ Binding WalletId }" />
+                <DataGridTextColumn  Header="ID" IsReadOnly="True" CanUserResize="False" Binding="{ Binding Id }" />
 
                 <DataGridTextColumn  Header="Тип операции" IsReadOnly="True" CanUserResize="False" Binding="{ Binding OperationTypeView }" />
 

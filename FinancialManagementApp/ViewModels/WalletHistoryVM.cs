@@ -11,6 +11,7 @@ namespace FinancialManagementApp.ViewModels
 {
     public class WalletHistoryVM
     {
+        private int id;
         private int walletId;
         private int operationType;
         private decimal walletValue;
@@ -25,6 +26,16 @@ namespace FinancialManagementApp.ViewModels
             get
             {
                 return WalletOperations.walletOperationsDict[this.OperationType];
+            }
+        }
+
+        public int Id
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+                OnPropertyChanged("Id");
             }
         }
 

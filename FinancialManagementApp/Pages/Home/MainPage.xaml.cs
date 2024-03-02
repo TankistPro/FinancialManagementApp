@@ -24,21 +24,22 @@ namespace FinancialManagementApp.Pages
 
             _statisticMonthVM = statisticMonthVM;
             _homeLayoutVM = homeLayoutVM;
-
-            InitStatisticPlot();
         }
 
         async public void InitStatisticPlot()
         {
+            
             StatisticService statisticService = new StatisticService();
-
             StatisticMonthDto statisticMonthDto = await statisticService.InitStatiscticByMonth(DateTime.Now.Month, DateTime.Now.Year, _homeLayoutVM.WalletVM.Id);
-
             _statisticMonthVM.InitStatistic(statisticMonthDto);
 
-            PieSlice slice1 = new() { Value = Math.Abs((double)_statisticMonthVM.Expenses), FillColor = Colors.IndianRed, Label = $"Расходы: {_statisticMonthVM.Expenses.ToString("N2")} руб." };
-            PieSlice slice2 = new() { Value = Math.Abs((double)_statisticMonthVM.Income), FillColor = Colors.LightGreen, Label = $"Доходы: {_statisticMonthVM.Income.ToString("N2")} руб." };
-            PieSlice slice3 = new() { Value = Math.Abs((double)_statisticMonthVM.Other), FillColor = Colors.LightGray, Label = $"Другие расходы: {_statisticMonthVM.Other.ToString("N2")} руб." };
+            StatisticChart.Reset();
+
+            var income = (double)_statisticMonthVM.Income + (double)_statisticMonthVM.Expenses + (double)_statisticMonthVM.Other;
+
+            PieSlice slice1 = new() { Value = Math.Abs((double)_statisticMonthVM.Expenses), FillColor = Colors.IndianRed, Label = $"Расходы за месяц: {_statisticMonthVM.Expenses.ToString("N2")} руб." };
+            PieSlice slice2 = new() { Value = Math.Abs(income), FillColor = Colors.LightGreen, Label = $"Текущий баланс: {income.ToString("N2")} руб." };
+            PieSlice slice3 = new() { Value = Math.Abs((double)_statisticMonthVM.Other), FillColor = Colors.LightGray, Label = $"Другие расходы за месяц: {_statisticMonthVM.Other.ToString("N2")} руб." };
 
             slice1.LabelStyle.FontSize = 18;
             slice2.LabelStyle.FontSize = 18;
@@ -56,7 +57,6 @@ namespace FinancialManagementApp.Pages
 
             var pie = StatisticChart.Plot.Add.Pie(slices);
             pie.ExplodeFraction = .04;
-            // pie.ShowSliceLabels = true;
 
             StatisticChart.Plot.ShowLegend(Alignment.LowerLeft);
             StatisticChart.Plot.HideGrid();

@@ -22,12 +22,14 @@ namespace FinancialManagementApp.Layouts
         private IWalletService _walletService;
         private HomeLayoutVM _homeLayoutVM;
         private StatisticMonthVM _statisticMonthVM;
-        private readonly HistoryPage _historyPage;
+        private HistoryPage _historyPage;
+        private MainPage _mainPage;
 
         public HomeLayout(
             HomeLayoutVM homeLayoutVM, 
             IWalletService walletService,
             HistoryPage historyPage,
+            MainPage mainPage,
             StatisticMonthVM statisticMonthVM
             )
         {
@@ -37,7 +39,9 @@ namespace FinancialManagementApp.Layouts
             _homeLayoutVM = homeLayoutVM;
             _statisticMonthVM = statisticMonthVM;
 
-           _historyPage = historyPage;
+            _historyPage = historyPage;
+            _mainPage = mainPage;
+            
             _walletService = walletService;
 
             DataContext = _homeLayoutVM;
@@ -50,7 +54,8 @@ namespace FinancialManagementApp.Layouts
             switch (item?.ComponentName)
             {
                 case "MainPage":
-                    mainFraim.Navigate(new MainPage(_statisticMonthVM, _homeLayoutVM));
+                    _mainPage.InitStatisticPlot();
+                    mainFraim.Navigate(_mainPage);
                     break;
                 case "HistoryPage":
                     mainFraim.Navigate(_historyPage);
@@ -60,7 +65,7 @@ namespace FinancialManagementApp.Layouts
 
         private void OpenAddHistoryModal(object sender, RoutedEventArgs e)
         {
-            var modal = new AddWalletHistoryWindow(_walletService, _homeLayoutVM);
+            var modal = new AddWalletHistoryWindow(_walletService, _homeLayoutVM, _mainPage);
             modal.ShowDialog();
         }
     }

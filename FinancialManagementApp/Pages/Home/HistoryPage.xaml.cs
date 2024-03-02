@@ -26,11 +26,15 @@ namespace FinancialManagementApp.Pages.Home
     {
         private readonly IWalletService _walletService;
         private HomeLayoutVM _homeLayoutVM;
+        private MainPage _mainPage;
         public HistoryPage(
             HomeLayoutVM homeLayoutVM,
+            MainPage mainPage,
             IWalletService walletService)
         {
             InitializeComponent();
+
+            _mainPage = mainPage;
 
             _walletService = walletService;
             _homeLayoutVM = homeLayoutVM;
@@ -53,7 +57,7 @@ namespace FinancialManagementApp.Pages.Home
 
             if (currentRecord != null)
             {
-                var modal = new AddWalletHistoryWindow(_walletService, _homeLayoutVM, currentRecord);
+                var modal = new AddWalletHistoryWindow(_walletService, _homeLayoutVM, _mainPage, currentRecord);
                 modal.ShowDialog();
             }
             

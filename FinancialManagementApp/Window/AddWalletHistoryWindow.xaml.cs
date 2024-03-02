@@ -2,6 +2,7 @@
 using FinancialManagementApp.Infrastructure.Enums;
 using FinancialManagementApp.Infrastructure.ModelDto;
 using FinancialManagementApp.Interfaces;
+using FinancialManagementApp.Pages;
 using FinancialManagementApp.Services;
 using FinancialManagementApp.ViewModels;
 using System.Windows;
@@ -17,12 +18,15 @@ namespace FinancialManagementApp
         private IWalletService _walletService;
         private WalletHistoryVM _walletHistoryVM;
         private HomeLayoutVM _homeLayoutVM;
+        private MainPage _mainPage;
 
         private bool isEditRecord = false;
 
-        public AddWalletHistoryWindow(IWalletService walletService, HomeLayoutVM homeLayoutVM, WalletHistoryVM? editRecordVM = null)
+        public AddWalletHistoryWindow(IWalletService walletService, HomeLayoutVM homeLayoutVM, MainPage mainPage, WalletHistoryVM? editRecordVM = null)
         {
             InitializeComponent();
+
+            _mainPage = mainPage;
 
             _walletService = walletService;
             _homeLayoutVM = homeLayoutVM;
@@ -78,6 +82,7 @@ namespace FinancialManagementApp
                     _homeLayoutVM.WalletVM.Balance = (decimal)newBalance;
 
                     _homeLayoutVM.InsertWalletHistoryRecord(_walletHistoryVM);
+                    _mainPage.InitStatisticPlot();
 
                     this.Hide();
                 }
