@@ -1,5 +1,10 @@
-﻿using ScottPlot;
-
+﻿using FinancialManagementApp.Domain.Entities;
+using FinancialManagementApp.Infrastructure.ModelDto;
+using FinancialManagementApp.Interfaces;
+using FinancialManagementApp.Services;
+using FinancialManagementApp.ViewModels;
+using ScottPlot;
+using System.Text.RegularExpressions;
 using System.Windows.Controls;
 
 
@@ -10,33 +15,48 @@ namespace FinancialManagementApp.Pages
     /// </summary>
     public partial class MainPage : Page
     {
-        public MainPage()
+        private readonly StatisticMonthVM _statisticMonthVM;
+        private HomeLayoutVM _homeLayoutVM;
+
+        public MainPage(StatisticMonthVM statisticMonthVM, HomeLayoutVM homeLayoutVM)
         {
             InitializeComponent();
+
+            _statisticMonthVM = statisticMonthVM;
+            _homeLayoutVM = homeLayoutVM;
+
             InitStatisticPlot();
         }
 
-        private void InitStatisticPlot()
+        async public void InitStatisticPlot()
         {
-            double[] values = { 778, 283, 184, 76, 43 };
+            StatisticService statisticService = new StatisticService();
 
-            PieSlice slice1 = new() { Value = 11204.80, FillColor = Colors.LightGray, Label = $"Расходы - {11204.80}руб." };
-            PieSlice slice2 = new() { Value = 13019.50, FillColor = Colors.LightGreen, Label = $"Доходы  - {13019.50}руб." };
+            StatisticMonthDto statisticMonthDto = await statisticService.InitStatiscticByMonth(DateTime.Now.Month, DateTime.Now.Year, _homeLayoutVM.WalletVM.Id);
+
+            _statisticMonthVM.InitStatistic(statisticMonthDto);
+
+            PieSlice slice1 = new() { Value = Math.Abs((double)_statisticMonthVM.Expenses), FillColor = Colors.IndianRed, Label = $"Расходы: {_statisticMonthVM.Expenses.ToString("N2")} руб." };
+            PieSlice slice2 = new() { Value = Math.Abs((double)_statisticMonthVM.Income), FillColor = Colors.LightGreen, Label = $"Доходы: {_statisticMonthVM.Income.ToString("N2")} руб." };
+            PieSlice slice3 = new() { Value = Math.Abs((double)_statisticMonthVM.Other), FillColor = Colors.LightGray, Label = $"Другие расходы: {_statisticMonthVM.Other.ToString("N2")} руб." };
 
             slice1.LabelStyle.FontSize = 18;
             slice2.LabelStyle.FontSize = 18;
+            slice3.LabelStyle.FontSize = 18;
 
             slice1.LabelStyle.Bold = true;
             slice2.LabelStyle.Bold = true;
+            slice3.LabelStyle.Bold = true;
 
-            slice1.LabelStyle.ForeColor = Colors.Gray;
+            slice1.LabelStyle.ForeColor = Colors.IndianRed;
             slice2.LabelStyle.ForeColor = Colors.Green;
+            slice3.LabelStyle.ForeColor = Colors.LightGray;
 
-            List<PieSlice> slices = new() { slice1, slice2 };
+            List<PieSlice> slices = new() { slice1, slice2, slice3 };
 
             var pie = StatisticChart.Plot.Add.Pie(slices);
             pie.ExplodeFraction = .04;
-            pie.ShowSliceLabels = true;
+            // pie.ShowSliceLabels = true;
 
             StatisticChart.Plot.ShowLegend(Alignment.LowerLeft);
             StatisticChart.Plot.HideGrid();

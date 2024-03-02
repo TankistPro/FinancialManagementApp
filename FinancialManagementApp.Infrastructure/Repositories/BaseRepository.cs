@@ -1,5 +1,6 @@
 ﻿using FinancialManagementApp.Infrastructure.Context;
 using FinancialManagementApp.Infrastructure.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -45,6 +46,11 @@ namespace FinancialManagementApp.Infrastructure.Repositories
         async public Task<TEntity> GetById(int id)
         {
             return await _context.Set<TEntity>().FindAsync(id);
+        }
+
+        async public Task<List<TEntity>> GetAll()
+        {
+            return await _context.Set<TEntity>().ToListAsync();
         }
 
         public bool Remove(TEntity entity)

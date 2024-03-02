@@ -27,7 +27,7 @@
 
 
                 <TextBlock Text="Статистика за текущий месяц" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" TextDecorations="Underline" Padding="0, 5, 0, 0" />
-                <ScottPlot:WpfPlot Grid.Row="1" x:Name="StatisticChart"  />
+                <ScottPlot:WpfPlot Grid.Row="1" x:Name="StatisticChart" />
             </Grid>
         </Border>
 

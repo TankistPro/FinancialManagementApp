@@ -11,5 +11,6 @@ namespace FinancialManagementApp.Infrastructure.Interfaces
         bool Remove(T entity);
         bool RemoveRange(List<T> entities);
         Task<T> GetById(int id);
+        Task<List<T>> GetAll();
     }
 }

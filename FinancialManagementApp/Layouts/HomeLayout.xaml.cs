@@ -21,32 +21,26 @@ namespace FinancialManagementApp.Layouts
     {
         private IWalletService _walletService;
         private HomeLayoutVM _homeLayoutVM;
-
-        private readonly MainPage _mainPage;
+        private StatisticMonthVM _statisticMonthVM;
         private readonly HistoryPage _historyPage;
 
         public HomeLayout(
             HomeLayoutVM homeLayoutVM, 
             IWalletService walletService,
-            MainPage mainPage,
-            HistoryPage historyPage
+            HistoryPage historyPage,
+            StatisticMonthVM statisticMonthVM
             )
         {
 
             InitializeComponent();
 
             _homeLayoutVM = homeLayoutVM;
-            _mainPage = mainPage;
-            _historyPage = historyPage;
+            _statisticMonthVM = statisticMonthVM;
+
+           _historyPage = historyPage;
+            _walletService = walletService;
 
             DataContext = _homeLayoutVM;
-
-            if (this.sideBar.Items.Count > 0)
-            {
-                this.sideBar.SelectedIndex = 0;
-            }
-
-            _walletService = walletService;
         }
 
         private void sideBar_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -55,14 +49,11 @@ namespace FinancialManagementApp.Layouts
 
             switch (item?.ComponentName)
             {
-                case "MainPage": 
-                    mainFraim.Navigate(_mainPage);
+                case "MainPage":
+                    mainFraim.Navigate(new MainPage(_statisticMonthVM, _homeLayoutVM));
                     break;
                 case "HistoryPage":
                     mainFraim.Navigate(_historyPage);
-                    break;
-                default:
-                    mainFraim.Navigate(_mainPage);
                     break;
             }
         }

@@ -77,6 +77,8 @@ namespace FinancialManagementApp
                     WalletVM wallet = await _walletService.GetUserWallet(user.Id);
 
                     _homeLayoutVM.InitVM(user, wallet, null);
+                    _homeLayout.sideBar.SelectedIndex = 0;
+
                     this.NavigationService.Navigate(_homeLayout);
                 }
                 else

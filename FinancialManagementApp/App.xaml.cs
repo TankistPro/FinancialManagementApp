@@ -36,11 +36,12 @@ namespace FinancialManagementApp
             services.AddScoped<AuthPage>();
             services.AddScoped<RegistrationPage>();
             services.AddTransient<HistoryPage>();
-            services.AddTransient<MainPage>();
+            // services.AddTransient<MainPage>();
             services.AddScoped<HomeLayout>();
 
             services.AddSingleton<HomeLayoutVM>();
             services.AddSingleton<WalletHistoryVM>();
+            services.AddSingleton<StatisticMonthVM>();
 
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IWalletService, WalletService>();

@@ -27,7 +27,7 @@ namespace FinancialManagementApp.Pages.Home
         private readonly IWalletService _walletService;
         private HomeLayoutVM _homeLayoutVM;
         public HistoryPage(
-            HomeLayoutVM homeLayoutVM, 
+            HomeLayoutVM homeLayoutVM,
             IWalletService walletService)
         {
             InitializeComponent();
