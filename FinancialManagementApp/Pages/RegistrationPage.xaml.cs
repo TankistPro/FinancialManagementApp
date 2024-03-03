@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using FinancialManagementApp.Interfaces;
+using FinancialManagementApp.ViewModels;
 
 namespace FinancialManagementApp.Pages
 {
@@ -12,13 +13,20 @@ namespace FinancialManagementApp.Pages
     {
         private readonly IAuthService _authService;
         private readonly IWalletService _walletService;
+        private RegistrationPageVM _registrationPageVM;
 
-        public RegistrationPage(IAuthService authService, IWalletService walletService)
+        public RegistrationPage(IAuthService authService, IWalletService walletService, RegistrationPageVM registrationPageVM)
         {
             InitializeComponent();
 
             _authService = authService;
             _walletService = walletService;
+
+            _registrationPageVM = registrationPageVM;
+            _registrationPageVM.WalletVM = new WalletVM();
+            _registrationPageVM.UserVM = new UserVM();
+
+            this.DataContext = _registrationPageVM;
         }
 
         private void GoToAuthPage(object sender, RoutedEventArgs e)
@@ -35,9 +43,9 @@ namespace FinancialManagementApp.Pages
 
             var newUser = new RegistrationUserDto()
             {
-                FirstName = FirstName.inputValue.Text,
-                LastName = LastName.inputValue.Text,
-                MiddleName = MiddleName.inputValue.Text,
+                FirstName = _registrationPageVM.UserVM.FirstName,
+                LastName = _registrationPageVM.UserVM.LastName,
+                MiddleName = _registrationPageVM.UserVM.MiddleName,
                 Email = Email.inputValue.Text,
                 EmailConfirmed = 0,
                 Password = Password.inputValue.Password,
@@ -50,8 +58,8 @@ namespace FinancialManagementApp.Pages
                 var newWallet = new WalletDto()
                 {
                     Name = "Test",
-                    WalletNumber = Convert.ToInt64(WalletNumber.inputValue.Text),
-                    Balance = Convert.ToInt32(Balance.inputValue.Text),
+                    WalletNumber = Convert.ToInt64(_registrationPageVM.WalletVM.WalletNumber),
+                    Balance = _registrationPageVM.WalletVM.Balance,
                     UserId = userId,
                 };
 

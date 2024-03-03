@@ -35,6 +35,15 @@ namespace FinancialManagementApp.Controls.UserControls
             }
         }
 
+        public string TextCurrency
+        {
+            get { return (string)GetValue(textCurrencyProperty); }
+            set { SetValue(textCurrencyProperty, value); }
+        }
+
+        public static readonly DependencyProperty textCurrencyProperty =
+            DependencyProperty.Register("TextCurrency", typeof(string), typeof(CurrencyInputControl), new FrameworkPropertyMetadata(String.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
         private void input_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (string.IsNullOrEmpty(inputValue.Text))

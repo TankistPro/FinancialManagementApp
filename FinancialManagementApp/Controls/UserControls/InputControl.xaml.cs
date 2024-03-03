@@ -45,6 +45,15 @@ namespace FinancialManagementApp.Controls.UserControls
             }
         }
 
+        public string TextValue
+        {
+            get { return (string)GetValue(textValueProperty); }
+            set { SetValue(textValueProperty, value); }
+        }
+
+        public static readonly DependencyProperty textValueProperty =
+            DependencyProperty.Register("TextValue", typeof(string), typeof(InputControl), new FrameworkPropertyMetadata(String.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
         private void input_TextChanged(object sender, TextChangedEventArgs e)
         {
             if(string.IsNullOrEmpty(inputValue.Text))

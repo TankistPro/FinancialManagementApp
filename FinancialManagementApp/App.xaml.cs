@@ -42,6 +42,7 @@ namespace FinancialManagementApp
             services.AddSingleton<HomeLayoutVM>();
             services.AddSingleton<WalletHistoryVM>();
             services.AddSingleton<StatisticMonthVM>();
+            services.AddSingleton<RegistrationPageVM>();
 
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IWalletService, WalletService>();

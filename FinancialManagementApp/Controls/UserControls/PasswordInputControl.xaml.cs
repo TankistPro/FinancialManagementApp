@@ -45,6 +45,16 @@ namespace FinancialManagementApp.Controls.UserControls
             }
         }
 
+        //public string PasswordValue
+        //{
+        //    get { return (string)GetValue(PasswordValueProperty); }
+        //    set { SetValue(PasswordValueProperty, value); }
+        //}
+
+        //// Using a DependencyProperty as the backing store for PasswordValue.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty PasswordValueProperty =
+        //    DependencyProperty.Register("PasswordValue", typeof(string), typeof(PasswordInputControl), new FrameworkPropertyMetadata(String.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
         private void inputValue_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(inputValue.Password))

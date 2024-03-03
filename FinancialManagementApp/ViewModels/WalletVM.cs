@@ -33,7 +33,7 @@ namespace FinancialManagementApp.ViewModels
             set
             {
                 id = value;
-                OnPropertyChanged("iId");
+                OnPropertyChanged("Id");
             }
         }
 

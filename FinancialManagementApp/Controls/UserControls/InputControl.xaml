@@ -15,7 +15,7 @@
 
         <Border BorderThickness="1" BorderBrush="Gray" Background="White" CornerRadius="5">
             <Grid Grid.Row="1">
-                <TextBox x:Name="inputValue" TextWrapping="Wrap" Padding="15, 10, 15, 10" Background="Transparent" BorderThickness="0" TextChanged="input_TextChanged" />
+                <TextBox x:Name="inputValue" Text="{Binding Path=TextValue, RelativeSource={RelativeSource FindAncestor, AncestorType=local:InputControl}, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Padding="15, 10, 15, 10" Background="Transparent" BorderThickness="0" TextChanged="input_TextChanged" />
                 <TextBlock Panel.ZIndex="-1" x:Name="inputPlaceholder" Text="{Binding Placeholder, RelativeSource={RelativeSource AncestorType=local:InputControl}}" VerticalAlignment="Center" Padding="16, 0" Foreground="Gray" FontWeight="Light" />
             </Grid>
         </Border>
