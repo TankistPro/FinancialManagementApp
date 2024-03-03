@@ -70,10 +70,7 @@
                 <Button Style="{ StaticResource CancelCustomButtom }"  Margin="0, 5, 0, 0"  Click="GoToAuthPage">Назад</Button>
             </StackPanel>
 
-            <StackPanel x:Name="Loader" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <fa:ImageAwesome Icon="Spinner" Spin="True" Width="50" SpinDuration="4" />
-                <TextBlock  Text="Идет создание пользователя..." FontSize="18" />
-            </StackPanel>
+            <UserControls:LoaderControl x:Name="Loader" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" LoaderText="Идет создание пользователя..." />
         </Grid>
     </Grid>
 </Page>
