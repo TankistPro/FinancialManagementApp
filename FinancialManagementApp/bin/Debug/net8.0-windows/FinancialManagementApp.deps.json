@@ -1143,6 +1143,7 @@
           "FontAwesome.WPF": "4.7.0.9",
           "Microsoft.CSharp": "4.7.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.2",
+          "Microsoft.Extensions.Configuration.UserSecrets": "8.0.0",
           "System.Data.DataSetExtensions": "4.5.0"
         },
         "runtime": {

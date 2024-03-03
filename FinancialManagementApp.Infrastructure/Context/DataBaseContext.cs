@@ -1,10 +1,9 @@
 ﻿using FinancialManagementApp.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System.IO;
+using System.Reflection;
 
 namespace FinancialManagementApp.Infrastructure.Context
 {
@@ -14,9 +13,18 @@ namespace FinancialManagementApp.Infrastructure.Context
         public DbSet<Wallet> Wallets { get; set; }
         public DbSet<WalletHistory> WalletHistories { get; set; }
 
+
+        private readonly IConfiguration _configuration;
+        public DataBaseContext()
+        {
+            _configuration = new ConfigurationBuilder()
+                .AddUserSecrets("0146aae4-ce2f-40b1-9098-adcbc859cda2")
+                .Build();
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=FinancialManagementApp;Trusted_Connection=True;Integrated Security=True;");
+            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("defaultConnectionString"));
         }
     }
 }
