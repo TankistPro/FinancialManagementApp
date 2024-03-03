@@ -35,12 +35,12 @@ namespace FinancialManagementApp.Pages
 
             var newUser = new RegistrationUserDto()
             {
-                FirstName = FirstName.Text,
-                LastName = LastName.Text,
-                MiddleName = MiddleName.Text,
-                Email = Email.Text,
+                FirstName = FirstName.inputValue.Text,
+                LastName = LastName.inputValue.Text,
+                MiddleName = MiddleName.inputValue.Text,
+                Email = Email.inputValue.Text,
                 EmailConfirmed = 0,
-                Password = Password.Password,
+                Password = Password.inputValue.Password,
             };
 
             int userId = await _authService.RegistartionUser(newUser);
@@ -50,8 +50,8 @@ namespace FinancialManagementApp.Pages
                 var newWallet = new WalletDto()
                 {
                     Name = "Test",
-                    WalletNumber = Convert.ToInt64(WalletNumber.Text),
-                    Balance = Convert.ToInt32(Balance.Text),
+                    WalletNumber = Convert.ToInt64(WalletNumber.inputValue.Text),
+                    Balance = Convert.ToInt32(Balance.inputValue.Text),
                     UserId = userId,
                 };
 

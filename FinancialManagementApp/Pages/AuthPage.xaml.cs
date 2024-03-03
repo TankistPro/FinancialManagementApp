@@ -55,8 +55,8 @@ namespace FinancialManagementApp
         {
             ErrorBlock.Visibility = Visibility.Collapsed;
  
-            string Email = email.Text;
-            string Password = password.Password;
+            string Email = email.inputValue.Text;
+            string Password = password.inputValue.Password;
 
 
             if (String.IsNullOrEmpty(Email) || String.IsNullOrEmpty(Password)) 
@@ -70,7 +70,7 @@ namespace FinancialManagementApp
 
                 await Task.Delay(1000); //искусственная задержка для просмотра лоадера
 
-                UserVM user = await _authService.LoginUser(email.Text, password.Password);
+                UserVM user = await _authService.LoginUser(Email, Password);
                 
                 if (user != null)
                 {

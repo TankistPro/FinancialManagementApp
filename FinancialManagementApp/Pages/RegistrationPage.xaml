@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:svgc="http://sharpvectors.codeplex.com/svgc/" 
-      xmlns:fa="http://schemas.fontawesome.io/icons/"
+      xmlns:fa="http://schemas.fontawesome.io/icons/" xmlns:UserControls="clr-namespace:FinancialManagementApp.Controls.UserControls"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Регистрация">
@@ -42,47 +42,24 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Orientation="Vertical" Grid.Column="2">
-                        <StackPanel>
-                            <TextBlock Text="Имя*" />
-                            <TextBox x:Name="FirstName" TextWrapping="Wrap" Margin="0, 5, 0, 5" />
-                        </StackPanel>
+                        <UserControls:InputControl x:Name="FirstName" Placeholder="Имя*" Margin="0, 5, 0, 5"  />
 
-                        <StackPanel>
-                            <TextBlock Text="Фамилия*" />
-                            <TextBox x:Name="LastName" TextWrapping="Wrap" Margin="0, 5, 0, 5"/>
-                        </StackPanel>
+                        <UserControls:InputControl x:Name="LastName" Placeholder="Фамилия*" Margin="0, 5, 0, 5"  />
 
-                        <StackPanel>
-                            <TextBlock Text="Отчество" />
-                            <TextBox x:Name="MiddleName" TextWrapping="Wrap" Margin="0, 5, 0, 5"/>
-                        </StackPanel>
+                        <UserControls:InputControl x:Name="MiddleName" Placeholder="Отчество" Margin="0, 5, 0, 5"  />
 
-                        <StackPanel>
-                            <TextBlock Text="Текущий баланс в рублях*" />
-                            <TextBox x:Name="Balance" TextWrapping="Wrap" Text="0" Margin="0, 5, 0, 5"/>
-                        </StackPanel>
+                        <UserControls:InputControl x:Name="Balance" Placeholder="Текущий баланс в рублях (по умолчанию 0 руб.)" Margin="0, 5, 0, 5"  />
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical"  Grid.Column="0">
-                        <StackPanel >
-                            <TextBlock Text="Введите Email*" />
-                            <TextBox x:Name="Email" TextWrapping="Wrap"  Margin="0, 5, 0, 5"/>
-                        </StackPanel>
 
-                        <StackPanel>
-                            <TextBlock Text="Номер карты (счёта)*" />
-                            <TextBox x:Name="WalletNumber" TextWrapping="Wrap"  Margin="0, 5, 0, 5"/>
-                        </StackPanel>
+                        <UserControls:InputControl x:Name="Email" Placeholder="Ваш Email*" Margin="0, 5, 0, 5"  />
 
-                        <StackPanel>
-                            <TextBlock Text="Пароль*" />
-                            <PasswordBox x:Name="Password" Margin="0, 5, 0, 5" PasswordChar="$" MaxLength="25" />
-                        </StackPanel>
+                        <UserControls:InputControl x:Name="WalletNumber" Placeholder="Номер карты (счёта)*" Margin="0, 5, 0, 5"  />
 
-                        <StackPanel>
-                            <TextBlock Text="Повторите пароль*" />
-                            <PasswordBox  x:Name="RepeatPassword" Margin="0, 5, 0, 5" PasswordChar="$" MaxLength="25" />
-                        </StackPanel>
+                        <UserControls:PasswordInputControl x:Name="Password" Placeholder="Пароль*" Margin="0, 5, 0, 5"  />
+
+                        <UserControls:PasswordInputControl x:Name="RepeatPassword" Placeholder="Повторите пароль*" Margin="0, 5, 0, 5"  />
 
                     </StackPanel>
                 </Grid>
