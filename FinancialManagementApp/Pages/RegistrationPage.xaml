@@ -48,7 +48,9 @@
 
                         <UserControls:InputControl x:Name="MiddleName" Placeholder="Отчество" Margin="0, 5, 0, 5"  />
 
-                        <UserControls:InputControl x:Name="Balance" Placeholder="Текущий баланс в рублях (по умолчанию 0 руб.)" Margin="0, 5, 0, 5"  />
+                        <!--<UserControls:InputControl x:Name="Balance" Placeholder="Текущий баланс в рублях (по умолчанию 0 руб.)" Margin="0, 5, 0, 5"  />-->
+
+                        <UserControls:CurrencyInputControl x:Name="Balance" Placeholder="Текущий баланс в рублях (по умолчанию 0 руб.)" Margin="0, 5, 0, 5"  />
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical"  Grid.Column="0">

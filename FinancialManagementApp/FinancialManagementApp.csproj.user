@@ -2,6 +2,9 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="Controls\UserControls\CurrencyInputControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Controls\UserControls\InputControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -28,6 +31,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Controls\UserControls\CurrencyInputControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Controls\UserControls\InputControl.xaml">
       <SubType>Designer</SubType>
     </Page>

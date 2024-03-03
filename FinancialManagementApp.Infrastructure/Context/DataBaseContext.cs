@@ -1,6 +1,7 @@
 ﻿using FinancialManagementApp.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.UserSecrets;
 using Microsoft.Extensions.DependencyInjection;
 using System.IO;
 using System.Reflection;
