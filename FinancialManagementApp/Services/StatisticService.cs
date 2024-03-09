@@ -39,5 +39,24 @@ namespace FinancialManagementApp.Services
                 Other = other
             };
         }
+
+        async public Task<PeriodStatisticDto> InitPeriodStatistic(DateTime startDate, DateTime? endDate = null)
+        {
+			List<WalletHistory> AllHistory = await _walletRepository.GetAll();
+
+            List<WalletHistory> periodWalletList = AllHistory
+                .Where(x => endDate.HasValue ? x.CreatedDate.Date >= startDate.Date && x.CreatedDate.Date <= endDate?.Date : x.CreatedDate.Date == startDate.Date).ToList();
+
+			PeriodStatisticDto statisticDto = new PeriodStatisticDto()
+            {
+                StartDate = startDate,
+                EndDate = endDate,
+				IncomePeriod = periodWalletList.Where(x => x.OperationType == (int)OperationTypeEnums.Income).Sum(x => x.Value),
+                ExpensesPeriod = periodWalletList.Where(x => x.OperationType == (int)OperationTypeEnums.Expenses).Sum(x => x.Value),
+				OtherPeriond = periodWalletList.Where(x => x.OperationType == (int)OperationTypeEnums.Other).Sum(x => x.Value)
+		    };
+
+            return statisticDto;
+		}
     }
 }

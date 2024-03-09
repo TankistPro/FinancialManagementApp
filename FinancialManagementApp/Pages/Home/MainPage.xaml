@@ -3,7 +3,9 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:FinancialManagementApp.Pages" xmlns:ScottPlot="clr-namespace:ScottPlot.WPF;assembly=ScottPlot.WPF"
+      xmlns:local="clr-namespace:FinancialManagementApp.Pages" 
+      xmlns:ScottPlot="clr-namespace:ScottPlot.WPF;assembly=ScottPlot.WPF" 
+      xmlns:viewmodels="clr-namespace:FinancialManagementApp.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:PeriodStatisticVM}"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainPage">
@@ -40,7 +42,7 @@
                 </Grid.RowDefinitions>
                 
                 <StackPanel>
-                    <TextBlock Text="Статистика за 02.02.2024" TextAlignment="Center" FontSize="18" FontWeight="Bold" TextDecorations="Underline" />
+                    <TextBlock Text="{Binding Path=StartDate, StringFormat='Статистика за dd.MM.yyyy'}" TextAlignment="Center" FontSize="18" FontWeight="Bold" TextDecorations="Underline" />
                     <StackPanel VerticalAlignment="Center">
                         <Grid HorizontalAlignment="Center" >
                             <Grid.ColumnDefinitions>
@@ -50,7 +52,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0"  Text="Доходы: " FontSize="14" />
-                            <TextBlock Grid.Column="2" Text="1000руб." FontSize="14" />
+                            <TextBlock Grid.Column="2" Text="{ Binding Path=IncomePeriod, StringFormat='{}{0:N2} руб.'}" FontSize="14" />
                         </Grid>
                         <Grid HorizontalAlignment="Center" >
                             <Grid.ColumnDefinitions>
@@ -60,7 +62,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0"  Text="Расходы: " FontSize="14" />
-                            <TextBlock Grid.Column="2" Text="-1000руб." FontSize="14" />
+                            <TextBlock Grid.Column="2" Text="{ Binding Path=ExpensesPeriod, StringFormat='{}{0:N2} руб.'}" FontSize="14" />
                         </Grid>
                         <Grid HorizontalAlignment="Center" >
                             <Grid.ColumnDefinitions>
@@ -70,7 +72,7 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0"  Text="Другое: " FontSize="14" />
-                            <TextBlock Grid.Column="2" Text="-1000руб." FontSize="14" />
+                            <TextBlock Grid.Column="2" Text="{ Binding Path=OtherPeriond, StringFormat='{}{0:N2} руб.'}" FontSize="14" />
                         </Grid>
                         <Grid HorizontalAlignment="Center" >
                             <Grid.ColumnDefinitions>

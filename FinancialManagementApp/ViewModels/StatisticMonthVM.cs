@@ -49,13 +49,6 @@ namespace FinancialManagementApp.ViewModels
 
         public void InitStatistic(StatisticMonthDto statisticMonthDto)
         {
-            //StatisticService statisticService = new StatisticService();
-
-            //month = month == -1 ? DateTime.Now.Month : month;
-            //year = year == -1 ? DateTime.Now.Year : year;
-
-            //StatisticMonthDto statisticMonthDto = await statisticService.InitStatiscticByMonth(month, year, walletId);
-
             this.Other = statisticMonthDto.Other;
             this.Expenses = statisticMonthDto.Expenses;
             this.Income = statisticMonthDto.Income;

@@ -17,17 +17,23 @@ namespace FinancialManagementApp
     {
         private IWalletService _walletService;
         private WalletHistoryVM _walletHistoryVM;
+        private PeriodStatisticVM _periodStatisticVM;
         private HomeLayoutVM _homeLayoutVM;
         private MainPage _mainPage;
 
         private bool isEditRecord = false;
 
-        public AddWalletHistoryWindow(IWalletService walletService, HomeLayoutVM homeLayoutVM, MainPage mainPage, WalletHistoryVM? editRecordVM = null)
+        public AddWalletHistoryWindow(
+            IWalletService walletService, 
+            HomeLayoutVM homeLayoutVM, 
+            MainPage mainPage,
+            PeriodStatisticVM periodStatisticVM,
+            WalletHistoryVM? editRecordVM = null)
         {
             InitializeComponent();
 
             _mainPage = mainPage;
-
+            _periodStatisticVM = periodStatisticVM;
             _walletService = walletService;
             _homeLayoutVM = homeLayoutVM;
 
@@ -82,7 +88,9 @@ namespace FinancialManagementApp
                     _homeLayoutVM.WalletVM.Balance = (decimal)newBalance;
 
                     _homeLayoutVM.InsertWalletHistoryRecord(_walletHistoryVM);
-                    _mainPage.InitStatisticPlot();
+
+                    await _mainPage.InitStatisticPlot();
+                    await _mainPage.InitPeriodStatistic((DateTime)_periodStatisticVM.StartDate, _periodStatisticVM.EndDate);
 
                     this.Hide();
                 }

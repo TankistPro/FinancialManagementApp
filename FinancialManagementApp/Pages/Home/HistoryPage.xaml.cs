@@ -26,16 +26,18 @@ namespace FinancialManagementApp.Pages.Home
     {
         private readonly IWalletService _walletService;
         private HomeLayoutVM _homeLayoutVM;
+        private PeriodStatisticVM _periodStatisticVM;
         private MainPage _mainPage;
         public HistoryPage(
             HomeLayoutVM homeLayoutVM,
             MainPage mainPage,
+            PeriodStatisticVM periodStatisticVM,
             IWalletService walletService)
         {
             InitializeComponent();
 
             _mainPage = mainPage;
-
+            _periodStatisticVM = periodStatisticVM;
             _walletService = walletService;
             _homeLayoutVM = homeLayoutVM;
 
@@ -44,10 +46,6 @@ namespace FinancialManagementApp.Pages.Home
 
         async private void InitHistory()
         {
-            var history = await _walletService.GetWalletHistory(_homeLayoutVM.WalletVM.Id);
-
-            _homeLayoutVM.ListWalletHistoryVM = new ObservableCollection<WalletHistoryVM>(history.AsEnumerable());
-
             WalletHistoryTable.ItemsSource = _homeLayoutVM.ListWalletHistoryVM;
         }
 
@@ -57,7 +55,7 @@ namespace FinancialManagementApp.Pages.Home
 
             if (currentRecord != null)
             {
-                var modal = new AddWalletHistoryWindow(_walletService, _homeLayoutVM, _mainPage, currentRecord);
+                var modal = new AddWalletHistoryWindow(_walletService, _homeLayoutVM, _mainPage, _periodStatisticVM, currentRecord);
                 modal.ShowDialog();
             }
             

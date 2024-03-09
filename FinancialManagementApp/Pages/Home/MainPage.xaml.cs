@@ -16,22 +16,31 @@ namespace FinancialManagementApp.Pages
     public partial class MainPage : Page
     {
         private readonly StatisticMonthVM _statisticMonthVM;
-        private HomeLayoutVM _homeLayoutVM;
+        private readonly PeriodStatisticVM _periodStatisticVM;
+        private readonly StatisticService _statisticService;
+		private HomeLayoutVM _homeLayoutVM;
 
-        public MainPage(StatisticMonthVM statisticMonthVM, HomeLayoutVM homeLayoutVM)
+        public MainPage(StatisticMonthVM statisticMonthVM, HomeLayoutVM homeLayoutVM, PeriodStatisticVM periodStatisticVM)
         {
             InitializeComponent();
 
+			_statisticService = new StatisticService();
+
+			_periodStatisticVM = periodStatisticVM;
             _statisticMonthVM = statisticMonthVM;
             _homeLayoutVM = homeLayoutVM;
+
+            this.DataContext = _periodStatisticVM;
+        }
+        async public void InitPage()
+        {
+            await InitPeriodStatistic(DateTime.Now);
+            await InitStatisticPlot();
         }
 
-        async public void InitStatisticPlot()
+        async public Task InitStatisticPlot()
         {
-            
-            StatisticService statisticService = new StatisticService();
-            StatisticMonthDto statisticMonthDto = await statisticService.InitStatiscticByMonth(DateTime.Now.Month, DateTime.Now.Year, _homeLayoutVM.WalletVM.Id);
-            
+            StatisticMonthDto statisticMonthDto = await _statisticService.InitStatiscticByMonth(DateTime.Now.Month, DateTime.Now.Year, _homeLayoutVM.WalletVM.Id);
             _statisticMonthVM.InitStatistic(statisticMonthDto);
 
             StatisticChart.Reset();
@@ -65,6 +74,13 @@ namespace FinancialManagementApp.Pages
             StatisticChart.Plot.Layout.Frameless();
             StatisticChart.Plot.Axes.AutoScale();
             StatisticChart.Refresh();
-        }
+		}
+
+        async public Task InitPeriodStatistic(DateTime startDate, DateTime? endDate = null)
+        {
+            PeriodStatisticDto periodStatisticDto = await _statisticService.InitPeriodStatistic(startDate, endDate);
+
+			_periodStatisticVM.InitStatistic(periodStatisticDto);
+		}
     }
 }

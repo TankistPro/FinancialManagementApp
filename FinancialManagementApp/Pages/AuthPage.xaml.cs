@@ -7,6 +7,7 @@ using FinancialManagementApp.Services;
 using FinancialManagementApp.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -76,7 +77,9 @@ namespace FinancialManagementApp
                 {
                     WalletVM wallet = await _walletService.GetUserWallet(user.Id);
 
-                    _homeLayoutVM.InitVM(user, wallet, null);
+					var history = await _walletService.GetWalletHistory(wallet.Id);
+
+					_homeLayoutVM.InitVM(user, wallet, new ObservableCollection<WalletHistoryVM>(history.AsEnumerable()));
                     _homeLayout.sideBar.SelectedIndex = 0;
 
                     this.NavigationService.Navigate(_homeLayout);
