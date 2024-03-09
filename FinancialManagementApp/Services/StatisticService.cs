@@ -40,12 +40,14 @@ namespace FinancialManagementApp.Services
             };
         }
 
-        async public Task<PeriodStatisticDto> InitPeriodStatistic(DateTime startDate, DateTime? endDate = null)
+        async public Task<PeriodStatisticDto> InitPeriodStatistic(DateTime startDate, int walletId, DateTime? endDate = null)
         {
 			List<WalletHistory> AllHistory = await _walletRepository.GetAll();
 
             List<WalletHistory> periodWalletList = AllHistory
-                .Where(x => endDate.HasValue ? x.CreatedDate.Date >= startDate.Date && x.CreatedDate.Date <= endDate?.Date : x.CreatedDate.Date == startDate.Date).ToList();
+                .Where(x => endDate.HasValue ? x.CreatedDate.Date >= startDate.Date && x.CreatedDate.Date <= endDate?.Date : x.CreatedDate.Date == startDate.Date)
+                .Where(x => x.WalletId == walletId)
+                .ToList();
 
 			PeriodStatisticDto statisticDto = new PeriodStatisticDto()
             {

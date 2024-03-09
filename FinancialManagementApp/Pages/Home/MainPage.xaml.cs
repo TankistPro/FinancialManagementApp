@@ -78,7 +78,7 @@ namespace FinancialManagementApp.Pages
 
         async public Task InitPeriodStatistic(DateTime startDate, DateTime? endDate = null)
         {
-            PeriodStatisticDto periodStatisticDto = await _statisticService.InitPeriodStatistic(startDate, endDate);
+            PeriodStatisticDto periodStatisticDto = await _statisticService.InitPeriodStatistic(startDate, _homeLayoutVM.WalletVM.Id, endDate);
 
 			_periodStatisticVM.InitStatistic(periodStatisticDto);
 		}
