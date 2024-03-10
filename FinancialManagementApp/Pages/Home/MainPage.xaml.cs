@@ -82,5 +82,16 @@ namespace FinancialManagementApp.Pages
 
 			_periodStatisticVM.InitStatistic(periodStatisticDto);
 		}
-    }
+
+		async private void Calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+		{
+            List<DateTime> selectedDate = calandare.SelectedDates.OrderBy(x => x).ToList();
+            DateTime startDate = selectedDate.FirstOrDefault();
+            DateTime? endDate = null;
+
+			if (selectedDate.Count > 1) endDate = selectedDate.LastOrDefault();
+
+			await InitPeriodStatistic(startDate, endDate);
+		}
+	}
 }

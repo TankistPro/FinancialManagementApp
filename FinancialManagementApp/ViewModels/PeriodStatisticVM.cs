@@ -18,6 +18,22 @@ namespace FinancialManagementApp.ViewModels
 		private decimal _expensesPeriod { get; set; }
 		private decimal _otherPeriond { get; set; }
 
+		public string DateTimePeriodView
+		{
+			get
+			{
+				if (EndDate == null)
+				{
+					return $"Статистика за {StartDate?.ToString("d")}г.";
+				} 
+				return $"Статистика c {StartDate?.ToString("d")}г. по {EndDate?.ToString("d")}г.";
+			}
+			set
+			{
+				OnPropertyChanged("DateTimePeriodView");
+			}
+		}
+
 		public decimal IncomePeriod
 		{
 			get { return _incomePeriod; }
@@ -54,6 +70,7 @@ namespace FinancialManagementApp.ViewModels
 			set
 			{
 				_startDate = value;
+				DateTimePeriodView = value.ToString();
 				OnPropertyChanged("StartDate");
 			}
 		}
@@ -64,6 +81,7 @@ namespace FinancialManagementApp.ViewModels
 			set
 			{
 				_endDate = value;
+				DateTimePeriodView = value.ToString();
 				OnPropertyChanged("EndDate");
 			}
 		}
