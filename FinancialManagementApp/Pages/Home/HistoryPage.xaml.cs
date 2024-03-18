@@ -1,4 +1,5 @@
-﻿using FinancialManagementApp.Infrastructure.Interfaces;
+﻿using AutoMapper;
+using FinancialManagementApp.Infrastructure.Interfaces;
 using FinancialManagementApp.Interfaces;
 using FinancialManagementApp.ViewModels;
 using System;
@@ -28,6 +29,7 @@ namespace FinancialManagementApp.Pages.Home
         private HomeLayoutVM _homeLayoutVM;
         private PeriodStatisticVM _periodStatisticVM;
         private MainPage _mainPage;
+
         public HistoryPage(
             HomeLayoutVM homeLayoutVM,
             MainPage mainPage,
@@ -51,7 +53,7 @@ namespace FinancialManagementApp.Pages.Home
 
         private void EditRecord_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            WalletHistoryVM currentRecord = WalletHistoryTable.SelectedItem as WalletHistoryVM;
+            WalletHistoryVM currentRecord = (WalletHistoryTable.SelectedItem as WalletHistoryVM);
 
             if (currentRecord != null)
             {

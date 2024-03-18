@@ -1,4 +1,5 @@
-﻿using FinancialManagementApp.Domain.Entities;
+﻿using AutoMapper;
+using FinancialManagementApp.Domain.Entities;
 using FinancialManagementApp.Infrastructure.Enums;
 using FinancialManagementApp.Infrastructure.ModelDto;
 using FinancialManagementApp.Interfaces;
@@ -24,7 +25,7 @@ namespace FinancialManagementApp
         private bool isEditRecord = false;
 
         public AddWalletHistoryWindow(
-            IWalletService walletService, 
+            IWalletService walletService,
             HomeLayoutVM homeLayoutVM, 
             MainPage mainPage,
             PeriodStatisticVM periodStatisticVM,
@@ -50,12 +51,23 @@ namespace FinancialManagementApp
             if (editRecordVM != null)
             {
                 isEditRecord = true;
-                _walletHistoryVM = editRecordVM;
+                _walletHistoryVM = new WalletHistoryVM()
+                {
+                    Id = editRecordVM.Id,
+                    WalletId = editRecordVM.WalletId,
+                    WalletValue = editRecordVM.WalletValue,
+                    NewBalance = editRecordVM.NewBalance,
+                    OldBalance = editRecordVM.OldBalance,
+                    CreatedDate = editRecordVM.CreatedDate,
+                    Comment = editRecordVM.Comment,
+                    OperationType = editRecordVM.OperationType,
+                };
                 this.OperationTypeBox.SelectedIndex = editRecordVM.OperationType;
-
                 this.Title = "Редактирование записи";
                 this.WindowTitle.Text = "Редактирование операции";
                 this.AcceptBtn.Content = "Сохранить";
+                this.OperationTypePanel.IsEnabled = false;
+                this.OperationTypePanel.Opacity = 0.5;
             }
             else
             {
@@ -71,7 +83,7 @@ namespace FinancialManagementApp
         }
 
         private void CancelAdd_Click(object sender, RoutedEventArgs e)
-        {
+        { 
             this.Hide();
         }
 

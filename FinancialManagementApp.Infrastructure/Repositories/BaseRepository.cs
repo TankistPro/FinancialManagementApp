@@ -50,7 +50,7 @@ namespace FinancialManagementApp.Infrastructure.Repositories
 
         async public Task<List<TEntity>> GetAll()
         {
-            return await _context.Set<TEntity>().ToListAsync();
+            return await _context.Set<TEntity>().AsNoTracking().ToListAsync();
         }
 
         public bool Remove(TEntity entity)

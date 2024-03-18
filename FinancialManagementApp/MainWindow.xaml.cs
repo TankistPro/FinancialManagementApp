@@ -14,6 +14,8 @@ namespace FinancialManagementApp
             InitializeComponent();
             
             this.mainWindowFraim.Content = authPage;
+
+            this.Closed += (e, x) => Application.Current.Shutdown();
         }
     }
 }

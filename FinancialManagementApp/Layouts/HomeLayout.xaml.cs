@@ -1,4 +1,5 @@
-﻿using FinancialManagementApp.Controls;
+﻿using AutoMapper;
+using FinancialManagementApp.Controls;
 using FinancialManagementApp.Interfaces;
 using FinancialManagementApp.Pages;
 using FinancialManagementApp.Pages.Home;
