@@ -50,7 +50,7 @@ namespace FinancialManagementApp.Infrastructure.Repositories
         /// </summary>
         /// <param name="walletHistoryDto"></param>
         /// <returns>Возвращается новый баланс пользователя</returns>
-        async public Task<decimal?> CreateWalletOperation(WalletHistory walletHistory)
+        async public Task<WalletHistory?> CreateWalletOperation(WalletHistory walletHistory)
         {
             var userWallet = await _context.Wallets.Where(x => x.Id == walletHistory.WalletId).FirstOrDefaultAsync();
 
@@ -64,15 +64,43 @@ namespace FinancialManagementApp.Infrastructure.Repositories
 
                     await _context.SaveChangesAsync();
 
-                    bool status = await _walletHistoryRepository.AddWalletHistory(walletHistory);
+                    WalletHistory record = await _walletHistoryRepository.AddWalletHistory(walletHistory);
 
-                    if (status)
+                    if (record != null)
                     {
-                        return userWallet.Balance;
+                        return record;
                     }
                 } catch (Exception ex) { }
             }
             
+            return null;
+        }
+
+        async public Task<WalletHistory?> UpdateWalletOperation(WalletHistory walletHistory)
+        {
+            var userWallet = await _context.Wallets.Where(x => x.Id == walletHistory.WalletId).FirstOrDefaultAsync();
+
+            if (userWallet != null) 
+            {
+                var oldValue = await _context.WalletHistories.Where(x => x.Id == walletHistory.Id).Select(x => x.Value).FirstOrDefaultAsync();
+
+                try
+                {
+                    walletHistory.OldBalance = userWallet.Balance;
+                    userWallet.Balance += walletHistory.Value - oldValue;
+                    walletHistory.NewBalance = userWallet.Balance;
+
+                    await _context.SaveChangesAsync();
+
+                    WalletHistory record = await _walletHistoryRepository.UpdateWalletHistory(walletHistory);
+
+                    if (record != null)
+                    {
+                        return record;
+                    }
+                } catch (Exception ex) { }
+            }
+
             return null;
         }
     }

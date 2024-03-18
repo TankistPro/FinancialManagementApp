@@ -13,18 +13,37 @@ namespace FinancialManagementApp.Infrastructure.Repositories
     {
         public WalletHistoryRepository() { }
 
-        async public Task<bool> AddWalletHistory(WalletHistory walletHistory)
+        async public Task<WalletHistory> AddWalletHistory(WalletHistory walletHistory)
         {
             try
             {
                 await _context.WalletHistories.AddAsync(walletHistory);
                 await _context.SaveChangesAsync();
 
-                return true;
+                return walletHistory;
             }
             catch (Exception ex) { }
 
-            return false;
+            return null;
+        }
+
+        async public Task<WalletHistory> UpdateWalletHistory(WalletHistory walletHistory)
+        {
+            var record = await this.GetById(walletHistory.Id);
+
+            try
+            {
+               if (record != null)
+                {
+                    _context.WalletHistories.Entry(record).CurrentValues.SetValues(walletHistory);
+                    await _context.SaveChangesAsync();
+                }
+
+                return walletHistory;
+            }
+            catch (Exception ex) { }
+
+            return null;
         }
 
         public async Task<List<WalletHistory>> GetWalletHistory(int walletId)

@@ -10,6 +10,7 @@ namespace FinancialManagementApp.Infrastructure.Interfaces
     public interface IWalletHistoryRepository
     {
         Task<List<WalletHistory>> GetWalletHistory(int walletId);
-        Task<bool> AddWalletHistory(WalletHistory walletHistoryDto);
+        Task<WalletHistory> AddWalletHistory(WalletHistory walletHistoryDto);
+        Task<WalletHistory> UpdateWalletHistory(WalletHistory walletHistory);
     }
 }

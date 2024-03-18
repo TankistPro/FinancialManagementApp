@@ -28,7 +28,7 @@
             </Grid.ColumnDefinitions>
 
             <svgc:SvgViewbox Grid.Column="0"  Height="30" Width="30" Source="/Images/add.svg" />
-            <TextBlock Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"  Text="Добаление операции" />
+            <TextBlock x:Name="WindowTitle" Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"  Text="Добаление операции" />
         </Grid>
 
         <StackPanel Grid.Column="1"  Grid.Row="1" Margin="0,20,0,0">
@@ -64,7 +64,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <Button Style="{ StaticResource SuccessCustomButtom }" Grid.Column="0" Click="AddWalletOperation_Click" >Добавить</Button>
+            <Button Style="{ StaticResource SuccessCustomButtom }" Grid.Column="0" Click="AddWalletOperation_Click" x:Name="AcceptBtn" >Добавить</Button>
             <Button Style="{ StaticResource CancelCustomButtom }" Grid.Column="2" Click="CancelAdd_Click">Отмена</Button>
         </Grid>
 

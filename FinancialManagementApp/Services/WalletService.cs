@@ -57,17 +57,33 @@ namespace FinancialManagementApp.Services
             return _mapper.Map<WalletVM>(walletEntity);
         }
 
-        async public Task<decimal?> CreateWalletOperation(WalletHistoryVM walletHistory)
+        async public Task<WalletHistoryVM?> CreateWalletOperation(WalletHistoryVM walletHistory)
         {
             WalletHistory walletEntity = _mapper.Map<WalletHistory>(walletHistory);
             // TODO: FIX Mapper ?????
             walletEntity.Value = walletHistory.WalletValue;
 
-            decimal? newBalance = await _walletRepository.CreateWalletOperation(walletEntity);
+            WalletHistory? record = await _walletRepository.CreateWalletOperation(walletEntity);
 
-            if (newBalance != null) 
+            if (record != null) 
             {
-                return (decimal)newBalance;
+                return _mapper.Map<WalletHistoryVM>(record);
+            }
+
+            return null;
+        }
+
+        async public Task<WalletHistoryVM?> UpdateWalletOperation(WalletHistoryVM walletHistory)
+        {
+            WalletHistory walletEntity = _mapper.Map<WalletHistory>(walletHistory);
+            // TODO: FIX Mapper ?????
+            walletEntity.Value = walletHistory.WalletValue;
+
+            WalletHistory? record = await _walletRepository.UpdateWalletOperation(walletEntity);
+
+            if (record != null)
+            {
+                return _mapper.Map<WalletHistoryVM>(record);
             }
 
             return null;

@@ -54,6 +54,8 @@ namespace FinancialManagementApp
                 this.OperationTypeBox.SelectedIndex = editRecordVM.OperationType;
 
                 this.Title = "Редактирование записи";
+                this.WindowTitle.Text = "Редактирование операции";
+                this.AcceptBtn.Content = "Сохранить";
             }
             else
             {
@@ -63,6 +65,8 @@ namespace FinancialManagementApp
                 this.OperationTypeBox.SelectedIndex = 0;
 
                 this.Title = "Создание записи";
+                this.WindowTitle.Text = "Добаление операции";
+                this.AcceptBtn.Content = "Добавить";
             }
         }
 
@@ -76,29 +80,43 @@ namespace FinancialManagementApp
             _walletHistoryVM.OperationType = Convert.ToInt32(OperationTypeBox.SelectedIndex);
             _walletHistoryVM.CreatedDate = DateTime.Now;
 
-            if(!isEditRecord)
+            WalletHistoryVM? entity;
+
+            if (!isEditRecord)
             {
-                decimal? newBalance = await _walletService.CreateWalletOperation(_walletHistoryVM);
-
-                if (newBalance != null)
-                {
-                    _walletHistoryVM.OldBalance = _homeLayoutVM.WalletVM.Balance;
-
-                    _walletHistoryVM.NewBalance = (decimal)newBalance;
-                    _homeLayoutVM.WalletVM.Balance = (decimal)newBalance;
-
-                    _homeLayoutVM.InsertWalletHistoryRecord(_walletHistoryVM);
-
-                    await _mainPage.InitStatisticPlot();
-                    await _mainPage.InitPeriodStatistic((DateTime)_periodStatisticVM.StartDate, _periodStatisticVM.EndDate);
-
-                    this.Hide();
-                }
+                entity = await _walletService.CreateWalletOperation(_walletHistoryVM);
             }
             else
             {
-                // Логика для редактирования уже созданной записи
-            }  
+                entity = await _walletService.UpdateWalletOperation(_walletHistoryVM);
+            }
+
+            if (entity != null)
+            {
+                _walletHistoryVM = entity;
+                _homeLayoutVM.WalletVM.Balance = (decimal)entity.NewBalance;
+
+                if (!isEditRecord)
+                {
+                    _homeLayoutVM.InsertWalletHistoryRecord(entity);
+                } 
+                else
+                {
+                    var oldRecord = _homeLayoutVM.ListWalletHistoryVM.First(x => x.Id == entity.Id);
+                    var index = _homeLayoutVM.ListWalletHistoryVM.IndexOf(oldRecord);
+
+                    if (index != -1) 
+                    {
+                        _homeLayoutVM.ListWalletHistoryVM[index] = entity;
+                    }
+                }
+                
+
+                await _mainPage.InitStatisticPlot();
+                await _mainPage.InitPeriodStatistic((DateTime)_periodStatisticVM.StartDate, _periodStatisticVM.EndDate);
+
+                this.Hide();
+            }
         }
     }
 }
