@@ -13,7 +13,7 @@ namespace FinancialManagementApp.Infrastructure.Context
         public DbSet<User> Users { get; set; }
         public DbSet<Wallet> Wallets { get; set; }
         public DbSet<WalletHistory> WalletHistories { get; set; }
-
+        public DbSet<Category> Categories { get; set; }
 
         private readonly IConfiguration _configuration;
         public DataBaseContext()
