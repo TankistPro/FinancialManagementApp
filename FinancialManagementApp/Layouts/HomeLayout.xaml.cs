@@ -63,6 +63,9 @@ namespace FinancialManagementApp.Layouts
                 case "HistoryPage":
                     mainFraim.Navigate(_historyPage);
                     break;
+                case "DirectoryPage":
+                    mainFraim.Navigate(new DirectoryPage());
+                    break;
             }
         }
 
