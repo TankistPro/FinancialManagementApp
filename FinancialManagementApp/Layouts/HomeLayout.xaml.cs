@@ -22,17 +22,17 @@ namespace FinancialManagementApp.Layouts
     {
         private IWalletService _walletService;
         private HomeLayoutVM _homeLayoutVM;
-        private StatisticMonthVM _statisticMonthVM;
         private PeriodStatisticVM _periodStatisticVM;
         private HistoryPage _historyPage;
         private MainPage _mainPage;
+        private DirectoryPage _directoryPage;
 
         public HomeLayout(
             HomeLayoutVM homeLayoutVM, 
             IWalletService walletService,
             HistoryPage historyPage,
             MainPage mainPage,
-            StatisticMonthVM statisticMonthVM,
+            DirectoryPage directoryPage,
             PeriodStatisticVM periodStatisticVM
             )
         {
@@ -40,10 +40,10 @@ namespace FinancialManagementApp.Layouts
             InitializeComponent();
 
             _homeLayoutVM = homeLayoutVM;
-            _statisticMonthVM = statisticMonthVM;
             _periodStatisticVM = periodStatisticVM;
             _historyPage = historyPage;
             _mainPage = mainPage;
+            _directoryPage = directoryPage;
             
             _walletService = walletService;
 
@@ -64,7 +64,7 @@ namespace FinancialManagementApp.Layouts
                     mainFraim.Navigate(_historyPage);
                     break;
                 case "DirectoryPage":
-                    mainFraim.Navigate(new DirectoryPage());
+                    mainFraim.Navigate(_directoryPage);
                     break;
             }
         }

@@ -13,6 +13,7 @@ namespace FinancialManagementApp.Domain.Entities
         public int? ParentId { get; set; }
         public string Color { get; set; }
         public int Order { get; set; }
+        public string DirectoryType { get; set; }
 
         public int UserId { get; set; }
         public User User { get; set; }

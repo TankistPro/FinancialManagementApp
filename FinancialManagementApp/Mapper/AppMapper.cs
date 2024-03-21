@@ -17,6 +17,8 @@ namespace FinancialManagementApp.Infrastructure.Mapper
             CreateMap<WalletHistoryVM, WalletHistory>().ReverseMap()
                 .ForMember(dest => dest.WalletValue, opt => opt.MapFrom(src => src.Value))
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id));
+
+            CreateMap<CategoryVM,  Category>().ReverseMap();
         }
     }
 }

@@ -37,6 +37,7 @@ namespace FinancialManagementApp
             services.AddScoped<RegistrationPage>();
             services.AddTransient<HistoryPage>();
             services.AddTransient<MainPage>();
+            services.AddTransient<DirectoryPage>();
             services.AddScoped<HomeLayout>();
 
             services.AddSingleton<HomeLayoutVM>();
@@ -44,9 +45,11 @@ namespace FinancialManagementApp
             services.AddSingleton<StatisticMonthVM>();
             services.AddSingleton<RegistrationPageVM>();
             services.AddSingleton<PeriodStatisticVM>();
+            services.AddSingleton<DirectoryPageVM>();
 
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IWalletService, WalletService>();
+            services.AddTransient<CategoryService>();
         }
 
         private void OnStartup(object sender, StartupEventArgs e)

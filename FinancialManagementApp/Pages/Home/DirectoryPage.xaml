@@ -19,32 +19,61 @@
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
+                    <ColumnDefinition Width="5" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
 
-                <TextBlock Text="Справочник расходов:" FontWeight="Bold" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="18" />
+                <TextBlock Grid.Row="0" Text="Справочник расходов:" FontWeight="Bold" Grid.ColumnSpan="3" HorizontalAlignment="Center" FontSize="18" />
 
-                <StackPanel Margin="0,30,0,0" Grid.Column="0">
-                    <TextBlock Text="Категория" HorizontalAlignment="Center" FontSize="14" />
-                    <ListBox>
-                        <ListBoxItem Content="Развлечения" Background="BlanchedAlmond" />
-                        <ListBoxItem Content="Хоз. товары" Background="Beige" />
-                        <ListBoxItem Content="Машина" Background="Aqua" />
-                        <ListBoxItem Content="Развлечения" Background="BlanchedAlmond" />
-                        <ListBoxItem Content="Хоз. товары" Background="Beige" />
-                        <ListBoxItem Content="Машина" Background="Aqua" />
-                        <ListBoxItem Content="Развлечения" Background="BlanchedAlmond" />
-                        <ListBoxItem Content="Хоз. товары" Background="Beige" />
-                        <ListBoxItem Content="Машина" Background="Aqua" />
-                    </ListBox>
+                <Grid Grid.Row="1" Grid.Column="0">
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="100" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" FontSize="11"  Padding="10,0,10,0" Height="30">Добавить</Button>
+                    <Button Grid.Column="2" FontSize="11"  Padding="10,0,10,0" Height="30">Удалить</Button>
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="3">
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="100" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" FontSize="11"  Padding="10,0,10,0" Height="30">Добавить</Button>
+                    <Button Grid.Column="2" FontSize="11"  Padding="10,0,10,0" Height="30">Удалить</Button>
+                </Grid>
+
+                <StackPanel Margin="0,0,0,0" Grid.Column="0" Grid.Row="2">
+                    <DataGrid CanUserAddRows="True"
+                              x:Name="ExpensesCategoryTable" 
+                              AutoGenerateColumns="False">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="№" Width="40" TextBlock.TextAlignment="Center" CanUserResize="False" CanUserSort="False" CanUserReorder="False" />
+                            <DataGridTextColumn Header="Категория" Width="*" CanUserResize="False" CanUserSort="False" CanUserReorder="False" Binding="{ Binding Path=Name }" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </StackPanel>
-                <StackPanel Margin="0,30,0,0" Grid.Column="1">
-                    <TextBlock Text="Подкатегория" HorizontalAlignment="Center" FontSize="14" />
-                    <ListBox>
-                        <ListBoxItem Content="Развлечения" />
-                        <ListBoxItem Content="Хоз. товары" />
-                        <ListBoxItem Content="Машина" />
-                    </ListBox>
+                <StackPanel Margin="0,0,0,0" Grid.Column="3" Grid.Row="2">
+                    <DataGrid 
+                        x:Name="ExpensesSubCategoryTable" 
+                        AutoGenerateColumns="False"
+                        CanUserAddRows="True"
+                        >
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="№" Width="40" CanUserResize="False" CanUserSort="False" CanUserReorder="False" />
+                            <DataGridTextColumn Header="Подкатегория" Width="*" CanUserResize="False" CanUserSort="False" CanUserReorder="False" />
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </StackPanel>
 
             </Grid>
