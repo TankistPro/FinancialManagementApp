@@ -64,8 +64,8 @@ namespace FinancialManagementApp
                 };
                 this.OperationTypeBox.SelectedIndex = editRecordVM.OperationType;
                 this.Title = "Редактирование записи";
-                this.WindowTitle.Text = "Редактирование операции";
-                this.AcceptBtn.Content = "Сохранить";
+                this.WindowTitle.Text = "Редактирование транзакции";
+                this.AcceptBtn.Content = "Изменить";
                 this.OperationTypePanel.IsEnabled = false;
                 this.OperationTypePanel.Opacity = 0.5;
             }
@@ -77,7 +77,7 @@ namespace FinancialManagementApp
                 this.OperationTypeBox.SelectedIndex = 0;
 
                 this.Title = "Создание записи";
-                this.WindowTitle.Text = "Добаление операции";
+                this.WindowTitle.Text = "Добаление транзакции";
                 this.AcceptBtn.Content = "Добавить";
             }
         }

@@ -19,8 +19,6 @@ namespace FinancialManagementApp.Controls
         public static readonly DependencyProperty ComponentNameProperty =
             DependencyProperty.Register("ComponentName", typeof(string), typeof(NavButtonControl), new PropertyMetadata(null));
 
-
-
         public Geometry Icon
         {
             get { return (Geometry)GetValue(IconProperty); }
@@ -29,5 +27,12 @@ namespace FinancialManagementApp.Controls
         public static readonly DependencyProperty IconProperty =
             DependencyProperty.Register("Icon", typeof(Geometry), typeof(NavButtonControl), new PropertyMetadata(null));
 
+        public string Text
+        {
+            get { return (string)GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
+        }
+        public static readonly DependencyProperty TextProperty =
+            DependencyProperty.Register("Text", typeof(string), typeof(NavButtonControl), new PropertyMetadata(null));
     }
 }

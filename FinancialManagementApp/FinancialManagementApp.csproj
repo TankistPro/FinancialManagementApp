@@ -8,6 +8,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Images\add.svg" />
+    <None Remove="Images\directory.png" />
     <None Remove="Images\logo.png" />
     <None Remove="Images\logo.svg" />
   </ItemGroup>
@@ -22,6 +23,7 @@
     <Resource Include="Images\add.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\directory.png" />
     <Resource Include="Images\logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
