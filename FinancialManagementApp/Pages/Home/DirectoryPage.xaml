@@ -3,10 +3,14 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:FinancialManagementApp.Pages.Home"
+      xmlns:local="clr-namespace:FinancialManagementApp.Pages.Home" 
+      xmlns:local1="clr-namespace:FinancialManagementApp.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DirectoryPage">
+    <Page.Resources>
+        <local1:CategoryRowColorConvertor x:Key="CategoryRowColorConvertor" />
+    </Page.Resources>
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -35,10 +39,13 @@
                         <ColumnDefinition Width="100" />
                         <ColumnDefinition Width="10" />
                         <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="100" />
                     </Grid.ColumnDefinitions>
 
                     <Button Grid.Column="0" FontSize="11"  Padding="10,0,10,0" Height="30">Добавить</Button>
-                    <Button Grid.Column="2" FontSize="11"  Padding="10,0,10,0" Height="30">Удалить</Button>
+                    <Button Grid.Column="2" x:Name="EditCategoryBtn" FontSize="11" Visibility="Hidden"  Padding="10,0,10,0" Height="30">Реадктировать</Button>
+                    <Button Grid.Column="4" x:Name="RemoveCategoryBtn" FontSize="11" Visibility="Hidden"  Padding="10,0,10,0" Height="30">Удалить</Button>
                 </Grid>
                 <Grid Grid.Row="1" Grid.Column="3">
                     <Grid.ColumnDefinitions >
@@ -52,9 +59,16 @@
                 </Grid>
 
                 <StackPanel Margin="0,0,0,0" Grid.Column="0" Grid.Row="2">
-                    <DataGrid CanUserAddRows="True"
-                              x:Name="ExpensesCategoryTable" 
-                              AutoGenerateColumns="False">
+                    <DataGrid x:Name="ExpensesCategoryTable" 
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="True"
+                              SelectionMode="Single"
+                              SelectionChanged="ExpensesCategoryTable_SelectionChanged">
+                        <DataGrid.RowStyle>
+                            <Style TargetType="{x:Type DataGridRow}">
+                                <Setter Property="Background" Value="{Binding Path=Color, Converter={StaticResource CategoryRowColorConvertor}}" />
+                            </Style>
+                        </DataGrid.RowStyle>
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="№" Width="40" TextBlock.TextAlignment="Center" CanUserResize="False" CanUserSort="False" CanUserReorder="False" />
@@ -68,10 +82,15 @@
                         AutoGenerateColumns="False"
                         CanUserAddRows="True"
                         >
+                        <DataGrid.RowStyle>
+                            <Style TargetType="{x:Type DataGridRow}">
+                                <Setter Property="Background" Value="{Binding Path=Color, Converter={StaticResource CategoryRowColorConvertor}}" />
+                            </Style>
+                        </DataGrid.RowStyle>
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="№" Width="40" CanUserResize="False" CanUserSort="False" CanUserReorder="False" />
-                            <DataGridTextColumn Header="Подкатегория" Width="*" CanUserResize="False" CanUserSort="False" CanUserReorder="False" />
+                            <DataGridTextColumn Header="Подкатегория" Width="*" CanUserResize="False" CanUserSort="False" CanUserReorder="False" Binding="{ Binding Path=Name }" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
@@ -79,39 +98,6 @@
             </Grid>
         </Border>
 
-        <Border Grid.Row="2" Background="White" BorderBrush="#FF000000" BorderThickness="1" CornerRadius="8" Padding="5">
-            <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Text="Справочник доходов:" FontWeight="Bold" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="18" />
-
-                <StackPanel Margin="0,30,0,0" Grid.Column="0">
-                    <TextBlock Text="Категория" HorizontalAlignment="Center" FontSize="14" />
-                    <ListBox>
-                        <ListBoxItem Content="Развлечения" Background="BlanchedAlmond" />
-                        <ListBoxItem Content="Хоз. товары" Background="Beige" />
-                        <ListBoxItem Content="Машина" Background="Aqua" />
-                        <ListBoxItem Content="Развлечения" Background="BlanchedAlmond" />
-                        <ListBoxItem Content="Хоз. товары" Background="Beige" />
-                        <ListBoxItem Content="Машина" Background="Aqua" />
-                        <ListBoxItem Content="Развлечения" Background="BlanchedAlmond" />
-                        <ListBoxItem Content="Хоз. товары" Background="Beige" />
-                        <ListBoxItem Content="Машина" Background="Aqua" />
-                    </ListBox>
-                </StackPanel>
-                <StackPanel Margin="0,30,0,0" Grid.Column="1">
-                    <TextBlock Text="Подкатегория" HorizontalAlignment="Center" FontSize="14" />
-                    <ListBox>
-                        <ListBoxItem Content="Развлечения" />
-                        <ListBoxItem Content="Хоз. товары" />
-                        <ListBoxItem Content="Машина" />
-                    </ListBox>
-                </StackPanel>
-
-            </Grid>
-        </Border>
+        
     </Grid>
 </Page>

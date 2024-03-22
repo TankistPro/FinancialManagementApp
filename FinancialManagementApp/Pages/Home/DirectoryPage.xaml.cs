@@ -53,5 +53,23 @@ namespace FinancialManagementApp.Pages.Home
 
             ExpensesCategoryTable.ItemsSource = _directoryPageVM.CategoryListVM?.Where(x => x.ParentId == null && x.DirectoryType != null && x.DirectoryType == DirectoryCategoriesType.Expenses);
         }
+
+        private async void ExpensesCategoryTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedCategory = ExpensesCategoryTable?.SelectedItem as CategoryVM;
+
+            if(selectedCategory != null )
+            {
+                EditCategoryBtn.Visibility = Visibility.Visible;
+                RemoveCategoryBtn.Visibility = Visibility.Visible;
+            }
+
+            if(selectedCategory?.ParentId == null) 
+            {
+                var subList = await _categoryService.GetSubCategories(_homeLayoutVM.UserVM.Id, (int)selectedCategory?.Id);
+
+                ExpensesSubCategoryTable.ItemsSource = subList;
+            }
+        }
     }
 }

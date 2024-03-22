@@ -28,5 +28,14 @@ namespace FinancialManagementApp.Services
 
             return _mapper.Map<List<CategoryVM>>(list);
         }
+
+        async public Task<List<CategoryVM>> GetSubCategories(int userID, int categoryId) 
+        {
+            var list = await _categoryRepository.GetAll();
+
+            list = list.Where(x => x.UserId == userID && x.ParentId == categoryId).ToList();
+
+            return _mapper.Map<List<CategoryVM>>(list);
+        }
     }
 }
