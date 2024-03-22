@@ -17,7 +17,7 @@
     <Compile Update="Pages\Home\DirectoryPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Window\AddWalletHistoryWindow.xaml.cs">
+    <Compile Update="Modals\AddWalletHistoryWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\AuthPage.xaml.cs">
@@ -33,6 +33,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\RegistrationPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Modals\CategoryWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -52,7 +55,7 @@
     <Page Update="Pages\Home\DirectoryPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Window\AddWalletHistoryWindow.xaml">
+    <Page Update="Modals\AddWalletHistoryWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\AuthPage.xaml">
@@ -74,6 +77,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Modals\CategoryWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

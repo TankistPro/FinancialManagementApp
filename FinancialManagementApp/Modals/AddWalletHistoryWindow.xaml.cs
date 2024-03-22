@@ -14,8 +14,8 @@ namespace FinancialManagementApp
     /// <summary>
     /// Логика взаимодействия для AddWalletHistoryWindow.xaml
     /// </summary>
-    public partial class AddWalletHistoryWindow : Window
-    {
+    public partial class AddWalletHistoryWindow : System.Windows.Window
+	{
         private IWalletService _walletService;
         private WalletHistoryVM _walletHistoryVM;
         private PeriodStatisticVM _periodStatisticVM;

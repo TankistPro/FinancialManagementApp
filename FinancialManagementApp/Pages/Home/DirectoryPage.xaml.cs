@@ -2,6 +2,7 @@
 using FinancialManagementApp.Interfaces;
 using FinancialManagementApp.Services;
 using FinancialManagementApp.ViewModels;
+using FinancialManagementApp.Window;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -70,6 +71,12 @@ namespace FinancialManagementApp.Pages.Home
 
                 ExpensesSubCategoryTable.ItemsSource = subList;
             }
+        }
+
+        private void AddCategory_Click(object sender, RoutedEventArgs e)
+        {
+            var modal = new CategoryWindow(_categoryService, _directoryPageVM, _homeLayoutVM);
+            modal.ShowDialog();
         }
     }
 }

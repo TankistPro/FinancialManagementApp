@@ -16,6 +16,7 @@ namespace FinancialManagementApp.ViewModels
         private string? _color;
         private int _order;
         private string _directoryType;
+        private int _userId;
 
         public int Id { 
             get { return _id; } 
@@ -75,7 +76,17 @@ namespace FinancialManagementApp.ViewModels
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+		public int UserId
+		{
+			get { return _userId; }
+			set
+			{
+				_userId = value;
+				OnPropertyChanged("UserId");
+			}
+		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)
