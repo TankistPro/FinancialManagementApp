@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FinancialManagementApp.ViewModels
 {
-    public class RegistrationPageVM : INotifyPropertyChanged
+    public class RegistrationPageVM : BaseViewModel
     {
         private UserVM _userVM;
         private WalletVM _walletVM;
@@ -31,13 +31,6 @@ namespace FinancialManagementApp.ViewModels
                 _walletVM = value;
                 OnPropertyChanged("WalletVM");
             }
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

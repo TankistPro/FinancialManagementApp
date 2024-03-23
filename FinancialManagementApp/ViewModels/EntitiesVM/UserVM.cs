@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace FinancialManagementApp.ViewModels
 {
-    public class UserVM : INotifyPropertyChanged
+    public class UserVM : BaseViewModel
     {
         private int id;
         private string firstName;
@@ -49,14 +49,6 @@ namespace FinancialManagementApp.ViewModels
                 middleName = value;
                 OnPropertyChanged("MiddleName");
             }
-        }
-
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

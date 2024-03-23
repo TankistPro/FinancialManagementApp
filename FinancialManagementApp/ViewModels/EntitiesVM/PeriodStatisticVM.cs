@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FinancialManagementApp.ViewModels
 {
-    public class PeriodStatisticVM : INotifyPropertyChanged
+    public class PeriodStatisticVM : BaseViewModel
 	{
         private DateTime? _startDate {  get; set; }
 		private DateTime? _endDate { get; set; }
@@ -93,13 +93,6 @@ namespace FinancialManagementApp.ViewModels
 			IncomePeriod = periodStatisticDto.IncomePeriod;
 			ExpensesPeriod = periodStatisticDto.ExpensesPeriod;
 			OtherPeriond = periodStatisticDto.OtherPeriond;
-		}
-
-		public event PropertyChangedEventHandler? PropertyChanged;
-		public void OnPropertyChanged([CallerMemberName] string prop = "")
-		{
-			if (PropertyChanged != null)
-				PropertyChanged(this, new PropertyChangedEventArgs(prop));
 		}
 	}
 }

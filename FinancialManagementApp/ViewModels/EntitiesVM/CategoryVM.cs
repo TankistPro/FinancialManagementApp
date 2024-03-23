@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FinancialManagementApp.ViewModels
 {
-    public class CategoryVM : INotifyPropertyChanged
+    public class CategoryVM : BaseViewModel
     {
         private int _id;
         private string _name;
@@ -85,12 +85,5 @@ namespace FinancialManagementApp.ViewModels
 				OnPropertyChanged("UserId");
 			}
 		}
-
-		public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
     }
 }

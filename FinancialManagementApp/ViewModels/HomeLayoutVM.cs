@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace FinancialManagementApp.ViewModels
 {
-    public class HomeLayoutVM : IHomeLayoutVM, INotifyPropertyChanged
+    public class HomeLayoutVM : BaseViewModel, IHomeLayoutVM
     {
         private UserVM _userVM;
         private WalletVM _walletVM;
@@ -58,14 +58,6 @@ namespace FinancialManagementApp.ViewModels
         public void InsertWalletHistoryRecord(WalletHistoryVM walletHistoryVM)
         {
             this.ListWalletHistoryVM.Insert(0, walletHistoryVM);
-        }
-        
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

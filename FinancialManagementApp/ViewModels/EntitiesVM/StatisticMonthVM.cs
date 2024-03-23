@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FinancialManagementApp.ViewModels
 {
-    public class StatisticMonthVM : INotifyPropertyChanged
+    public class StatisticMonthVM : BaseViewModel
     {
         private decimal income { get; set; }
         private decimal expenses { get; set; }
@@ -52,13 +52,6 @@ namespace FinancialManagementApp.ViewModels
             this.Other = statisticMonthDto.Other;
             this.Expenses = statisticMonthDto.Expenses;
             this.Income = statisticMonthDto.Income;
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

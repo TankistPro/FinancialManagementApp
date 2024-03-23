@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FinancialManagementApp.ViewModels
 {
-    public class WalletHistoryVM
+    public class WalletHistoryVM : BaseViewModel
     {
         private int id;
         private int walletId;
@@ -107,13 +107,6 @@ namespace FinancialManagementApp.ViewModels
                 createdDate = value;
                 OnPropertyChanged("CreatedDate");
             }
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

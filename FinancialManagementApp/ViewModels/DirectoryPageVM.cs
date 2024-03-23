@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FinancialManagementApp.ViewModels
 {
-    public class DirectoryPageVM : INotifyPropertyChanged
+    public class DirectoryPageVM : BaseViewModel
     {
         private ObservableCollection<CategoryVM>? _categoryListVM;
 
@@ -29,14 +29,6 @@ namespace FinancialManagementApp.ViewModels
             {
                 this.CategoryListVM = categoryListVM;
             }
-        }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

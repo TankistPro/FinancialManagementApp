@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FinancialManagementApp.ViewModels
 {
-    public class WalletVM : INotifyPropertyChanged
+    public class WalletVM : BaseViewModel
     {
         private int id;
         private string name;
@@ -76,13 +76,6 @@ namespace FinancialManagementApp.ViewModels
                 image = value;
                 OnPropertyChanged("Image");
             }
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }
