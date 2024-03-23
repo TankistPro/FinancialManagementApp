@@ -58,38 +58,42 @@
                     <Button Grid.Column="2" FontSize="11"  Padding="10,0,10,0" Height="30">Удалить</Button>
                 </Grid>
 
-                <StackPanel Margin="0,0,0,0" Grid.Column="0" Grid.Row="2">
+                <DockPanel Margin="0,0,0,0" Grid.Column="0" Grid.Row="2">
                     <DataGrid x:Name="ExpensesCategoryTable" 
                               AutoGenerateColumns="False"
-                              SelectionChanged="ExpensesCategoryTable_SelectionChanged">
+                              SelectionChanged="ExpensesCategoryTable_SelectionChanged"
+                              VerticalScrollBarVisibility="Auto"
+                              CanUserAddRows="False"
+                              >
                         <DataGrid.RowStyle>
                             <Style TargetType="{x:Type DataGridRow}">
-                                <Setter Property="Background" Value="{Binding Path=Color, Converter={StaticResource CategoryRowColorConvertor}}" />
+                                <Setter Property="Background" Value="{Binding Color, Converter={StaticResource CategoryRowColorConvertor}}" />
                             </Style>
                         </DataGrid.RowStyle>
 
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Категория" Width="*" CanUserResize="False" CanUserSort="False" CanUserReorder="False" Binding="{ Binding Path=Name }" />
+                            <DataGridTextColumn Header="Категория" Width="*" CanUserResize="False" CanUserSort="False" CanUserReorder="False" Binding="{ Binding Path=Name}" FontSize="13" />
                         </DataGrid.Columns>
                     </DataGrid>
-                </StackPanel>
-                <StackPanel Margin="0,0,0,0" Grid.Column="3" Grid.Row="2">
+                </DockPanel>
+                <DockPanel Margin="0,0,0,0" Grid.Column="3" Grid.Row="2">
                     <DataGrid 
                         x:Name="ExpensesSubCategoryTable" 
                         AutoGenerateColumns="False"
+                        VerticalScrollBarVisibility="Auto"
                         CanUserAddRows="False"
                         >
                         <DataGrid.RowStyle>
                             <Style TargetType="{x:Type DataGridRow}">
-                                <Setter Property="Background" Value="{Binding Path=Color, Converter={StaticResource CategoryRowColorConvertor}}" />
+                                <Setter Property="Background" Value="{Binding Color, Converter={StaticResource CategoryRowColorConvertor}}" />
                             </Style>
                         </DataGrid.RowStyle>
 
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Подкатегория" Width="*" CanUserResize="False" CanUserSort="False" CanUserReorder="False" Binding="{ Binding Path=Name }" />
+                            <DataGridTextColumn Header="Подкатегория" Width="*" CanUserResize="False" CanUserSort="False" CanUserReorder="False" Binding="{ Binding Name }" />
                         </DataGrid.Columns>
                     </DataGrid>
-                </StackPanel>
+                </DockPanel>
 
             </Grid>
         </Border>

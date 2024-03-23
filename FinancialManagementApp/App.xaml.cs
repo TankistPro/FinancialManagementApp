@@ -31,14 +31,14 @@ namespace FinancialManagementApp
         {
             services.AddAutoMapper(typeof(AppMapper));
             services.AddSingleton<MainWindow>();
-            services.AddScoped<AddWalletHistoryWindow>();
+            services.AddSingleton<AddWalletHistoryWindow>();
 
-            services.AddScoped<AuthPage>();
-            services.AddScoped<RegistrationPage>();
-            services.AddTransient<HistoryPage>();
-            services.AddTransient<MainPage>();
-            services.AddTransient<DirectoryPage>();
-            services.AddScoped<HomeLayout>();
+            services.AddSingleton<AuthPage>();
+            services.AddSingleton<RegistrationPage>();
+            services.AddSingleton<HistoryPage>();
+            services.AddSingleton<MainPage>();
+            services.AddSingleton<DirectoryPage>();
+            services.AddSingleton<HomeLayout>();
 
             services.AddSingleton<HomeLayoutVM>();
             services.AddSingleton<WalletHistoryVM>();
@@ -49,7 +49,7 @@ namespace FinancialManagementApp
 
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IWalletService, WalletService>();
-            services.AddTransient<CategoryService>();
+            services.AddTransient<ICategoryService, CategoryService>();
         }
 
         private void OnStartup(object sender, StartupEventArgs e)

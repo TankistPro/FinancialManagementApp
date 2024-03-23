@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinancialManagementApp.ViewModels.EntitiesVM.Directory;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -11,23 +12,14 @@ namespace FinancialManagementApp.ViewModels
 {
     public class DirectoryPageVM : BaseViewModel
     {
-        private ObservableCollection<CategoryVM>? _categoryListVM;
+        private ExpenseDirectoryVM _expenseDirectoryVM = new ExpenseDirectoryVM();
 
-        public ObservableCollection<CategoryVM> CategoryListVM
+		public ExpenseDirectoryVM ExpenseDirectoryVM
         {
-            get { return _categoryListVM; }
-            set
-            {
-                _categoryListVM = value;
-                OnPropertyChanged("CategoryListVM");
-            }
-        }
-
-        public void SetCategoryListVM(ObservableCollection<CategoryVM> categoryListVM)
-        {
-            if (categoryListVM != null)
-            {
-                this.CategoryListVM = categoryListVM;
+            get { return _expenseDirectoryVM; }
+            set { 
+                _expenseDirectoryVM = value;
+                OnPropertyChanged("ExpenseDirectoryVM");
             }
         }
     }

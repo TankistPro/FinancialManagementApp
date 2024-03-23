@@ -2,6 +2,7 @@
 using FinancialManagementApp.Interfaces;
 using FinancialManagementApp.Services;
 using FinancialManagementApp.ViewModels;
+using FinancialManagementApp.ViewModels.EntitiesVM.Directory;
 using FinancialManagementApp.Window;
 using System;
 using System.Collections.Generic;
@@ -28,11 +29,11 @@ namespace FinancialManagementApp.Pages.Home
     {
         private DirectoryPageVM _directoryPageVM;
         private HomeLayoutVM _homeLayoutVM;
-        private CategoryService _categoryService;
+        private ICategoryService _categoryService;
         public DirectoryPage(
             DirectoryPageVM directoryPageVM,
             HomeLayoutVM homeLayoutVM,
-            CategoryService categoryService
+			ICategoryService categoryService
             )
         {
             InitializeComponent();
@@ -41,8 +42,6 @@ namespace FinancialManagementApp.Pages.Home
             _homeLayoutVM = homeLayoutVM;
             _categoryService = categoryService;
 
-            this.DataContext = _directoryPageVM;
-
             this.Loaded += (e, s) => InitDirectory();
         }
 
@@ -50,26 +49,37 @@ namespace FinancialManagementApp.Pages.Home
         {
             var list = await _categoryService.GetExpensesCategory(_homeLayoutVM.UserVM.Id);
 
-            _directoryPageVM.SetCategoryListVM(new ObservableCollection<CategoryVM>(list));
+            var catalogList = list.Where(x => x.ParentId == null && x.DirectoryType != null && x.DirectoryType == DirectoryCategoriesType.Expenses).ToList();
 
-            ExpensesCategoryTable.ItemsSource = _directoryPageVM.CategoryListVM?.Where(x => x.ParentId == null && x.DirectoryType != null && x.DirectoryType == DirectoryCategoriesType.Expenses);
-        }
+            _directoryPageVM.ExpenseDirectoryVM.CategoryList = new ObservableCollection<CategoryVM>(catalogList);
+
+            ExpensesCategoryTable.ItemsSource = _directoryPageVM.ExpenseDirectoryVM.CategoryList;
+            ExpensesCategoryTable.SelectedIndex = 0;
+
+		}
 
         private async void ExpensesCategoryTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selectedCategory = ExpensesCategoryTable?.SelectedItem as CategoryVM;
 
-            if(selectedCategory != null )
+            if(selectedCategory != null)
             {
                 EditCategoryBtn.Visibility = Visibility.Visible;
                 RemoveCategoryBtn.Visibility = Visibility.Visible;
-            }
+            } 
+            else
+            {
+				EditCategoryBtn.Visibility = Visibility.Hidden;
+				RemoveCategoryBtn.Visibility = Visibility.Hidden;
+			}
 
-            if(selectedCategory?.ParentId == null) 
+            if(selectedCategory != null && selectedCategory?.ParentId == null) 
             {
                 var subList = await _categoryService.GetSubCategories(_homeLayoutVM.UserVM.Id, (int)selectedCategory?.Id);
 
-                ExpensesSubCategoryTable.ItemsSource = subList;
+                _directoryPageVM.ExpenseDirectoryVM.SubCategoryList = new ObservableCollection<CategoryVM>(subList);
+
+				ExpensesSubCategoryTable.ItemsSource = subList;
             }
         }
 
@@ -77,6 +87,8 @@ namespace FinancialManagementApp.Pages.Home
         {
             var modal = new CategoryWindow(_categoryService, _directoryPageVM, _homeLayoutVM);
             modal.ShowDialog();
-        }
+
+			ExpensesCategoryTable.ItemsSource = _directoryPageVM.ExpenseDirectoryVM.CategoryList;
+		}
     }
 }

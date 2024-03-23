@@ -2,17 +2,12 @@
 using FinancialManagementApp.Domain.Entities;
 using FinancialManagementApp.Infrastructure.Enums;
 using FinancialManagementApp.Infrastructure.Repositories;
+using FinancialManagementApp.Interfaces;
 using FinancialManagementApp.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Documents;
 
 namespace FinancialManagementApp.Services
 {
-    public class CategoryService
+    public class CategoryService : ICategoryService
     {
         private readonly CategoryRepository _categoryRepository;
         private readonly IMapper _mapper;

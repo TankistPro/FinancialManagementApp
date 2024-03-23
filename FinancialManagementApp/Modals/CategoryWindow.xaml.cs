@@ -19,10 +19,10 @@ namespace FinancialManagementApp.Window
 	public partial class CategoryWindow : System.Windows.Window
 	{
 		private CategoryVM _categoryVM;
-		private CategoryService _categoryService;
+		private ICategoryService _categoryService;
 		private DirectoryPageVM _directoryPageVM;
 		private HomeLayoutVM _homeLayoutVM;
-		public CategoryWindow(CategoryService categoryService, DirectoryPageVM directoryPageVM, HomeLayoutVM homeLayoutVM)
+		public CategoryWindow(ICategoryService categoryService, DirectoryPageVM directoryPageVM, HomeLayoutVM homeLayoutVM)
 		{
 			InitializeComponent();
 
@@ -52,7 +52,7 @@ namespace FinancialManagementApp.Window
 			{
 				var list = await _categoryService.GetExpensesCategory(_homeLayoutVM.UserVM.Id);
 
-				_directoryPageVM.SetCategoryListVM(new ObservableCollection<CategoryVM>(list));
+				_directoryPageVM.ExpenseDirectoryVM.CategoryList = new ObservableCollection<CategoryVM>(list);
 
 				this.Hide();
 			}
