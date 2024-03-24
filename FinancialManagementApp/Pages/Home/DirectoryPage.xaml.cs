@@ -47,15 +47,9 @@ namespace FinancialManagementApp.Pages.Home
 
         async private void InitDirectory()
         {
-            var list = await _categoryService.GetExpensesCategory(_homeLayoutVM.UserVM.Id);
-
-            var catalogList = list.Where(x => x.ParentId == null && x.DirectoryType != null && x.DirectoryType == DirectoryCategoriesType.Expenses).ToList();
-
-            _directoryPageVM.ExpenseDirectoryVM.CategoryList = new ObservableCollection<CategoryVM>(catalogList);
+			_directoryPageVM.ExpenseDirectoryVM = await _categoryService.GetExpenseDirectory(_homeLayoutVM.UserVM.Id, null);
 
             ExpensesCategoryTable.ItemsSource = _directoryPageVM.ExpenseDirectoryVM.CategoryList;
-            ExpensesCategoryTable.SelectedIndex = 0;
-
 		}
 
         private async void ExpensesCategoryTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -85,10 +79,23 @@ namespace FinancialManagementApp.Pages.Home
 
         private void AddCategory_Click(object sender, RoutedEventArgs e)
         {
-            var modal = new CategoryWindow(_categoryService, _directoryPageVM, _homeLayoutVM);
+            CategoryVM? selectedCategory = null;
+            int selectedIndex = -1;
+
+			if (((Button)sender).Name == "AddSubCategory")
+            {
+				selectedCategory = ExpensesCategoryTable?.SelectedItem as CategoryVM;
+                selectedIndex = ExpensesCategoryTable.Items.IndexOf(selectedCategory);
+			} 
+			
+
+			var modal = new CategoryWindow(_categoryService, _directoryPageVM, _homeLayoutVM, selectedCategory);
             modal.ShowDialog();
 
 			ExpensesCategoryTable.ItemsSource = _directoryPageVM.ExpenseDirectoryVM.CategoryList;
+            ExpensesSubCategoryTable.ItemsSource = _directoryPageVM.ExpenseDirectoryVM.SubCategoryList;
+
+            ExpensesCategoryTable.SelectedIndex = selectedIndex == -1 ? ExpensesCategoryTable.Items.Count - 1 : selectedIndex;
 		}
     }
 }

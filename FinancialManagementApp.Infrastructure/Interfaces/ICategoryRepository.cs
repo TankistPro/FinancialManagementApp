@@ -9,5 +9,6 @@ namespace FinancialManagementApp.Infrastructure.Interfaces
 {
     public interface ICategoryRepository : IBaseRepository<Category>
     {
+        
     }
 }

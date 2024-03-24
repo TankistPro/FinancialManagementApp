@@ -4,6 +4,9 @@ using FinancialManagementApp.Infrastructure.Enums;
 using FinancialManagementApp.Infrastructure.Repositories;
 using FinancialManagementApp.Interfaces;
 using FinancialManagementApp.ViewModels;
+using FinancialManagementApp.ViewModels.EntitiesVM.Directory;
+using Microsoft.VisualBasic.ApplicationServices;
+using System.Collections.ObjectModel;
 
 namespace FinancialManagementApp.Services
 {
@@ -17,7 +20,28 @@ namespace FinancialManagementApp.Services
             _mapper = mapper;
         }
 
-        async public Task<List<CategoryVM>> GetExpensesCategory(int userID)
+		async public Task<ExpenseDirectoryVM> GetExpenseDirectory(int userId, int? categoryId)
+		{
+			var allRecords = await _categoryRepository.GetAll();
+
+            var list = allRecords.Where(x => x.UserId == userId).ToList();
+
+            List<CategoryVM> categoryList = await GetExpensesCategory(userId);
+			List<CategoryVM>? subList = null;
+
+			if (categoryId != null)
+            {
+                subList = await GetSubCategories(userId, (int)categoryId);
+			}
+
+            return new ExpenseDirectoryVM
+            {
+                CategoryList = new ObservableCollection<CategoryVM>(categoryList),
+                SubCategoryList = subList != null ? new ObservableCollection<CategoryVM>(subList) : null
+            };
+		}
+
+		async public Task<List<CategoryVM>> GetExpensesCategory(int userID)
         {
             var list = await _categoryRepository.GetAll();
 

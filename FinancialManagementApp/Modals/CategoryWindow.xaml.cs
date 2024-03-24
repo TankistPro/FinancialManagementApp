@@ -22,7 +22,7 @@ namespace FinancialManagementApp.Window
 		private ICategoryService _categoryService;
 		private DirectoryPageVM _directoryPageVM;
 		private HomeLayoutVM _homeLayoutVM;
-		public CategoryWindow(ICategoryService categoryService, DirectoryPageVM directoryPageVM, HomeLayoutVM homeLayoutVM)
+		public CategoryWindow(ICategoryService categoryService, DirectoryPageVM directoryPageVM, HomeLayoutVM homeLayoutVM, CategoryVM? category)
 		{
 			InitializeComponent();
 
@@ -32,8 +32,9 @@ namespace FinancialManagementApp.Window
 			_categoryVM = new CategoryVM()
 			{
 				Order = 1,
-				DirectoryType = DirectoryCategoriesType.Expenses,
-				UserId = _homeLayoutVM.UserVM.Id
+				DirectoryType = category == null ? DirectoryCategoriesType.Expenses : String.Empty,
+				UserId = _homeLayoutVM.UserVM.Id,
+				ParentId = category?.Id
 			};
 			this.DataContext = _categoryVM;
 		}
@@ -50,9 +51,7 @@ namespace FinancialManagementApp.Window
 
 			if (category != null)
 			{
-				var list = await _categoryService.GetExpensesCategory(_homeLayoutVM.UserVM.Id);
-
-				_directoryPageVM.ExpenseDirectoryVM.CategoryList = new ObservableCollection<CategoryVM>(list);
+				_directoryPageVM.ExpenseDirectoryVM = await _categoryService.GetExpenseDirectory(_homeLayoutVM.UserVM.Id, category.Id);
 
 				this.Hide();
 			}

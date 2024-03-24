@@ -43,7 +43,7 @@
                         <ColumnDefinition Width="100" />
                     </Grid.ColumnDefinitions>
 
-                    <Button Grid.Column="0" FontSize="11"  Padding="10,0,10,0" Height="30" Click="AddCategory_Click">Добавить</Button>
+                    <Button Grid.Column="0" FontSize="11"  Padding="10,0,10,0" Height="30" Click="AddCategory_Click"  Name="AddCategory">Добавить</Button>
                     <Button Grid.Column="2" x:Name="EditCategoryBtn" FontSize="11" Visibility="Hidden"  Padding="10,0,10,0" Height="30">Реадктировать</Button>
                     <Button Grid.Column="4" x:Name="RemoveCategoryBtn" FontSize="11" Visibility="Hidden"  Padding="10,0,10,0" Height="30">Удалить</Button>
                 </Grid>
@@ -54,7 +54,7 @@
                         <ColumnDefinition Width="100" />
                     </Grid.ColumnDefinitions>
 
-                    <Button Grid.Column="0" FontSize="11"  Padding="10,0,10,0" Height="30">Добавить</Button>
+                    <Button Grid.Column="0" FontSize="11"  Padding="10,0,10,0" Height="30" Click="AddCategory_Click" Name="AddSubCategory">Добавить</Button>
                     <Button Grid.Column="2" FontSize="11"  Padding="10,0,10,0" Height="30">Удалить</Button>
                 </Grid>
 

@@ -1,4 +1,5 @@
 ﻿using FinancialManagementApp.ViewModels;
+using FinancialManagementApp.ViewModels.EntitiesVM.Directory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace FinancialManagementApp.Interfaces
 {
 	public interface ICategoryService
 	{
+		public Task<ExpenseDirectoryVM> GetExpenseDirectory(int userId, int? categoryId);
 		public Task<List<CategoryVM>> GetExpensesCategory(int userID);
 		public Task<List<CategoryVM>> GetSubCategories(int userID, int categoryId);
 		public Task<CategoryVM>? SaveNewCategory(CategoryVM categoryVM);
