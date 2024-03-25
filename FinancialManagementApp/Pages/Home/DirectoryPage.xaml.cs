@@ -59,14 +59,14 @@ namespace FinancialManagementApp.Pages.Home
 
             if(selectedCategory != null)
             {
-                EditCategoryBtn.Visibility = Visibility.Visible;
                 RemoveCategoryBtn.Visibility = Visibility.Visible;
+                AddSubCategory.Visibility = Visibility.Visible;
             } 
             else
             {
-				EditCategoryBtn.Visibility = Visibility.Hidden;
 				RemoveCategoryBtn.Visibility = Visibility.Hidden;
-			}
+                AddSubCategory.Visibility = Visibility.Hidden;
+            }
 
             if(selectedCategory != null && selectedCategory?.ParentId == null) 
             {
@@ -125,6 +125,20 @@ namespace FinancialManagementApp.Pages.Home
             if (isRemoveSubCategory)
             {
                 ExpensesCategoryTable.SelectedIndex = selectedCategiryIndex;
+            }
+        }
+
+        private void ExpensesSubCategoryTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CategoryVM? selectedSubCategory = ExpensesSubCategoryTable?.SelectedItem as CategoryVM;
+
+            if (selectedSubCategory != null)
+            {
+                RemoveSubCategory.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                RemoveSubCategory.Visibility = Visibility.Hidden;
             }
         }
     }

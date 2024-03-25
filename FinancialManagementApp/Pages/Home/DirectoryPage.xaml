@@ -3,7 +3,6 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:FinancialManagementApp.Pages.Home" 
       xmlns:local1="clr-namespace:FinancialManagementApp.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -44,7 +43,6 @@
                     </Grid.ColumnDefinitions>
 
                     <Button Grid.Column="0" FontSize="11"  Padding="10,0,10,0" Height="30" Click="AddCategory_Click"  Name="AddCategory">Добавить</Button>
-                    <Button Grid.Column="2" x:Name="EditCategoryBtn" FontSize="11" Visibility="Hidden"  Padding="10,0,10,0" Height="30">Реадктировать</Button>
                     <Button Grid.Column="4" x:Name="RemoveCategoryBtn" FontSize="11" Visibility="Hidden"  Padding="10,0,10,0" Height="30" Click="RemoveCategoryBtn_Click">Удалить</Button>
                 </Grid>
                 <Grid Grid.Row="1" Grid.Column="3">
@@ -54,8 +52,8 @@
                         <ColumnDefinition Width="100" />
                     </Grid.ColumnDefinitions>
 
-                    <Button Grid.Column="0" FontSize="11"  Padding="10,0,10,0" Height="30" Click="AddCategory_Click" Name="AddSubCategory">Добавить</Button>
-                    <Button Grid.Column="2" FontSize="11"  Padding="10,0,10,0" Height="30" Click="RemoveCategoryBtn_Click" Name="RemoveSubCategory">Удалить</Button>
+                    <Button Grid.Column="0" FontSize="11"  Padding="10,0,10,0" Height="30" Click="AddCategory_Click" Name="AddSubCategory" Visibility="Hidden">Добавить</Button>
+                    <Button Grid.Column="2" FontSize="11"  Padding="10,0,10,0" Height="30" Click="RemoveCategoryBtn_Click" Name="RemoveSubCategory" Visibility="Hidden">Удалить</Button>
                 </Grid>
 
                 <DockPanel Margin="0,0,0,0" Grid.Column="0" Grid.Row="2">
@@ -72,7 +70,7 @@
                         </DataGrid.RowStyle>
 
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Категория" Width="*" CanUserResize="False" CanUserSort="False" CanUserReorder="False" Binding="{ Binding Path=Name}" FontSize="13" />
+                            <DataGridTextColumn Header="Категория" Width="*" IsReadOnly="True" CanUserResize="False" CanUserSort="False" CanUserReorder="False" Binding="{ Binding Path=Name}" FontSize="13" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </DockPanel>
@@ -82,6 +80,7 @@
                         AutoGenerateColumns="False"
                         VerticalScrollBarVisibility="Auto"
                         CanUserAddRows="False"
+                        SelectionChanged="ExpensesSubCategoryTable_SelectionChanged"
                         >
                         <DataGrid.RowStyle>
                             <Style TargetType="{x:Type DataGridRow}">
@@ -90,7 +89,7 @@
                         </DataGrid.RowStyle>
 
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Подкатегория" Width="*" CanUserResize="False" CanUserSort="False" CanUserReorder="False" Binding="{ Binding Name }" />
+                            <DataGridTextColumn Header="Подкатегория" Width="*" IsReadOnly="True" CanUserResize="False" CanUserSort="False" CanUserReorder="False" Binding="{ Binding Name }" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </DockPanel>

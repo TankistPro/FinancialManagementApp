@@ -36,6 +36,7 @@ namespace FinancialManagementApp.Window
 				UserId = _homeLayoutVM.UserVM.Id,
 				ParentId = category?.Id
 			};
+
 			this.DataContext = _categoryVM;
 		}
 
