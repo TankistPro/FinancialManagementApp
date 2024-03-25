@@ -42,15 +42,16 @@ namespace FinancialManagementApp.Pages.Home
             _homeLayoutVM = homeLayoutVM;
             _categoryService = categoryService;
 
-            this.Loaded += (e, s) => InitDirectory();
+            this.Loaded += async (e, s) => await InitDirectory();
         }
 
-        async private void InitDirectory()
+        async private Task InitDirectory(int? selectedCategory = null)
         {
-			_directoryPageVM.ExpenseDirectoryVM = await _categoryService.GetExpenseDirectory(_homeLayoutVM.UserVM.Id, null);
+			_directoryPageVM.ExpenseDirectoryVM = await _categoryService.GetExpenseDirectory(_homeLayoutVM.UserVM.Id, selectedCategory);
 
             ExpensesCategoryTable.ItemsSource = _directoryPageVM.ExpenseDirectoryVM.CategoryList;
-		}
+            ExpensesSubCategoryTable.ItemsSource = _directoryPageVM.ExpenseDirectoryVM.SubCategoryList;
+        }
 
         private async void ExpensesCategoryTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -97,5 +98,34 @@ namespace FinancialManagementApp.Pages.Home
 
             ExpensesCategoryTable.SelectedIndex = selectedIndex == -1 ? ExpensesCategoryTable.Items.Count - 1 : selectedIndex;
 		}
+
+        async private void RemoveCategoryBtn_Click(object sender, RoutedEventArgs e)
+        {
+            CategoryVM? selectedCategory = ExpensesCategoryTable?.SelectedItem as CategoryVM;
+            CategoryVM? selectedSubCategory = ExpensesSubCategoryTable?.SelectedItem as CategoryVM;
+            
+            bool isRemoveSubCategory = false;
+            int selectedCategiryIndex = -1;
+
+            if (((Button)sender).Name == "RemoveSubCategory")
+            {
+                isRemoveSubCategory = true;
+                selectedCategiryIndex = ExpensesCategoryTable.Items.IndexOf(selectedCategory);
+            }
+
+            int categoryIdToRemove = isRemoveSubCategory ? (int)selectedSubCategory?.Id : (int)selectedCategory?.Id;
+
+            bool status = await _categoryService.RemoveCategory(_homeLayoutVM.UserVM.Id, categoryIdToRemove);
+
+            if (status)
+            {
+                await InitDirectory();
+            }
+
+            if (isRemoveSubCategory)
+            {
+                ExpensesCategoryTable.SelectedIndex = selectedCategiryIndex;
+            }
+        }
     }
 }

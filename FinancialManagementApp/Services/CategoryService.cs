@@ -59,6 +59,27 @@ namespace FinancialManagementApp.Services
             return _mapper.Map<List<CategoryVM>>(list);
         }
 
+        public async Task<bool> RemoveCategory(int userID, int categoryID)
+        {
+            List <Category> hierarchy = await _categoryRepository.GetHierarchyGategory(categoryID);
+            bool status = false;
+            if(hierarchy.Count == 1)
+            {
+                status = _categoryRepository.Remove(hierarchy.Where(x => x.Id == categoryID).FirstOrDefault());
+            } 
+            else if (hierarchy.Count > 1)
+            {
+                bool isSuccess = _categoryRepository.RemoveRange(hierarchy.Where(x => x.ParentId == categoryID).ToList());
+
+                if (isSuccess)
+                {
+                    status = _categoryRepository.Remove(hierarchy.Where(x => x.Id == categoryID).FirstOrDefault());
+                }
+            }
+
+            return status;
+        }
+
         async public Task<CategoryVM>? SaveNewCategory(CategoryVM categoryVM)
         {
             try

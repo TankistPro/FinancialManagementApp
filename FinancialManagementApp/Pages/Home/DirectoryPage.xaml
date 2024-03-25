@@ -45,7 +45,7 @@
 
                     <Button Grid.Column="0" FontSize="11"  Padding="10,0,10,0" Height="30" Click="AddCategory_Click"  Name="AddCategory">Добавить</Button>
                     <Button Grid.Column="2" x:Name="EditCategoryBtn" FontSize="11" Visibility="Hidden"  Padding="10,0,10,0" Height="30">Реадктировать</Button>
-                    <Button Grid.Column="4" x:Name="RemoveCategoryBtn" FontSize="11" Visibility="Hidden"  Padding="10,0,10,0" Height="30">Удалить</Button>
+                    <Button Grid.Column="4" x:Name="RemoveCategoryBtn" FontSize="11" Visibility="Hidden"  Padding="10,0,10,0" Height="30" Click="RemoveCategoryBtn_Click">Удалить</Button>
                 </Grid>
                 <Grid Grid.Row="1" Grid.Column="3">
                     <Grid.ColumnDefinitions >
@@ -55,7 +55,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Button Grid.Column="0" FontSize="11"  Padding="10,0,10,0" Height="30" Click="AddCategory_Click" Name="AddSubCategory">Добавить</Button>
-                    <Button Grid.Column="2" FontSize="11"  Padding="10,0,10,0" Height="30">Удалить</Button>
+                    <Button Grid.Column="2" FontSize="11"  Padding="10,0,10,0" Height="30" Click="RemoveCategoryBtn_Click" Name="RemoveSubCategory">Удалить</Button>
                 </Grid>
 
                 <DockPanel Margin="0,0,0,0" Grid.Column="0" Grid.Row="2">

@@ -14,5 +14,6 @@ namespace FinancialManagementApp.Interfaces
 		public Task<List<CategoryVM>> GetExpensesCategory(int userID);
 		public Task<List<CategoryVM>> GetSubCategories(int userID, int categoryId);
 		public Task<CategoryVM>? SaveNewCategory(CategoryVM categoryVM);
+		public Task<bool> RemoveCategory(int userID, int categoryID);
 	}
 }
