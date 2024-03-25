@@ -21,19 +21,23 @@ namespace FinancialManagementApp.Layouts
     public partial class HomeLayout : Page
     {
         private IWalletService _walletService;
+        private ICategoryService _categoryService;
         private HomeLayoutVM _homeLayoutVM;
         private PeriodStatisticVM _periodStatisticVM;
         private HistoryPage _historyPage;
         private MainPage _mainPage;
         private DirectoryPage _directoryPage;
+        private DirectoryPageVM _directoryPageVM;
 
         public HomeLayout(
             HomeLayoutVM homeLayoutVM, 
             IWalletService walletService,
+            ICategoryService categoryService,
             HistoryPage historyPage,
             MainPage mainPage,
             DirectoryPage directoryPage,
-            PeriodStatisticVM periodStatisticVM
+            PeriodStatisticVM periodStatisticVM,
+            DirectoryPageVM directoryPageVM
             )
         {
 
@@ -44,7 +48,8 @@ namespace FinancialManagementApp.Layouts
             _historyPage = historyPage;
             _mainPage = mainPage;
             _directoryPage = directoryPage;
-            
+            _directoryPageVM = directoryPageVM;
+            _categoryService = categoryService;
             _walletService = walletService;
 
             DataContext = _homeLayoutVM;
@@ -71,7 +76,7 @@ namespace FinancialManagementApp.Layouts
 
         private void OpenAddHistoryModal(object sender, RoutedEventArgs e)
         {
-            var modal = new AddWalletHistoryWindow(_walletService, _homeLayoutVM, _mainPage, _periodStatisticVM);
+            var modal = new AddWalletHistoryWindow(_walletService, _homeLayoutVM, _mainPage, _periodStatisticVM, _directoryPageVM, _categoryService);
             modal.ShowDialog();
         }
     }

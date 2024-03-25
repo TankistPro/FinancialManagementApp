@@ -26,14 +26,18 @@ namespace FinancialManagementApp.Pages.Home
     public partial class HistoryPage : Page
     {
         private readonly IWalletService _walletService;
+        private ICategoryService _categoryService;
         private HomeLayoutVM _homeLayoutVM;
         private PeriodStatisticVM _periodStatisticVM;
         private MainPage _mainPage;
+        private DirectoryPageVM _directoryPageVM;
 
         public HistoryPage(
             HomeLayoutVM homeLayoutVM,
             MainPage mainPage,
             PeriodStatisticVM periodStatisticVM,
+            DirectoryPageVM directoryPageVM,
+            ICategoryService categoryService,
             IWalletService walletService)
         {
             InitializeComponent();
@@ -42,6 +46,8 @@ namespace FinancialManagementApp.Pages.Home
             _periodStatisticVM = periodStatisticVM;
             _walletService = walletService;
             _homeLayoutVM = homeLayoutVM;
+            _directoryPageVM = directoryPageVM;
+            _categoryService = categoryService;
 
             this.Loaded += (e, s) => InitHistory();
         }
@@ -57,10 +63,9 @@ namespace FinancialManagementApp.Pages.Home
 
             if (currentRecord != null)
             {
-                var modal = new AddWalletHistoryWindow(_walletService, _homeLayoutVM, _mainPage, _periodStatisticVM, currentRecord);
+                var modal = new AddWalletHistoryWindow(_walletService, _homeLayoutVM, _mainPage, _periodStatisticVM, _directoryPageVM, _categoryService, currentRecord);
                 modal.ShowDialog();
             }
-            
         }
     }
 }

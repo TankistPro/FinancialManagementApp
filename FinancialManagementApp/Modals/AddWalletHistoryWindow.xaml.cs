@@ -17,6 +17,8 @@ namespace FinancialManagementApp
     public partial class AddWalletHistoryWindow : System.Windows.Window
 	{
         private IWalletService _walletService;
+        private ICategoryService _categoryService;
+        private DirectoryPageVM _directoryPageVM;
         private WalletHistoryVM _walletHistoryVM;
         private PeriodStatisticVM _periodStatisticVM;
         private HomeLayoutVM _homeLayoutVM;
@@ -29,6 +31,8 @@ namespace FinancialManagementApp
             HomeLayoutVM homeLayoutVM, 
             MainPage mainPage,
             PeriodStatisticVM periodStatisticVM,
+            DirectoryPageVM directoryPageVM,
+            ICategoryService categoryService,
             WalletHistoryVM? editRecordVM = null)
         {
             InitializeComponent();
@@ -37,16 +41,24 @@ namespace FinancialManagementApp
             _periodStatisticVM = periodStatisticVM;
             _walletService = walletService;
             _homeLayoutVM = homeLayoutVM;
+            _directoryPageVM = directoryPageVM;
+            _categoryService = categoryService;
 
             this.InitWalletHistoryWindow(editRecordVM);
 
-            this.DataContext = _walletHistoryVM;
+            this.DataContext = new
+            {
+                walletHistoryVM = _walletHistoryVM,
+                directoryPageVM  = _directoryPageVM
+            };
         }
 
-        private void InitWalletHistoryWindow(WalletHistoryVM? editRecordVM)
+        async private void InitWalletHistoryWindow(WalletHistoryVM? editRecordVM)
         {
             this.OperationTypeBox.ItemsSource = WalletOperations.walletOperationsDict.Select(x => x.Value);
 
+            _directoryPageVM.ExpenseDirectoryVM = await _categoryService.GetExpenseDirectory(_homeLayoutVM.UserVM.Id, null);
+            ExpensesCategoryTable.ItemsSource = _directoryPageVM.ExpenseDirectoryVM.CategoryList;
 
             if (editRecordVM != null)
             {
