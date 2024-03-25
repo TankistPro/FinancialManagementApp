@@ -11,5 +11,5 @@ namespace FinancialManagementApp.Infrastructure.Interfaces
         Task<Wallet> GetUserWallet(int userId);
         Task<WalletHistory?> CreateWalletOperation(WalletHistory walletHistoryDto);
         Task<WalletHistory?> UpdateWalletOperation(WalletHistory walletHistory);
-    }
+	}
 }

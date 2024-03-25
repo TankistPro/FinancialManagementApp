@@ -52,19 +52,21 @@ namespace FinancialManagementApp.Infrastructure.Repositories
         /// <returns>Возвращается новый баланс пользователя</returns>
         async public Task<WalletHistory?> CreateWalletOperation(WalletHistory walletHistory)
         {
-            var userWallet = await _context.Wallets.Where(x => x.Id == walletHistory.WalletId).FirstOrDefaultAsync();
+            Wallet userWallet = await getUserWalletById((int)walletHistory.WalletId);
 
             if (userWallet != null) 
             {
                 try
                 {
-                    walletHistory.OldBalance = userWallet.Balance;
-                    userWallet.Balance += walletHistory.Value;
-                    walletHistory.NewBalance = userWallet.Balance;
+                    decimal oldBalance = userWallet.Balance;
+                    decimal updatetdBalance = await updateUserBalance(userWallet.Balance + walletHistory.Value, userWallet.UserId);
 
-                    await _context.SaveChangesAsync();
+					await _context.SaveChangesAsync();
 
-                    WalletHistory record = await _walletHistoryRepository.AddWalletHistory(walletHistory);
+					walletHistory.OldBalance = oldBalance;
+					walletHistory.NewBalance = updatetdBalance;
+
+					WalletHistory record = await _walletHistoryRepository.AddWalletHistory(walletHistory);
 
                     if (record != null)
                     {
@@ -78,21 +80,22 @@ namespace FinancialManagementApp.Infrastructure.Repositories
 
         async public Task<WalletHistory?> UpdateWalletOperation(WalletHistory walletHistory)
         {
-            var userWallet = await _context.Wallets.Where(x => x.Id == walletHistory.WalletId).FirstOrDefaultAsync();
+			Wallet userWallet = await getUserWalletById((int)walletHistory.WalletId);
 
-            if (userWallet != null) 
+			if (userWallet != null) 
             {
-                var oldValue = await _context.WalletHistories.Where(x => x.Id == walletHistory.Id).Select(x => x.Value).FirstOrDefaultAsync();
+                var oldHistory = await _context.WalletHistories.Where(x => x.Id == walletHistory.Id).FirstOrDefaultAsync();
 
                 try
                 {
-                    walletHistory.OldBalance = userWallet.Balance;
-                    userWallet.Balance += walletHistory.Value - oldValue;
-                    walletHistory.NewBalance = userWallet.Balance;
+					decimal oldBalance = userWallet.Balance;
+					decimal newBalanceToUpdate = userWallet.Balance + (walletHistory.Value - oldHistory.Value);
+					decimal updatetdBalance = await updateUserBalance(newBalanceToUpdate, userWallet.UserId);
 
-                    await _context.SaveChangesAsync();
+					walletHistory.OldBalance = oldBalance;
+					walletHistory.NewBalance = updatetdBalance;
 
-                    WalletHistory record = await _walletHistoryRepository.UpdateWalletHistory(walletHistory);
+					WalletHistory record = await _walletHistoryRepository.UpdateWalletHistory(walletHistory);
 
                     if (record != null)
                     {
@@ -103,5 +106,26 @@ namespace FinancialManagementApp.Infrastructure.Repositories
 
             return null;
         }
+
+        async private Task<Wallet?> getUserWalletById(int walletId)
+        {
+			return await _context.Wallets.Where(x => x.Id == walletId).FirstOrDefaultAsync();
+		}
+
+        async private Task<decimal> updateUserBalance(decimal newBalance, int userId)
+        {
+            Wallet userWallet = await GetUserWallet(userId);
+
+            if (userWallet != null)
+            {
+				userWallet.Balance = newBalance;
+				await _context.SaveChangesAsync();
+
+			}
+
+			await _context.SaveChangesAsync();
+
+            return userWallet.Balance;
+		}
     }
 }

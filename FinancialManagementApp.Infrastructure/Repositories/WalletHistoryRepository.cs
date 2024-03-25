@@ -17,7 +17,7 @@ namespace FinancialManagementApp.Infrastructure.Repositories
         {
             try
             {
-                await _context.WalletHistories.AddAsync(walletHistory);
+				await _context.WalletHistories.AddAsync(walletHistory);
                 await _context.SaveChangesAsync();
 
                 return walletHistory;
