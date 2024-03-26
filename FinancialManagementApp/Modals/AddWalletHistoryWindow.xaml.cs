@@ -45,12 +45,6 @@ namespace FinancialManagementApp
             _categoryService = categoryService;
 
             this.InitWalletHistoryWindow(editRecordVM);
-
-            this.DataContext = new
-            {
-                walletHistoryVM = _walletHistoryVM,
-                directoryPageVM  = _directoryPageVM
-            };
         }
 
         async private void InitWalletHistoryWindow(WalletHistoryVM? editRecordVM)
@@ -92,6 +86,12 @@ namespace FinancialManagementApp
                 this.WindowTitle.Text = "Добаление транзакции";
                 this.AcceptBtn.Content = "Добавить";
             }
+
+            this.DataContext = new
+            {
+                walletHistoryVM = _walletHistoryVM,
+                directoryPageVM = _directoryPageVM
+            };
         }
 
         private void CancelAdd_Click(object sender, RoutedEventArgs e)
